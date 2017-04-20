@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "amd",
+    "target": "es5",
+    "sourceMap": true,
+    "rootDir": "ts",
+    "outDir": "gear/js"
+//    "outFile": ""
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
