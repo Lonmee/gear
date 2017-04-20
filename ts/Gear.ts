@@ -3,21 +3,31 @@
  */
 import {Person} from "./data/Person";
 import {Person as NPCPerson} from "./data/npc/Person";
-import {Story} from "./data/Data";
+import {Story, Chapter, Scene} from "./data/Data";
 
-class Gear{
+class Gear {
     private person: Person;
     private story: Story;
+    private chapter: Chapter;
+    private scene: Scene;
+    private str: number;
 
     constructor() {
+        this.str = 9;
         this.person = new Person("Lunar");
         console.log(this.person.name);
         this.person.walk();
 
         this.story = new Story(0);
-        console.log(this.story.id);
+        console.log(`story ID: ${this.story.id}`);
 
-        let p:NPCPerson = new NPCPerson(55);
+        this.chapter = new Chapter(1);
+        console.log(`chapter ID: ${this.story.id}`);
+
+        this.scene = new Scene(3);
+        console.log(`scene ID: ${this.scene.id}`);
+
+        let p: NPCPerson = new NPCPerson(55);
         console.log(p.age);
     }
 }
