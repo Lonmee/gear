@@ -30,6 +30,11 @@ class Gear {
         let p: NPCPerson = new NPCPerson(55);
         console.log(p.age);
     }
+
+    init() {
+
+    }
+
 }
 
-new Gear();
+new Gear().init();
