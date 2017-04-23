@@ -23,7 +23,7 @@
 
 		__class(AnimationContent,'laya.ani.AnimationContent');
 		return AnimationContent;
-	})()
+	})();
 
 
 	/**
@@ -48,7 +48,7 @@
 
 		__class(AnimationNodeContent,'laya.ani.AnimationNodeContent');
 		return AnimationNodeContent;
-	})()
+	})();
 
 
 	/**
@@ -56,8 +56,9 @@
 	*/
 	//class laya.ani.AnimationParser01
 	var AnimationParser01=(function(){
-		function AnimationParser01(){};
-		__class(AnimationParser01,'laya.ani.AnimationParser01');
+            function AnimationParser01() {
+            }
+            __class(AnimationParser01,'laya.ani.AnimationParser01');
 		AnimationParser01.parse=function(templet,reader){
 			var data=reader.__getBuffer();
 			var i=0,j=0,k=0,n=0,l=0,m=0,o=0;
@@ -77,8 +78,9 @@
 			templet._anis.length=aniCount;
 			for (i=0;i < aniCount;i++){
 				var ani=templet._anis[i]=new AnimationContent();
-				{};
-				ani.nodes=new Array;
+                {
+                }
+                ani.nodes=[];
 				var name=ani.name=strList[reader.getUint16()];
 				templet._aniMap[name]=i;
 				ani.bone3DMap={};
@@ -87,16 +89,17 @@
 				ani.totalKeyframeDatasLength=0;
 				for (j=0;j < boneCount;j++){
 					var node=ani.nodes[j]=new AnimationNodeContent();
-					{};
-					node.childs=[];
+                    {
+                    }
+                    node.childs=[];
 					var nameIndex=reader.getInt16();
 					if (nameIndex >=0){
 						node.name=strList[nameIndex];
 						ani.bone3DMap[node.name]=j;
 					}
-					node.keyFrame=new Array;
+					node.keyFrame=[];
 					node.parentIndex=reader.getInt16();
-					node.parentIndex==-1 ? node.parent=null :node.parent=ani.nodes[node.parentIndex]
+					node.parentIndex==-1 ? node.parent=null :node.parent=ani.nodes[node.parentIndex];
 					node.lerpType=reader.getUint8();
 					var keyframeParamsOffset=reader.getUint32();
 					publicRead.pos=keyframeParamsOffset;
@@ -114,14 +117,15 @@
 					if (privateDataLen > 0){
 						node.extenData=data.slice(reader.pos,reader.pos+privateDataLen);
 						reader.pos+=privateDataLen;
-					};
-					var keyframeCount=reader.getUint16();
+                    }
+                    var keyframeCount=reader.getUint16();
 					node.keyFrame.length=keyframeCount;
 					var startTime=0;
 					for (k=0,n=keyframeCount;k < n;k++){
 						var keyFrame=node.keyFrame[k]=new KeyFramesContent();
-						{};
-						keyFrame.duration=reader.getFloat32();
+                        {
+                        }
+                        keyFrame.duration=reader.getFloat32();
 						keyFrame.startTime=startTime;
 						if (node.lerpType===2){
 							keyFrame.interpolationData=[];
@@ -159,10 +163,10 @@
 					templet._calculateKeyFrame(node,keyframeCount,keyframeDataCount);
 				}
 			}
-		}
+		};
 
 		return AnimationParser01;
-	})()
+	})();
 
 
 	/**
@@ -170,12 +174,13 @@
 	*/
 	//class laya.ani.AnimationParser02
 	var AnimationParser02=(function(){
-		function AnimationParser02(){};
-		__class(AnimationParser02,'laya.ani.AnimationParser02');
+            function AnimationParser02() {
+            }
+            __class(AnimationParser02,'laya.ani.AnimationParser02');
 		AnimationParser02.READ_DATA=function(){
 			AnimationParser02._DATA.offset=AnimationParser02._reader.getUint32();
 			AnimationParser02._DATA.size=AnimationParser02._reader.getUint32();
-		}
+		};
 
 		AnimationParser02.READ_BLOCK=function(){
 			var count=AnimationParser02._BLOCK.count=AnimationParser02._reader.getUint16();
@@ -185,7 +190,7 @@
 				blockStarts.push(AnimationParser02._reader.getUint32());
 				blockLengths.push(AnimationParser02._reader.getUint32());
 			}
-		}
+		};
 
 		AnimationParser02.READ_STRINGS=function(){
 			var offset=AnimationParser02._reader.getUint32();
@@ -195,7 +200,7 @@
 			for (var i=0;i < count;i++)
 			AnimationParser02._strings[i]=AnimationParser02._reader.readUTFString();
 			AnimationParser02._reader.pos=prePos;
-		}
+		};
 
 		AnimationParser02.parse=function(templet,reader){
 			AnimationParser02._templet=templet;
@@ -213,7 +218,7 @@
 				else
 				fn.call();
 			}
-		}
+		};
 
 		AnimationParser02.READ_ANIMATIONS=function(){
 			var reader=AnimationParser02._reader;
@@ -229,7 +234,7 @@
 			for (i=0;i < aniCount;i++){
 				var ani=AnimationParser02._templet._anis[i]=
 				{};
-				ani.nodes=new Array;
+				ani.nodes=[];
 				var aniName=ani.name=AnimationParser02._strings[reader.getUint16()];
 				AnimationParser02._templet._aniMap[aniName]=i;
 				ani.bone3DMap={};
@@ -246,9 +251,9 @@
 						node.name=AnimationParser02._strings[nameIndex];
 						ani.bone3DMap[node.name]=j;
 					}
-					node.keyFrame=new Array;
+					node.keyFrame=[];
 					node.parentIndex=reader.getInt16();
-					node.parentIndex==-1 ? node.parent=null :node.parent=ani.nodes[node.parentIndex]
+					node.parentIndex==-1 ? node.parent=null :node.parent=ani.nodes[node.parentIndex];
 					ani.totalKeyframeDatasLength+=keyframeWidth;
 					node.interpolationMethod=interpolationMethod;
 					if (node.parent !=null)
@@ -274,16 +279,16 @@
 					AnimationParser02._templet._calculateKeyFrame(node,keyframeCount,keyframeWidth);
 				}
 			}
-		}
+		};
 
-		AnimationParser02._templet=null
-		AnimationParser02._reader=null
+		AnimationParser02._templet=null;
+		AnimationParser02._reader=null;
 		AnimationParser02._strings=[];
 		__static(AnimationParser02,
 		['_BLOCK',function(){return this._BLOCK={count:0};},'_DATA',function(){return this._DATA={offset:0,size:0};}
 		]);
 		return AnimationParser02;
-	})()
+	})();
 
 
 	/**
@@ -297,7 +302,7 @@
 		AnimationState.paused=1;
 		AnimationState.playing=2;
 		return AnimationState;
-	})()
+	})();
 
 
 	/**
@@ -333,7 +338,7 @@
 				tBone=this._children[i];
 				tBone.setTempMatrix(this._tempMatrix);
 			}
-		}
+		};
 
 		__proto.update=function(pMatrix){
 			this.rotation=this.transform.skX;
@@ -394,14 +399,14 @@
 					tResultMatrix=this.resultTransform.getMatrix();
 					tResultMatrix.copyTo(this.resultMatrix);
 				}
-			};
-			var i=0,n=0;
+            }
+            var i=0,n=0;
 			var tBone;
 			for (i=0,n=this._children.length;i < n;i++){
 				tBone=this._children[i];
 				tBone.update();
 			}
-		}
+		};
 
 		__proto.updateChild=function(){
 			var i=0,n=0;
@@ -410,13 +415,13 @@
 				tBone=this._children[i];
 				tBone.update();
 			}
-		}
+		};
 
 		__proto.setRotation=function(rd){
 			if (this._sprite){
 				this._sprite.rotation=rd *180 / Math.PI;
 			}
-		}
+		};
 
 		__proto.updateDraw=function(x,y){
 			if (!Bone.ShowBones || Bone.ShowBones[this.name]){
@@ -433,19 +438,19 @@
 					this._sprite.x=x+this.resultMatrix.tx;
 					this._sprite.y=y+this.resultMatrix.ty;
 				}
-			};
-			var i=0,n=0;
+            }
+            var i=0,n=0;
 			var tBone;
 			for (i=0,n=this._children.length;i < n;i++){
 				tBone=this._children[i];
 				tBone.updateDraw(x,y);
 			}
-		}
+		};
 
 		__proto.addChild=function(bone){
 			this._children.push(bone);
 			bone.parentBone=this;
-		}
+		};
 
 		__proto.findBone=function(boneName){
 			if (this.name==boneName){
@@ -464,18 +469,18 @@
 				}
 			}
 			return null;
-		}
+		};
 
 		__proto.localToWorld=function(local){
 			var localX=local[0];
 			var localY=local[1];
 			local[0]=localX *this.resultMatrix.a+localY *this.resultMatrix.c+this.resultMatrix.tx;
 			local[1]=localX *this.resultMatrix.b+localY *this.resultMatrix.d+this.resultMatrix.ty;
-		}
+		};
 
 		Bone.ShowBones={};
 		return Bone;
-	})()
+	})();
 
 
 	/**
@@ -520,7 +525,7 @@
 				this.displayIndex=this.srcDisplayIndex;
 			this.currDisplayData=null;
 			this.currTexture=null;
-		}
+		};
 
 		/**
 		*通过名字显示指定对象
@@ -530,7 +535,7 @@
 			if (this.currSlotData){
 				this.showDisplayByIndex(this.currSlotData.getDisplayByName(name));
 			}
-		}
+		};
 
 		/**
 		*替换贴图名
@@ -544,7 +549,7 @@
 			var newIndex=0;
 			newIndex=this.currSlotData.getDisplayByName(newName);
 			this.replaceDisplayByIndex(preIndex,newIndex);
-		}
+		};
 
 		/**
 		*替换贴图索引
@@ -557,7 +562,7 @@
 			if (this.displayIndex==tarIndex){
 				this.showDisplayByIndex(tarIndex);
 			}
-		}
+		};
 
 		/**
 		*指定显示对象
@@ -580,7 +585,7 @@
 				this.currDisplayData=null;
 				this.currTexture=null;
 			}
-		}
+		};
 
 		/**
 		*替换皮肤
@@ -592,7 +597,7 @@
 			if (this.currDisplayData&&this._diyTexture==this.currDisplayData.texture){
 				this._diyTexture=null;
 			}
-		}
+		};
 
 		/**
 		*保存父矩阵的索引
@@ -600,7 +605,7 @@
 		*/
 		__proto.setParentMatrix=function(parentMatrix){
 			this._parentMatrix=parentMatrix;
-		}
+		};
 
 		/**
 		*把纹理画到Graphics上
@@ -614,8 +619,8 @@
 				if (!(this.currDisplayData && this.currDisplayData.type==3)){
 					return;
 				}
-			};
-			var tTexture=this.currTexture;
+            }
+            var tTexture=this.currTexture;
 			if (this._diyTexture)tTexture=this._diyTexture;
 			var tSkinSprite;
 			switch (this.currDisplayData.type){
@@ -668,8 +673,8 @@
 					}
 					if (tSkinSprite==null){
 						return;
-					};
-					var tIBArray;
+                    }
+                    var tIBArray;
 					var tRed=1;
 					var tGreed=1;
 					var tBlue=1;
@@ -678,8 +683,8 @@
 						var tVertices=this.currDisplayData.weights;
 						if (this.deformData){
 							tVertices=this.deformData;
-						};
-						var tUVs;
+                        }
+                        var tUVs;
 						if (this._diyTexture){
 							if (!this._curDiyUV){
 								this._curDiyUV=[];
@@ -734,7 +739,7 @@
 				case 3:
 					break ;
 				}
-		}
+		};
 
 		/**
 		*显示蒙皮动画
@@ -756,8 +761,8 @@
 				tUvs=this._curDiyUV;
 				}else{
 				tUvs=this.currDisplayData.uvs;
-			};
-			var tWeights=this.currDisplayData.weights;
+            }
+            var tWeights=this.currDisplayData.weights;
 			var tTriangles=this.currDisplayData.triangles;
 			var tIBArray;
 			var tRx=0;
@@ -780,7 +785,7 @@
 					nn=tBones[i++]+i;
 					tRx=0,tRy=0;
 					for (;i < nn;i++){
-						tMatrix=boneMatrixArray[tBones[i]]
+						tMatrix=boneMatrixArray[tBones[i]];
 						tX=tWeights[tB]+this.deformData[f++];
 						tY=tWeights[tB+1]+this.deformData[f++];
 						tWeight=tWeights[tB+2];
@@ -795,7 +800,7 @@
 					nn=tBones[i++]+i;
 					tRx=0,tRy=0;
 					for (;i < nn;i++){
-						tMatrix=boneMatrixArray[tBones[i]]
+						tMatrix=boneMatrixArray[tBones[i]];
 						tX=tWeights[tB];
 						tY=tWeights[tB+1];
 						tWeight=tWeights[tB+2];
@@ -809,7 +814,7 @@
 			this._mVerticleArr=tVertices;
 			tIBArray=tTriangles;
 			skinSprite.init2(tTexture,null,tIBArray,this._mVerticleArr,tUvs);
-		}
+		};
 
 		/**
 		*画骨骼的起始点，方便调试
@@ -819,7 +824,7 @@
 			if (graphics && this._parentMatrix){
 				graphics.drawCircle(this._parentMatrix.tx,this._parentMatrix.ty,5,"#ff0000");
 			}
-		}
+		};
 
 		/**
 		*得到显示对象的矩阵
@@ -830,7 +835,7 @@
 				return this.currDisplayData.transform.getMatrix();
 			}
 			return null;
-		}
+		};
 
 		/**
 		*得到插糟的矩阵
@@ -838,7 +843,7 @@
 		*/
 		__proto.getMatrix=function(){
 			return this._resultMatrix;
-		}
+		};
 
 		/**
 		*用原始数据拷贝出一个
@@ -857,13 +862,13 @@
 			tBoneSlot.currTexture=this.currTexture;
 			tBoneSlot.currDisplayData=this.currDisplayData;
 			return tBoneSlot;
-		}
+		};
 
 		__static(BoneSlot,
 		['_tempMatrix',function(){return this._tempMatrix=new Matrix();}
 		]);
 		return BoneSlot;
-	})()
+	})();
 
 
 	/**
@@ -878,7 +883,7 @@
 
 		__class(DeformAniData,'laya.ani.bone.DeformAniData');
 		return DeformAniData;
-	})()
+	})();
 
 
 	/**
@@ -893,7 +898,7 @@
 
 		__class(DeformSlotData,'laya.ani.bone.DeformSlotData');
 		return DeformSlotData;
-	})()
+	})();
 
 
 	/**
@@ -930,7 +935,7 @@
 				current=(low+high)>>> 1;
 			}
 			return 0;
-		}
+		};
 
 		// Can't happen.
 		__proto.apply=function(time,boneSlot,alpha){
@@ -938,14 +943,14 @@
 			time+=0.05;
 			if (this.timeList.length <=0){
 				return;
-			};
-			var i=0;
+            }
+            var i=0;
 			var n=0;
 			var tTime=this.timeList[0];
 			if (time < tTime){
 				return;
-			};
-			var tVertexCount=this.vectices[0].length;
+            }
+            var tVertexCount=this.vectices[0].length;
 			var tVertices=[];
 			var tFrameIndex=this.binarySearch1(this.timeList,time);
 			this.frameIndex=tFrameIndex;
@@ -962,8 +967,8 @@
 				}
 				this.deformData=tVertices;
 				return;
-			};
-			var tTweenKey=this.tweenKeyList[this.frameIndex];
+            }
+            var tTweenKey=this.tweenKeyList[this.frameIndex];
 			var tPrevVertices=this.vectices[this.frameIndex-1];
 			var tNextVertices=this.vectices[this.frameIndex];
 			var tPreFrameTime=this.timeList[this.frameIndex-1];
@@ -972,17 +977,17 @@
 				alpha=(time-tPreFrameTime)/ (tFrameTime-tPreFrameTime);
 				}else {
 				alpha=0;
-			};
-			var tPrev=NaN;
+            }
+            var tPrev=NaN;
 			for (i=0;i < tVertexCount;i++){
 				tPrev=tPrevVertices[i];
 				tVertices[i]=tPrev+(tNextVertices[i]-tPrev)*alpha;
 			}
 			this.deformData=tVertices;
-		}
+		};
 
 		return DeformSlotDisplayData;
-	})()
+	})();
 
 
 	/**
@@ -998,7 +1003,7 @@
 
 		__class(DrawOrderData,'laya.ani.bone.DrawOrderData');
 		return DrawOrderData;
-	})()
+	})();
 
 
 	//class laya.ani.bone.EventData
@@ -1013,7 +1018,7 @@
 
 		__class(EventData,'laya.ani.bone.EventData');
 		return EventData;
-	})()
+	})();
 
 
 	/**
@@ -1059,7 +1064,7 @@
 					}
 					break ;
 				}
-		}
+		};
 
 		__proto._applyIk1=function(bone,targetX,targetY,alpha){
 			var pp=bone.parentBone;
@@ -1075,19 +1080,19 @@
 			else if (rotationIK <-180)rotationIK+=360;
 			bone.transform.skX=bone.transform.skY=bone.transform.skX+rotationIK *alpha;
 			bone.update();
-		}
+		};
 
 		__proto.updatePos=function(x,y){
 			if (this._sp){
 				this._sp.pos(x,y);
 			}
-		}
+		};
 
 		__proto._applyIk2=function(parent,child,targetX,targetY,bendDir,alpha){
 			if (alpha==0){
 				return;
-			};
-			var px=parent.resultTransform.x,py=parent.resultTransform.y;
+            }
+            var px=parent.resultTransform.x,py=parent.resultTransform.y;
 			var psx=parent.transform.scX,psy=parent.transform.scY;
 			var csx=child.transform.scX;
 			var os1=0,os2=0,s2=0;
@@ -1108,8 +1113,8 @@
 				os2=180;
 				}else {
 				os2=0
-			};
-			var cx=child.resultTransform.x,cy=NaN,cwx=NaN,cwy=NaN;
+            }
+            var cx=child.resultTransform.x,cy=NaN,cwx=NaN,cwy=NaN;
 			var a=parent.resultMatrix.a,b=parent.resultMatrix.c;
 			var c=parent.resultMatrix.b,d=parent.resultMatrix.d;
 			var u=Math.abs(psx-psy)<=0.0001;
@@ -1176,8 +1181,8 @@
 						a1=ta-Math.atan2(y,r);
 						a2=Math.atan2(y / psy,(r-l1)/ psx);
 					}
-				};
-				var minAngle=0,minDist=Number.MAX_VALUE,minX=0,minY=0;
+                }
+                var minAngle=0,minDist=Number.MAX_VALUE,minX=0,minY=0;
 				var maxAngle=0,maxDist=0,maxX=0,maxY=0;
 				x=l1+a;
 				d=x *x;
@@ -1192,8 +1197,8 @@
 					minAngle=Math.PI;
 					minDist=d;
 					minX=x;
-				};
-				var angle=Math.acos(-a *l1 / (aa-bb));
+                }
+                var angle=Math.acos(-a *l1 / (aa-bb));
 				x=a *Math.cos(angle)+l1;
 				y=b *Math.sin(angle);
 				d=x *x+y *y;
@@ -1216,8 +1221,8 @@
 					a1=ta-Math.atan2(maxY *bendDir,maxX);
 					a2=maxAngle *bendDir;
 				}
-			};
-			var os=Math.atan2(cy,cx)*s2;
+            }
+            var os=Math.atan2(cy,cx)*s2;
 			var rotation=parent.resultTransform.skX;
 			a1=(a1-os)*IkConstraint.radDeg+os1-rotation;
 			if (a1 > 180)
@@ -1236,13 +1241,13 @@
 			child.resultTransform.y=cy;
 			child.resultTransform.skX=child.resultTransform.skY=child.resultTransform.skY+a2 *alpha;
 			parent.update();
-		}
+		};
 
 		__proto._applyIk3=function(parent,child,targetX,targetY,bendDir,alpha){
 			if (alpha==0){
 				return;
-			};
-			var cwx=NaN,cwy=NaN;
+            }
+            var cwx=NaN,cwy=NaN;
 			var x=child.resultMatrix.a *child.length;
 			var y=child.resultMatrix.b *child.length;
 			var lLL=x *x+y *y;
@@ -1297,8 +1302,8 @@
 				this._sp.graphics.drawCircle(parentX,parentY,15,"#ff00ff");
 				this._sp.graphics.drawCircle(targetX,targetY,15,"#ffff00");
 				this._sp.graphics.drawCircle(cwx,cwy,15,"#ff00ff");
-			};
-			var pRotation=NaN;
+            }
+            var pRotation=NaN;
 			pRotation=Math.atan2(cwy-parent.resultMatrix.ty,cwx-parent.resultMatrix.tx);
 			parent.setRotation(pRotation);
 			var pTarMatrix;
@@ -1320,13 +1325,13 @@
 			childTarMatrix.translate(cwx,cwy);
 			pTarMatrix.copyTo(child.resultMatrix);
 			child.updateChild();
-		}
+		};
 
 		__static(IkConstraint,
 		['radDeg',function(){return this.radDeg=180 / Math.PI;},'degRad',function(){return this.degRad=Math.PI / 180;},'_tempMatrix',function(){return this._tempMatrix=new Matrix();}
 		]);
 		return IkConstraint;
-	})()
+	})();
 
 
 	/**
@@ -1347,7 +1352,7 @@
 
 		__class(IkConstraintData,'laya.ani.bone.IkConstraintData');
 		return IkConstraintData;
-	})()
+	})();
 
 
 	/**
@@ -1422,19 +1427,19 @@
 				for (i=1;i < spacesCount;i++){
 					spaces[i]=spacing;
 				}
-			};
-			var positions=this.computeWorldPositions(this.target,boneList,graphics,spacesCount,tTangents,this.data.positionMode=="percent",tSpacingMode=="percent");
+            }
+            var positions=this.computeWorldPositions(this.target,boneList,graphics,spacesCount,tTangents,this.data.positionMode=="percent",tSpacingMode=="percent");
 			if (this._debugKey){
 				for (i=0;i < positions.length;i++){
 					graphics.drawCircle(positions[i++],positions[i++],5,"#00ff00");
-				};
-				var tLinePos=[];
+                }
+                var tLinePos=[];
 				for (i=0;i < positions.length;i++){
 					tLinePos.push(positions[i++],positions[i++]);
 				}
 				graphics.drawLines(0,0,tLinePos,"#ff0000");
-			};
-			var skeletonX=NaN;
+            }
+            var skeletonX=NaN;
 			var skeletonY=NaN;
 			var boneX=positions[0];
 			var boneY=positions[1];
@@ -1495,7 +1500,7 @@
 					bone.resultMatrix.d=sin *b+cos *d;
 				}
 			}
-		}
+		};
 
 		/**
 		*计算顶点的世界坐标
@@ -1525,8 +1530,8 @@
 				n=tBones[v];
 				v+=n+1;
 				skip+=n;
-			};
-			var skeletonBones=boneList;
+            }
+            var skeletonBones=boneList;
 			for (w=offset,b=skip *3;w < count;w+=2){
 				wx=0,wy=0;
 				n=tBones[v++];
@@ -1542,7 +1547,7 @@
 				worldVertices[w]=wx;
 				worldVertices[w+1]=wy;
 			}
-		}
+		};
 
 		/**
 		*计算路径上的节点
@@ -1696,8 +1701,8 @@
 			if (percentSpacing){
 				for (i=0;i < spacesCount;i++)
 				spaces[i] *=pathLength;
-			};
-			var segments=this._segments;
+            }
+            var segments=this._segments;
 			var curveLength=0;
 			var segment=0;
 			for (i=0,o=0,curve=0,segment=0;i < spacesCount;i++,o+=3){
@@ -1780,21 +1785,21 @@
 				this.addCurvePosition(p *0.1,x1,y1,cx1,cy1,cx2,cy2,x2,y2,out,o,tangents || (i > 0 && space==0));
 			}
 			return out;
-		}
+		};
 
 		__proto.addBeforePosition=function(p,temp,i,out,o){
 			var x1=temp[i],y1=temp[i+1],dx=temp[i+2]-x1,dy=temp[i+3]-y1,r=Math.atan2(dy,dx);
 			out[o]=x1+p *Math.cos(r);
 			out[o+1]=y1+p *Math.sin(r);
 			out[o+2]=r;
-		}
+		};
 
 		__proto.addAfterPosition=function(p,temp,i,out,o){
 			var x1=temp[i+2],y1=temp[i+3],dx=x1-temp[i],dy=y1-temp[i+1],r=Math.atan2(dy,dx);
 			out[o]=x1+p *Math.cos(r);
 			out[o+1]=y1+p *Math.sin(r);
 			out[o+2]=r;
-		}
+		};
 
 		__proto.addCurvePosition=function(p,x1,y1,cx1,cy1,cx2,cy2,x2,y2,out,o,tangents){
 			if (p==0)p=0.0001;
@@ -1808,13 +1813,13 @@
 				}else {
 				out[o+2]=0;
 			}
-		}
+		};
 
 		PathConstraint.NONE=-1;
 		PathConstraint.BEFORE=-2;
 		PathConstraint.AFTER=-3;
 		return PathConstraint;
-	})()
+	})();
 
 
 	/**
@@ -1838,7 +1843,7 @@
 
 		__class(PathConstraintData,'laya.ani.bone.PathConstraintData');
 		return PathConstraintData;
-	})()
+	})();
 
 
 	/**
@@ -1853,7 +1858,7 @@
 
 		__class(SkinData,'laya.ani.bone.SkinData');
 		return SkinData;
-	})()
+	})();
 
 
 	/**
@@ -1900,14 +1905,14 @@
 				this.texture.sourceHeight=currTexture.sourceHeight;
 			}
 			return this.texture;
-		}
+		};
 
 		__proto.destory=function(){
 			if (this.texture)this.texture.destroy();
-		}
+		};
 
 		return SkinSlotDisplayData;
-	})()
+	})();
 
 
 	/**
@@ -1931,10 +1936,10 @@
 				}
 			}
 			return-1;
-		}
+		};
 
 		return SlotData;
-	})()
+	})();
 
 
 	/**
@@ -2019,10 +2024,10 @@
 					tTfBone.resultMatrix.d=Math.sin(r)*s;
 				}
 			}
-		}
+		};
 
 		return TfConstraint;
-	})()
+	})();
 
 
 	/**
@@ -2048,7 +2053,7 @@
 
 		__class(TfConstraintData,'laya.ani.bone.TfConstraintData');
 		return TfConstraintData;
-	})()
+	})();
 
 
 	/**
@@ -2089,7 +2094,7 @@
 			if (data.scY !=undefined){
 				this.scY=data.scY;
 			}
-		}
+		};
 
 		__proto.getMatrix=function(){
 			var tMatrix;
@@ -2106,7 +2111,7 @@
 			tMatrix.rotate(this.skX *Math.PI / 180);
 			tMatrix.translate(this.x,this.y);
 			return tMatrix;
-		}
+		};
 
 		__proto.skew=function(m,x,y){
 			var sinX=Math.sin(y);
@@ -2120,10 +2125,10 @@
 			m.tx *cosY-m.ty *sinX,
 			m.tx *sinY+m.ty *cosX);
 			return m;
-		}
+		};
 
 		return Transform;
-	})()
+	})();
 
 
 	/**
@@ -2150,7 +2155,7 @@
 				rst[i+1]=(smallUV[i+1]-startY)*dHeight;
 			}
 			return rst;
-		}
+		};
 
 		UVTools.getAbsoluteUV=function(bigUV,smallUV,rst){
 			if (bigUV[0]==0 && bigUV[1]==0 && bigUV[4]==1 && bigUV[5]==1){
@@ -2160,8 +2165,8 @@
 					}else{
 					return smallUV;
 				}
-			};
-			var startX=bigUV[0];
+            }
+            var startX=bigUV[0];
 			var width=bigUV[2]-bigUV[0];
 			var startY=bigUV[1];
 			var height=bigUV[5]-bigUV[1];
@@ -2174,10 +2179,10 @@
 				rst[i+1]=smallUV[i+1]*height+startY;
 			}
 			return rst;
-		}
+		};
 
 		return UVTools;
-	})()
+	})();
 
 
 	/**
@@ -2197,7 +2202,7 @@
 
 		__class(KeyFramesContent,'laya.ani.KeyFramesContent');
 		return KeyFramesContent;
-	})()
+	})();
 
 
 	/**
@@ -2223,11 +2228,11 @@
 			}
 			BezierLerp._bezierResultCache[vKey]=1;
 			return 1;
-		}
+		};
 
 		BezierLerp._getBezierParamKey=function(px0,py0,px1,py1){
 			return (((px0 *100+py0)*100+px1)*100+py1)*100;
-		}
+		};
 
 		BezierLerp._getBezierPoints=function(px0,py0,px1,py1,key){
 			if (BezierLerp._bezierPointsCache[key])return BezierLerp._bezierPointsCache[key];
@@ -2239,12 +2244,12 @@
 			points=bz.getBezierPoints(controlPoints,100,3);
 			BezierLerp._bezierPointsCache[key]=points;
 			return points;
-		}
+		};
 
 		BezierLerp._bezierResultCache={};
 		BezierLerp._bezierPointsCache={};
 		return BezierLerp;
-	})()
+	})();
 
 
 	/**
@@ -2290,14 +2295,14 @@
 
 		__class(AnimationPlayer,'laya.ani.AnimationPlayer',_super);
 		var __proto=AnimationPlayer.prototype;
-		Laya.imps(__proto,{"laya.resource.IDestroy":true})
+		Laya.imps(__proto,{"laya.resource.IDestroy":true});
 		/**
 		*@private
 		*/
 		__proto._onTempletLoadedComputeFullKeyframeIndices=function(cachePlayRate,cacheFrameRate,templet){
 			if (this._templet===templet && this._cachePlayRate===cachePlayRate && this._cacheFrameRate===cacheFrameRate)
 				this._computeFullKeyframeIndices();
-		}
+		};
 
 		/**
 		*@private
@@ -2330,14 +2335,14 @@
 				}
 				anifullFrames.push(aniFullFrame);
 			}
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onAnimationTempletLoaded=function(){
 			(this.destroyed)|| (this._calculatePlayDuration());
-		}
+		};
 
 		/**
 		*@private
@@ -2350,7 +2355,7 @@
 					this._playEnd=oriDuration;
 				this._playDuration=this._playEnd-this._playStart;
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -2359,7 +2364,7 @@
 			this._currentTime=time;
 			this._currentKeyframeIndex=Math.floor((this.currentPlayTime)/ cacheFrameInterval+0.01);
 			this._currentFrameTime=this._currentKeyframeIndex *cacheFrameInterval;
-		}
+		};
 
 		/**
 		*@private
@@ -2369,7 +2374,7 @@
 			this._currentKeyframeIndex=Math.floor(currentAniClipPlayDuration / cacheFrameInterval+0.01);
 			this._currentFrameTime=this._currentKeyframeIndex *cacheFrameInterval;
 			this._currentAnimationClipIndex=-1;
-		}
+		};
 
 		/**
 		*@private
@@ -2415,7 +2420,7 @@
 				this._currentTime=this._currentFrameTime=this._currentKeyframeIndex=0;
 				this.event(/*laya.events.Event.COMPLETE*/"complete");
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -2425,7 +2430,7 @@
 			this._templet=null;
 			this._fullFrames=null;
 			this._destroyed=true;
-		}
+		};
 
 		/**
 		*播放动画。
@@ -2464,7 +2469,7 @@
 			else
 			this._templet.once(/*laya.events.Event.LOADED*/"loaded",this,this._onAnimationTempletLoaded);
 			this._update(0);
-		}
+		};
 
 		/**
 		*播放动画。
@@ -2483,7 +2488,7 @@
 			(fpsIn3DBuilder===void 0)&& (fpsIn3DBuilder=30);
 			var interval=1000.0 / fpsIn3DBuilder;
 			this.play(index,playbackRate,overallDuration,playStartFrame *interval,playEndFrame *interval);
-		}
+		};
 
 		/**
 		*停止播放当前动画
@@ -2498,7 +2503,7 @@
 				}else {
 				this._stopWhenCircleFinish=true;
 			}
-		}
+		};
 
 		/**
 		*动画播放的结束时间位置。
@@ -2689,7 +2694,7 @@
 		});
 
 		return AnimationPlayer;
-	})(EventDispatcher)
+	})(EventDispatcher);
 
 
 	//class laya.ani.GraphicsAni extends laya.display.Graphics
@@ -2714,10 +2719,10 @@
 		__proto.drawSkin=function(skin){
 			var arr=[skin];
 			this._saveToCmd(Render._context._drawSkin,arr);
-		}
+		};
 
 		return GraphicsAni;
-	})(Graphics)
+	})(Graphics);
 
 
 	/**
@@ -2737,7 +2742,7 @@
 			//this._aniClassName=null;
 			//this._animationDatasCache=null;
 			AnimationTemplet.__super.call(this);
-			this._anis=new Array;
+			this._anis=[];
 		}
 
 		__class(AnimationTemplet,'laya.ani.AnimationTemplet',_super);
@@ -2749,7 +2754,7 @@
 			var reader=new Byte(data);
 			this._aniVersion=reader.readUTFString();
 			AnimationParser01.parse(this,reader);
-		}
+		};
 
 		/**
 		*@private
@@ -2757,7 +2762,7 @@
 		__proto._endLoaded=function(){
 			this._loaded=true;
 			this.event(/*laya.events.Event.LOADED*/"loaded",this);
-		}
+		};
 
 		/**
 		*@private
@@ -2773,7 +2778,7 @@
 				}
 			}
 			keyFrames.length--;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -2789,39 +2794,39 @@
 					AnimationParser01.parse(this,reader);
 				}
 			this._endLoaded();
-		}
+		};
 
 		__proto.getAnimationCount=function(){
 			return this._anis.length;
-		}
+		};
 
 		__proto.getAnimation=function(aniIndex){
 			return this._anis[aniIndex];
-		}
+		};
 
 		__proto.getAniDuration=function(aniIndex){
 			return this._anis[aniIndex].playTime;
-		}
+		};
 
 		__proto.getNodes=function(aniIndex){
 			return this._anis[aniIndex].nodes;
-		}
+		};
 
 		__proto.getNodeIndexWithName=function(aniIndex,name){
 			return this._anis[aniIndex].bone3DMap[name];
-		}
+		};
 
 		__proto.getNodeCount=function(aniIndex){
 			return this._anis[aniIndex].nodes.length;
-		}
+		};
 
 		__proto.getTotalkeyframesLength=function(aniIndex){
 			return this._anis[aniIndex].totalKeyframeDatasLength;
-		}
+		};
 
 		__proto.getPublicExtData=function(){
 			return this._publicExtData;
-		}
+		};
 
 		__proto.getAnimationDataWithCache=function(key,cacheDatas,aniIndex,frameIndex){
 			var aniDatas=cacheDatas[aniIndex];
@@ -2835,13 +2840,13 @@
 					return keyDatas[frameIndex];
 				}
 			}
-		}
+		};
 
 		__proto.setAnimationDataWithCache=function(key,cacheDatas,aniIndex,frameIndex,data){
 			var aniDatas=(cacheDatas[aniIndex])|| (cacheDatas[aniIndex]={});
 			var aniDatasCache=(aniDatas[key])|| (aniDatas[key]=[]);
 			aniDatasCache[frameIndex]=data;
-		}
+		};
 
 		__proto.getOriginalData=function(aniIndex,originalData,nodesFrameIndices,frameIndex,playCurTime){
 			var oneAni=this._anis[aniIndex];
@@ -2861,8 +2866,8 @@
 							for (j=0;j < node.keyframeWidth;)
 							j+=node.interpolationMethod[j](node,j,originalData,outOfs+j,key.data,dt,key.dData,key.duration,key.nextData);
 							break ;
-						case 2:;
-							var interpolationData=key.interpolationData;
+                        case 2:
+                            var interpolationData=key.interpolationData;
 							var interDataLen=interpolationData.length;
 							var dataIndex=0;
 							for (j=0;j < interDataLen;){
@@ -2887,7 +2892,7 @@
 				}
 				outOfs+=node.keyframeWidth;
 			}
-		}
+		};
 
 		__proto.getNodesCurrentFrameIndex=function(aniIndex,playCurTime){
 			var ani=this._anis[aniIndex];
@@ -2910,7 +2915,7 @@
 				this.unfixedCurrentFrameIndexes[i]--;
 			}
 			return this.unfixedCurrentFrameIndexes;
-		}
+		};
 
 		__proto.getOriginalDataUnfixedRate=function(aniIndex,originalData,playCurTime){
 			var oneAni=this._anis[aniIndex];
@@ -2920,8 +2925,8 @@
 				this.unfixedCurrentTimes=new Float32Array(nodes.length);
 				this.unfixedKeyframes=__newvec(nodes.length);
 				this.unfixedLastAniIndex=aniIndex;
-			};
-			var j=0;
+            }
+            var j=0;
 			for (var i=0,n=nodes.length,outOfs=0;i < n;i++){
 				var node=nodes[i];
 				if (playCurTime < this.unfixedCurrentTimes[i])
@@ -2932,8 +2937,8 @@
 						break ;
 					this.unfixedKeyframes[i]=node.keyFrame[this.unfixedCurrentFrameIndexes[i]];
 					this.unfixedCurrentFrameIndexes[i]++;
-				};
-				var key=this.unfixedKeyframes[i];
+                }
+                var key=this.unfixedKeyframes[i];
 				node.dataOffset=outOfs;
 				var dt=playCurTime-key.startTime;
 				var lerpType=node.lerpType;
@@ -2944,8 +2949,8 @@
 							for (j=0;j < node.keyframeWidth;)
 							j+=node.interpolationMethod[j](node,j,originalData,outOfs+j,key.data,dt,key.dData,key.duration,key.nextData);
 							break ;
-						case 2:;
-							var interpolationData=key.interpolationData;
+                        case 2:
+                            var interpolationData=key.interpolationData;
 							var interDataLen=interpolationData.length;
 							var dataIndex=0;
 							for (j=0;j < interDataLen;){
@@ -2970,63 +2975,63 @@
 				}
 				outOfs+=node.keyframeWidth;
 			}
-		}
+		};
 
 		__proto.dispose=function(){
 			if (this.resourceManager)
 				this.resourceManager.removeResource(this);
 			_super.prototype.dispose.call(this);
-		}
+		};
 
 		AnimationTemplet._LinearInterpolation_0=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData){
 			out[outOfs]=data[index]+dt *dData[index];
 			return 1;
-		}
+		};
 
 		AnimationTemplet._QuaternionInterpolation_1=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData){
 			var amount=duration===0 ? 0 :dt / duration;
 			MathUtil.slerpQuaternionArray(data,index,nextData,index,amount,out,outOfs);
 			return 4;
-		}
+		};
 
 		AnimationTemplet._AngleInterpolation_2=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData){
 			return 0;
-		}
+		};
 
 		AnimationTemplet._RadiansInterpolation_3=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData){
 			return 0;
-		}
+		};
 
 		AnimationTemplet._Matrix4x4Interpolation_4=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData){
 			for (var i=0;i < 16;i++,index++)
 			out[outOfs+i]=data[index]+dt *dData[index];
 			return 16;
-		}
+		};
 
 		AnimationTemplet._NoInterpolation_5=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData){
 			out[outOfs]=data[index];
 			return 1;
-		}
+		};
 
 		AnimationTemplet._BezierInterpolation_6=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData,offset){
 			(offset===void 0)&& (offset=0);
 			out[outOfs]=data[index]+(nextData[index]-data[index])*BezierLerp.getBezierRate(dt / duration,interData[offset],interData[offset+1],interData[offset+2],interData[offset+3]);
 			return 5;
-		}
+		};
 
 		AnimationTemplet._BezierInterpolation_7=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData,offset){
 			(offset===void 0)&& (offset=0);
 			out[outOfs]=interData[offset+4]+interData[offset+5] *BezierLerp.getBezierRate((dt *0.001+interData[offset+6])/ interData[offset+7],interData[offset],interData[offset+1],interData[offset+2],interData[offset+3]);
 			return 9;
-		}
+		};
 
 		AnimationTemplet.load=function(url){
 			return Laya.loader.create(url,null,null,AnimationTemplet);
-		}
+		};
 
 		AnimationTemplet.interpolation=[AnimationTemplet._LinearInterpolation_0,AnimationTemplet._QuaternionInterpolation_1,AnimationTemplet._AngleInterpolation_2,AnimationTemplet._RadiansInterpolation_3,AnimationTemplet._Matrix4x4Interpolation_4,AnimationTemplet._NoInterpolation_5,AnimationTemplet._BezierInterpolation_6,AnimationTemplet._BezierInterpolation_7];
 		return AnimationTemplet;
-	})(Resource)
+	})(Resource);
 
 
 	/**
@@ -3141,7 +3146,7 @@
 			this._player.on(/*laya.events.Event.PLAYED*/"played",this,this._onPlay);
 			this._player.on(/*laya.events.Event.STOPPED*/"stopped",this,this._onStop);
 			this._player.on(/*laya.events.Event.PAUSED*/"paused",this,this._onPause);
-		}
+		};
 
 		/**
 		*通过加载直接创建动画
@@ -3156,7 +3161,7 @@
 			this._loadAniMode=aniMode;
 			this._texturePath=path.replace(".sk",".png").replace(".bin",".png");
 			Laya.loader.load([{url:path,type:/*laya.net.Loader.BUFFER*/"arraybuffer"},{url:this._texturePath,type:/*laya.net.Loader.IMAGE*/"image"}],Handler.create(this,this._onLoaded));
-		}
+		};
 
 		/**
 		*加载完成
@@ -3167,8 +3172,8 @@
 			if (tTexture==null || arraybuffer==null)return;
 			if (Templet.TEMPLET_DICTIONARY==null){
 				Templet.TEMPLET_DICTIONARY={};
-			};
-			var tFactory;
+            }
+            var tFactory;
 			tFactory=Templet.TEMPLET_DICTIONARY[this._aniPath];
 			if (tFactory){
 				tFactory.isParseFail ? this._parseFail():this._parseComplete();
@@ -3180,7 +3185,7 @@
 				tFactory.on(/*laya.events.Event.ERROR*/"error",this,this._parseFail);
 				tFactory.parseData(tTexture,arraybuffer);
 			}
-		}
+		};
 
 		/**
 		*解析完成
@@ -3192,21 +3197,21 @@
 				this.play(0,true);
 			}
 			this._complete && this._complete.runWith(this);
-		}
+		};
 
 		/**
 		*解析失败
 		*/
 		__proto._parseFail=function(){
 			console.log("[Error]:"+this._aniPath+"解析失败");
-		}
+		};
 
 		/**
 		*传递PLAY事件
 		*/
 		__proto._onPlay=function(){
 			this.event(/*laya.events.Event.PLAYED*/"played");
-		}
+		};
 
 		/**
 		*传递STOP事件
@@ -3226,14 +3231,14 @@
 			this._eventIndex=0;
 			this._drawOrder=null;
 			this.event(/*laya.events.Event.STOPPED*/"stopped");
-		}
+		};
 
 		/**
 		*传递PAUSE事件
 		*/
 		__proto._onPause=function(){
 			this.event(/*laya.events.Event.PAUSED*/"paused");
-		}
+		};
 
 		/**
 		*创建骨骼的矩阵，保存每次计算的最终结果
@@ -3266,7 +3271,7 @@
 					this._boneSlotArray.push(tBS);
 				}
 			}
-		}
+		};
 
 		__proto._emitMissedEvents=function(startTime,endTime,startIndex){
 			(startIndex===void 0)&& (startIndex=0);
@@ -3283,7 +3288,7 @@
 					}
 				}
 			}
-		}
+		};
 
 		/**
 		*更新动画
@@ -3294,8 +3299,8 @@
 			if (this._pause)return;
 			if (autoKey && this._indexControl){
 				return;
-			};
-			var tCurrTime=Laya.timer.currTimer;
+            }
+            var tCurrTime=Laya.timer.currTimer;
 			var preIndex=this._player.currentKeyframeIndex;
 			var dTime=tCurrTime-this._lastTime;
 			if (autoKey){
@@ -3314,8 +3319,8 @@
 			if (preIndex > this._clipIndex&&this._eventIndex!=0){
 				this._emitMissedEvents(this._player.playStart,this._player.playEnd,this._eventIndex);
 				this._eventIndex=0;
-			};
-			var tEventData;
+            }
+            var tEventData;
 			var tEventAniArr=this._templet.eventAniArr;
 			var tEventArr=tEventAniArr[this._aniClipIndex];
 			if (tEventArr && this._eventIndex < tEventArr.length){
@@ -3328,8 +3333,8 @@
 					}else {
 					this._eventIndex++;
 				}
-			};
-			var tGraphics;
+            }
+            var tGraphics;
 			if (this._aniMode==0){
 				tGraphics=this._templet.getGrahicsDataWithCache(this._aniClipIndex,this._clipIndex);
 				if (tGraphics){
@@ -3369,7 +3374,7 @@
 				}
 			}
 			this._createGraphics();
-		}
+		};
 
 		/**
 		*@private
@@ -3393,8 +3398,8 @@
 					}
 					tDrawOrderData=tDrawOrderArr[this._drawOrderIndex];
 				}
-			};
-			var tGraphics;
+            }
+            var tGraphics;
 			if (this._aniMode==0 || this._aniMode==1){
 				this.graphics=new GraphicsAni();
 				}else {
@@ -3429,8 +3434,8 @@
 					tSrcBone.resultTransform.skewX=tParentTransform.skewX+this._curOriginalData[tStartIndex++];
 					tSrcBone.resultTransform.skewY=tParentTransform.skewY+this._curOriginalData[tStartIndex++];
 				}
-			};
-			var tSlotDic={};
+            }
+            var tSlotDic={};
 			var tSlotAlphaDic={};
 			var tBoneData;
 			for (n+=tSectionArr[1];i < n;i++){
@@ -3441,8 +3446,8 @@
 				this._curOriginalData[tStartIndex++];
 				this._curOriginalData[tStartIndex++];
 				this._curOriginalData[tStartIndex++];
-			};
-			var tBendDirectionDic={};
+            }
+            var tBendDirectionDic={};
 			var tMixDic={};
 			for (n+=tSectionArr[2];i < n;i++){
 				tBoneData=bones[i];
@@ -3518,8 +3523,8 @@
 						}
 					}
 				}
-			};
-			var tDeformDic={};
+            }
+            var tDeformDic={};
 			var tDeformAniArr=this._templet.deformAniArr;
 			var tDeformAniData;
 			var tDeformSlotData;
@@ -3531,8 +3536,8 @@
 						tDBBoneSlot=this._boneSlotArray[i];
 						tDBBoneSlot.deformData=null;
 					}
-				};
-				var tSkinDeformAni=tDeformAniArr[this._aniClipIndex];
+                }
+                var tSkinDeformAni=tDeformAniArr[this._aniClipIndex];
 				tDeformAniData=(tSkinDeformAni["default"]);
 				this._setDeform(tDeformAniData,tDeformDic,this._boneSlotArray,curTime);
 				var tSkin;
@@ -3544,8 +3549,8 @@
 				}
 				tDeformAniData=(tSkinDeformAni[this._skinName]);
 				this._setDeform(tDeformAniData,tDeformDic,this._boneSlotArray,curTime);
-			};
-			var tSlotData2;
+            }
+            var tSlotData2;
 			var tSlotData3;
 			var tObject;
 			if (this._drawOrder){
@@ -3624,7 +3629,7 @@
 				}else if (this._aniMode==1){
 				this._setGrahicsDataWithCache(this._aniClipIndex,_clipIndex,tGraphics);
 			}
-		}
+		};
 
 		/**
 		*设置deform数据
@@ -3653,7 +3658,7 @@
 					}
 				}
 			}
-		}
+		};
 
 		/**
 		*得到当前动画的数量
@@ -3661,7 +3666,7 @@
 		*/
 		__proto.getAnimNum=function(){
 			return this._templet.getAnimationCount();
-		}
+		};
 
 		/**
 		*得到指定动画的名字
@@ -3669,7 +3674,7 @@
 		*/
 		__proto.getAniNameByIndex=function(index){
 			return this._templet.getAniNameByIndex(index);
-		}
+		};
 
 		/**
 		*通过名字得到插槽的引用
@@ -3678,7 +3683,7 @@
 		*/
 		__proto.getSlotByName=function(name){
 			return this._boneSlotDic[name];
-		}
+		};
 
 		/**
 		*通过名字显示一套皮肤
@@ -3688,7 +3693,7 @@
 		__proto.showSkinByName=function(name,freshSlotIndex){
 			(freshSlotIndex===void 0)&& (freshSlotIndex=true);
 			this.showSkinByIndex(this._templet.getSkinIndexByName(name),freshSlotIndex);
-		}
+		};
 
 		/**
 		*通过索引显示一套皮肤
@@ -3706,7 +3711,7 @@
 				this._skinName=tSkinData.name;
 			}
 			this._clearCache();
-		}
+		};
 
 		/**
 		*设置某插槽的皮肤
@@ -3720,7 +3725,7 @@
 				tBoneSlot.showDisplayByIndex(index);
 			}
 			this._clearCache();
-		}
+		};
 
 		/**
 		*设置某插槽的皮肤
@@ -3734,7 +3739,7 @@
 				tBoneSlot.showDisplayByName(name);
 			}
 			this._clearCache();
-		}
+		};
 
 		/**
 		*替换插槽贴图名
@@ -3749,7 +3754,7 @@
 				tBoneSlot.replaceDisplayByName(oldName,newName);
 			}
 			this._clearCache();
-		}
+		};
 
 		/**
 		*替换插槽的贴图索引
@@ -3764,7 +3769,7 @@
 				tBoneSlot.replaceDisplayByIndex(oldIndex,newIndex);
 			}
 			this._clearCache();
-		}
+		};
 
 		/**
 		*设置自定义皮肤
@@ -3778,7 +3783,7 @@
 				tBoneSlot.replaceSkin(texture);
 			}
 			this._clearCache();
-		}
+		};
 
 		/**
 		*换装的时候，需要清一下缓冲区
@@ -3789,7 +3794,7 @@
 					this._graphicsCache[i].length=0;
 				}
 			}
-		}
+		};
 
 		/**
 		*播放动画
@@ -3842,7 +3847,7 @@
 					this._update();
 				}
 			}
-		}
+		};
 
 		/**
 		*停止动画
@@ -3855,7 +3860,7 @@
 				}
 				Laya.timer.clear(this,this._update);
 			}
-		}
+		};
 
 		/**
 		*设置动画播放速率
@@ -3865,7 +3870,7 @@
 			if (this._player){
 				this._player.playbackRate=value;
 			}
-		}
+		};
 
 		/**
 		*暂停动画的播放
@@ -3878,7 +3883,7 @@
 				}
 				Laya.timer.clear(this,this._update);
 			}
-		}
+		};
 
 		/**
 		*恢复动画的播放
@@ -3893,7 +3898,7 @@
 				this._lastTime=Browser.now();
 				Laya.stage.frameLoop(1,this,this._update,null,true);
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -3904,7 +3909,7 @@
 		*/
 		__proto._getGrahicsDataWithCache=function(aniIndex,frameIndex){
 			return this._graphicsCache[aniIndex][frameIndex];
-		}
+		};
 
 		/**
 		*@private
@@ -3915,7 +3920,7 @@
 		*/
 		__proto._setGrahicsDataWithCache=function(aniIndex,frameIndex,graphics){
 			this._graphicsCache[aniIndex][frameIndex]=graphics;
-		}
+		};
 
 		/**
 		*销毁当前动画
@@ -3930,7 +3935,7 @@
 			this._boneMatrixArray.length=0;
 			this._lastTime=0;
 			Laya.timer.clear(this,this._update);
-		}
+		};
 
 		/**
 		*设置动画路径
@@ -3983,7 +3988,7 @@
 		});
 
 		return Skeleton;
-	})(Sprite)
+	})(Sprite);
 
 
 	/**
@@ -4042,7 +4047,7 @@
 			(destroyChild===void 0)&& (destroyChild=true);
 			this._clear();
 			_super.prototype.destroy.call(this,destroyChild);
-		}
+		};
 
 		/**@private */
 		__proto._setDisplay=function(value){
@@ -4050,13 +4055,13 @@
 			if (this._isRoot){
 				this._$3__onDisplay(value);
 			}
-		}
+		};
 
 		/**@private */
 		__proto._$3__onDisplay=function(value){
 			if (value)Laya.timer.loop(this.interval,this,this.updates,null,true);
 			else Laya.timer.clear(this,this.updates);
-		}
+		};
 
 		/**@private 更新时间轴*/
 		__proto.updates=function(){
@@ -4066,7 +4071,7 @@
 			for (i=0;i < len;i++){
 				this._movieClipList[i]&&this._movieClipList[i]._update();
 			}
-		}
+		};
 
 		/**
 		*增加一个标签到index帧上，播放到此index后会派发label事件
@@ -4076,7 +4081,7 @@
 		__proto.addLabel=function(label,index){
 			if (!this._labels)this._labels={};
 			this._labels[index]=label;
-		}
+		};
 
 		/**
 		*删除某个标签
@@ -4092,7 +4097,7 @@
 					}
 				}
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -4121,14 +4126,14 @@
 				}
 				this.stop();
 			}
-		}
+		};
 
 		/**
 		*停止播放动画。
 		*/
 		__proto.stop=function(){
 			this._playing=false;
-		}
+		};
 
 		/**
 		*跳到某帧并停止播放动画。
@@ -4137,7 +4142,7 @@
 		__proto.gotoAndStop=function(index){
 			this.index=index;
 			this.stop();
-		}
+		};
 
 		/**
 		*@private
@@ -4155,8 +4160,8 @@
 						this._movieClipList[i]._clear();
 				}
 				this._movieClipList.length=0;
-			};
-			var key;
+            }
+            var key;
 			for (key in this._loadedImage){
 				if (this._loadedImage[key]){
 					Loader.clearRes(key);
@@ -4166,7 +4171,7 @@
 			this.removeChildren();
 			this.graphics=null;
 			this._parentMovieClip=null;
-		}
+		};
 
 		/**
 		*播放动画。
@@ -4179,7 +4184,7 @@
 			this._playing=true;
 			if (this._data)
 				this._displayFrame(index);
-		}
+		};
 
 		/**@private */
 		__proto._displayFrame=function(frameIndex){
@@ -4188,7 +4193,7 @@
 				if (this._curIndex > frameIndex)this._reset();
 				this._parse(frameIndex);
 			}
-		}
+		};
 
 		/**@private */
 		__proto._reset=function(rm){
@@ -4196,7 +4201,7 @@
 			if (rm && this._curIndex !=1)this.removeChildren();
 			this._preIndex=this._curIndex=-1;
 			this._Pos=this._start;
-		}
+		};
 
 		/**@private */
 		__proto._parse=function(frameIndex){
@@ -4221,7 +4226,7 @@
 						_data.pos=tPos;
 						if ((ttype=_data.getUint8())==0){
 							var pid=_data.getUint16();
-							sp=_idOfSprite[key]
+							sp=_idOfSprite[key];
 							if (!sp){
 								sp=_idOfSprite[key]=new Sprite();
 								var spp=new Sprite();
@@ -4234,7 +4239,7 @@
 							}
 							sp.alpha=1;
 							}else if (ttype==1){
-							mc=_idOfSprite[key]
+							mc=_idOfSprite[key];
 							if (!mc){
 								_idOfSprite[key]=mc=new MovieClip(this);
 								mc.interval=this.interval;
@@ -4248,8 +4253,8 @@
 						}
 						_data.pos=this._Pos;
 						break ;
-					case 3:;
-						var node=_idOfSprite[ _data.getUint16()];
+                    case 3:
+                        var node=_idOfSprite[ _data.getUint16()];
 						if (node){
 							this.addChild(node);
 							node.zOrder=_data.getUint16();
@@ -4307,13 +4312,13 @@
 			}
 			if (this._playing&&!this._ended)this.event(/*laya.events.Event.FRAME*/"enterframe");
 			this._Pos=_data.pos;
-		}
+		};
 
 		/**@private */
 		__proto._setData=function(data,start){
 			this._data=data;
 			this._start=start+3;
-		}
+		};
 
 		/**
 		*加载资源。
@@ -4334,7 +4339,7 @@
 				urls.push({url:this._atlasPath,type:/*laya.net.Loader.ATLAS*/"atlas" });
 			}
 			Laya.loader.load(urls,Handler.create(this,this._onLoaded));
-		}
+		};
 
 		/**@private */
 		__proto._onLoaded=function(){
@@ -4346,7 +4351,7 @@
 			}
 			this.basePath=this._atlasPath?Loader.getAtlas(this._atlasPath).dir:this._url.split(".swf")[0]+"/image/";
 			this._initData(data);
-		}
+		};
 
 		/**@private */
 		__proto._initState=function(){
@@ -4357,7 +4362,7 @@
 			this._curIndex=0;
 			while (!this._ended)this._parse(++this._curIndex);
 			this._playing=preState;
-		}
+		};
 
 		/**@private */
 		__proto._initData=function(data){
@@ -4370,7 +4375,7 @@
 			this.play(0);
 			this.event(/*laya.events.Event.LOADED*/"loaded");
 			if (!this._parentMovieClip)Laya.timer.loop(this.interval,this,this.updates,null,true);
-		}
+		};
 
 		/**
 		*从开始索引播放到结束索引，结束之后出发complete回调
@@ -4382,7 +4387,7 @@
 			this._completeHandler=complete;
 			this._endFrame=end;
 			this.play(start,false);
-		}
+		};
 
 		/**当前播放索引。*/
 		__getset(0,__proto,'index',function(){
@@ -4417,7 +4422,7 @@
 
 		MovieClip._ValueList=["x","y","width","height","scaleX","scaleY","rotation","alpha"];
 		return MovieClip;
-	})(Sprite)
+	})(Sprite);
 
 
 	/**
@@ -4464,21 +4469,21 @@
 		__proto.loadAni=function(url){
 			this._skBufferUrl=url;
 			Laya.loader.load(url,Handler.create(this,this.onComplete),null,/*laya.net.Loader.BUFFER*/"arraybuffer");
-		}
+		};
 
 		__proto.onComplete=function(content){
 			if (this._isDestroyed){
 				this.destroy();
 				return;
-			};
-			var tSkBuffer=Loader.getRes(this._skBufferUrl);
+            }
+            var tSkBuffer=Loader.getRes(this._skBufferUrl);
 			if (!tSkBuffer){
 				this.event(/*laya.events.Event.ERROR*/"error","load failed:"+this._skBufferUrl);
 				return;
 			}
 			this._path=this._skBufferUrl.slice(0,this._skBufferUrl.lastIndexOf("/"))+"/";
 			this.parseData(null,tSkBuffer);
-		}
+		};
 
 		/**
 		*解析骨骼动画数据
@@ -4496,7 +4501,7 @@
 			}
 			this._rate=playbackRate;
 			this.parse(skeletonData);
-		}
+		};
 
 		/**
 		*创建动画
@@ -4509,7 +4514,7 @@
 		__proto.buildArmature=function(aniMode){
 			(aniMode===void 0)&& (aniMode=0);
 			return new Skeleton(this,aniMode);
-		}
+		};
 
 		/**
 		*@private
@@ -4534,14 +4539,14 @@
 				this.event(/*laya.events.Event.ERROR*/"error",this);
 				this.isParseFail=true;
 			}
-		}
+		};
 
 		__proto._parseTexturePath=function(){
 			if (this._isDestroyed){
 				this.destroy();
 				return;
-			};
-			var i=0;
+            }
+            var i=0;
 			this._loadList=[];
 			var tByte=new Byte(this.getPublicExtData());
 			var tX=0,tY=0,tWidth=0,tHeight=0;
@@ -4572,7 +4577,7 @@
 				}
 			}
 			Laya.loader.load(this._loadList,Handler.create(this,this._textureComplete));
-		}
+		};
 
 		/**
 		*纹理加载完成
@@ -4588,7 +4593,7 @@
 				}
 			}
 			this._parsePublicExtData();
-		}
+		};
 
 		/**
 		*解析自定义数据
@@ -4597,8 +4602,8 @@
 			var i=0,j=0,k=0,l=0,n=0;
 			for (i=0,n=this.getAnimationCount();i < n;i++){
 				this._graphicsCache.push([]);
-			};
-			var isSpine=false;
+            }
+            var isSpine=false;
 			isSpine=this._aniClassName !="Dragon";
 			var tByte=new Byte(this.getPublicExtData());
 			var tX=0,tY=0,tWidth=0,tHeight=0;
@@ -4640,8 +4645,8 @@
 				tSectionArr.push(tByte.getUint16());
 				tSectionArr.push(tByte.getUint16());
 				this.aniSectionDic[i]=tSectionArr;
-			};
-			var tBone;
+            }
+            var tBone;
 			var tParentBone;
 			var tName;
 			var tParentName;
@@ -4698,8 +4703,8 @@
 				tMatrixArray.push(tResultTransform);
 				tBone=this.mBoneArr[i];
 				tBone.transform=tResultTransform;
-			};
-			var tIkConstraintData;
+            }
+            var tIkConstraintData;
 			var tIkLen=tByte.getUint16();
 			var tIkBoneLen=0;
 			for (i=0;i < tIkLen;i++){
@@ -4716,8 +4721,8 @@
 				tIkConstraintData.mix=tByte.getFloat32();
 				tIkConstraintData.isSpine=isSpine;
 				this.ikArr.push(tIkConstraintData);
-			};
-			var tTfConstraintData;
+            }
+            var tTfConstraintData;
 			var tTfLen=tByte.getUint16();
 			var tTfBoneLen=0;
 			for (i=0;i < tTfLen;i++){
@@ -4739,8 +4744,8 @@
 				tTfConstraintData.offsetScaleY=tByte.getFloat32();
 				tTfConstraintData.offsetShearY=tByte.getFloat32();
 				this.tfArr.push(tTfConstraintData);
-			};
-			var tPathConstraintData;
+            }
+            var tPathConstraintData;
 			var tPathLen=tByte.getUint16();
 			var tPathBoneLen=0;
 			for (i=0;i < tPathLen;i++){
@@ -4760,8 +4765,8 @@
 				tPathConstraintData.rotateMix=tByte.getFloat32();
 				tPathConstraintData.translateMix=tByte.getFloat32();
 				this.pathArr.push(tPathConstraintData);
-			};
-			var tDeformSlotLen=0;
+            }
+            var tDeformSlotLen=0;
 			var tDeformSlotDisplayLen=0;
 			var tDSlotIndex=0;
 			var tDAttachment;
@@ -4810,8 +4815,8 @@
 						}
 					}
 				}
-			};
-			var tDrawOrderArr;
+            }
+            var tDrawOrderArr;
 			var tDrawOrderAniLen=tByte.getInt16();
 			var tDrawOrderLen=0;
 			var tDrawOrderData;
@@ -4829,8 +4834,8 @@
 					tDrawOrderArr.push(tDrawOrderData);
 				}
 				this.drawOrderAniArr.push(tDrawOrderArr);
-			};
-			var tEventArr;
+            }
+            var tEventArr;
 			var tEventAniLen=tByte.getInt16();
 			var tEventLen=0;
 			var tEventData;
@@ -4847,15 +4852,15 @@
 					tEventArr.push(tEventData);
 				}
 				this.eventAniArr.push(tEventArr);
-			};
-			var tAttachmentLen=tByte.getInt16();
+            }
+            var tAttachmentLen=tByte.getInt16();
 			if (tAttachmentLen > 0){
 				this.attachmentNames=[];
 				for (i=0;i < tAttachmentLen;i++){
 					this.attachmentNames.push(tByte.getUTFString());
 				}
-			};
-			var tBoneSlotLen=tByte.getInt16();
+            }
+            var tBoneSlotLen=tByte.getInt16();
 			var tDBBoneSlot;
 			var tDBBoneSlotArr;
 			for (i=0;i < tBoneSlotLen;i++){
@@ -4872,8 +4877,8 @@
 				}
 				tDBBoneSlotArr.push(tDBBoneSlot);
 				this.boneSlotArray.push(tDBBoneSlot);
-			};
-			var tNameString=tByte.readUTFString();
+            }
+            var tNameString=tByte.readUTFString();
 			var tNameArray=tNameString.split("\n");
 			var tNameStartIndex=0;
 			var tSkinDataLen=tByte.getUint8();
@@ -4954,8 +4959,8 @@
 				}
 				this.skinDic[tSkinData.name]=tSkinData;
 				this.skinDataArray.push(tSkinData);
-			};
-			var tReverse=tByte.getUint8();
+            }
+            var tReverse=tByte.getUint8();
 			if (tReverse==1){
 				this.yReverseMatrix=new Matrix(1,0,0,-1,0,0);
 				if (tRootBone){
@@ -4968,7 +4973,7 @@
 			}
 			this.showSkinByIndex(this.boneSlotDic,0);
 			this.event(/*laya.events.Event.COMPLETE*/"complete",this);
-		}
+		};
 
 		/**
 		*得到指定的纹理
@@ -4981,7 +4986,7 @@
 				return this._mainTexture;
 			}
 			return tTexture;
-		}
+		};
 
 		/**
 		*@private
@@ -5015,7 +5020,7 @@
 				return true;
 			}
 			return false;
-		}
+		};
 
 		/**
 		*通过皮肤名字得到皮肤索引
@@ -5031,7 +5036,7 @@
 				}
 			}
 			return-1;
-		}
+		};
 
 		/**
 		*@private
@@ -5042,7 +5047,7 @@
 		*/
 		__proto.getGrahicsDataWithCache=function(aniIndex,frameIndex){
 			return this._graphicsCache[aniIndex][frameIndex];
-		}
+		};
 
 		/**
 		*@private
@@ -5053,7 +5058,7 @@
 		*/
 		__proto.setGrahicsDataWithCache=function(aniIndex,frameIndex,graphics){
 			this._graphicsCache[aniIndex][frameIndex]=graphics;
-		}
+		};
 
 		/**
 		*释放纹理
@@ -5069,8 +5074,8 @@
 			/*for each*/for($each_tTexture in this._textureDic){
 				tTexture=this._textureDic[$each_tTexture];
 				tTexture.destroy();
-			};
-			var tSkinSlotDisplayData;
+            }
+            var tSkinSlotDisplayData;
 			for (var i=0,n=this.skinSlotDisplayDataArr.length;i < n;i++){
 				tSkinSlotDisplayData=this.skinSlotDisplayDataArr[i];
 				tSkinSlotDisplayData.destory();
@@ -5080,7 +5085,7 @@
 				delete Templet.TEMPLET_DICTIONARY[this.url];
 			}
 			this.dispose();
-		}
+		};
 
 		/**
 		*通过索引得动画名称
@@ -5091,14 +5096,14 @@
 			var tAni=this.getAnimation(index);
 			if (tAni)return tAni.name;
 			return null;
-		}
+		};
 
 		__getset(0,__proto,'rate',function(){
 			return this._rate;
 		});
 
 		Templet.LAYA_ANIMATION_VISION="LAYAANIMATION:1.6.0";
-		Templet.TEMPLET_DICTIONARY=null
+		Templet.TEMPLET_DICTIONARY=null;
 		return Templet;
 	})(AnimationTemplet)
 

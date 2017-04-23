@@ -7,7 +7,7 @@ export class Story {
     person: Person;
     chapters: Array<Chapter>;
     constructor(private _id: number) {
-        this.chapters = new Array();
+        this.chapters = [];
         this.chapters.push(new Chapter(2));
         this.person = new Person(88);
     }

@@ -4,7 +4,7 @@
 
 class Gear {
     constructor() {
-        require(["../../verdor/laya/laya.core"], this.engReady);
+        require(["../verdor/laya/laya.core"], this.engReady);
     }
 
     engReady() {

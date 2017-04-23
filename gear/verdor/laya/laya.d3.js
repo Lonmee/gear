@@ -17821,7 +17821,7 @@
 		*/
 		__proto.getComponentByIndex=function(index){
 			return this._components[index];
-		}
+		};
 
 		/**
 		*通过指定类型和类型索引移除组件。
@@ -17834,7 +17834,7 @@
 			if (mapIndex===-1)
 				return;
 			this._removeComponent(mapIndex,typeIndex);
-		}
+		};
 
 		/**
 		*通过指定类型移除所有组件。
@@ -17847,7 +17847,7 @@
 			var componentIndices=this._typeComponentsIndices[mapIndex];
 			for (var i=0,n=componentIndices.length;i < n;componentIndices.length < n ? n--:i++)
 			this._removeComponent(mapIndex,i);
-		}
+		};
 
 		/**
 		*移除全部组件。
@@ -17855,7 +17855,7 @@
 		__proto.removeAllComponent=function(){
 			for (var i=0,n=this._componentsMap.length;i < n;this._componentsMap.length < n ? n--:i++)
 			this.removeComponentsByType(this._componentsMap[i]);
-		}
+		};
 
 		/**
 		*@private
@@ -17867,7 +17867,7 @@
 			var innerResouMap=data[1];
 			ClassUtils.createByJson(oriData,this,this,Handler.create(null,Utils3D._parseHierarchyProp,[innerResouMap],false),Handler.create(null,Utils3D._parseHierarchyNode,null,false));
 			this.event(/*laya.events.Event.HIERARCHY_LOADED*/"hierarchyloaded",[this]);
-		}
+		};
 
 		/**
 		*克隆。
@@ -17895,7 +17895,7 @@
 			destSprite3D.addComponent(this._componentsMap[i]);
 			for (i=0,n=this._childs.length;i < n;i++)
 			destSprite3D.addChild(this._childs[i].clone());
-		}
+		};
 
 		/**
 		*克隆。
@@ -17905,7 +17905,7 @@
 			var destSprite3D=/*__JS__ */new this.constructor();
 			this.cloneTo(destSprite3D);
 			return destSprite3D;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -17925,7 +17925,7 @@
 			colliders.splice(colliders.indexOf(this._colliders[i]),1);
 			this._colliders=null;
 			Loader.clearRes(this.url);
-		}
+		};
 
 		/**
 		*获得组件的数量。
@@ -18012,8 +18012,8 @@
 					var oldColliders=this._layer._colliders;
 					for (i=0;i < n;i++)
 					oldColliders.splice(oldColliders.indexOf(this._colliders[i]),1);
-				};
-				var colliders=value._colliders;
+                }
+                var colliders=value._colliders;
 				for (i=0;i < n;i++)
 				colliders.push(this._colliders[i]);
 				this._layer=value;
@@ -18057,18 +18057,18 @@
 				}
 			}
 			return destSprite3D;
-		}
+		};
 
 		Sprite3D.load=function(url){
 			return Laya.loader.create(url,null,null,Sprite3D,null,1,false);
-		}
+		};
 
 		Sprite3D.WORLDMATRIX=0;
 		Sprite3D.MVPMATRIX=1;
 		Sprite3D._uniqueIDCounter=0;
 		Sprite3D._nameNumberCounter=0;
 		return Sprite3D;
-	})(Node)
+	})(Node);
 
 
 	/**
@@ -18134,7 +18134,7 @@
 
 		__class(BaseMaterial,'laya.d3.core.material.BaseMaterial',_super);
 		var __proto=BaseMaterial.prototype;
-		Laya.imps(__proto,{"laya.d3.core.IClone":true})
+		Laya.imps(__proto,{"laya.d3.core.IClone":true});
 		/**
 		*@private
 		*/
@@ -18145,7 +18145,7 @@
 				if (texture)
 					this._uploadTexture(shaderIndex,texture.source || texture.defaulteTexture.source);
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -18154,14 +18154,14 @@
 			var publicDefineValue=(sceneDefineValue | vertexDefineValue)& (~this._disablePublicShaderDefine);
 			this._shader=this._shaderCompile.withCompile(this._sharderNameID,publicDefineValue,spriteDefineValue,this._shaderDefineValue);
 			return this._shader;
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._uploadTexture=function(shaderIndex,textureSource){
 			this._shaderValues.data[shaderIndex]=textureSource;
-		}
+		};
 
 		/**
 		*增加Shader宏定义。
@@ -18172,7 +18172,7 @@
 			if (this._conchMaterial){
 				this._conchMaterial.addShaderDefine(value);
 			}
-		}
+		};
 
 		/**
 		*移除Shader宏定义。
@@ -18183,7 +18183,7 @@
 			if (this._conchMaterial){
 				this._conchMaterial.removeShaderDefine(value);
 			}
-		}
+		};
 
 		/**
 		*增加禁用宏定义。
@@ -18191,7 +18191,7 @@
 		*/
 		__proto._addDisablePublicShaderDefine=function(value){
 			this._disablePublicShaderDefine |=value;
-		}
+		};
 
 		/**
 		*移除禁用宏定义。
@@ -18199,7 +18199,7 @@
 		*/
 		__proto._removeDisablePublicShaderDefine=function(value){
 			this._disablePublicShaderDefine &=~value;
-		}
+		};
 
 		/**
 		*设置Buffer。
@@ -18213,7 +18213,7 @@
 			if (this._conchMaterial){
 				this._conchMaterial.setShaderValue(shaderIndex,buffer,0);
 			}
-		}
+		};
 
 		/**
 		*获取Buffer。
@@ -18222,7 +18222,7 @@
 		*/
 		__proto._getBuffer=function(shaderIndex){
 			return this._values[shaderIndex];
-		}
+		};
 
 		/**
 		*设置矩阵。
@@ -18235,7 +18235,7 @@
 			if (this._conchMaterial){
 				this._conchMaterial.setShaderValue(shaderIndex,matrix4x4.elements,0);
 			}
-		}
+		};
 
 		/**
 		*获取矩阵。
@@ -18244,7 +18244,7 @@
 		*/
 		__proto._getMatrix4x4=function(shaderIndex){
 			return this._values[shaderIndex];
-		}
+		};
 
 		/**
 		*设置整型。
@@ -18258,7 +18258,7 @@
 			if (this._conchMaterial){
 				this._conchMaterial.setShaderValue(shaderIndex,i,1);
 			}
-		}
+		};
 
 		/**
 		*获取整形。
@@ -18267,7 +18267,7 @@
 		*/
 		__proto._getInt=function(shaderIndex){
 			return this._values[shaderIndex];
-		}
+		};
 
 		/**
 		*设置浮点。
@@ -18281,7 +18281,7 @@
 			if (this._conchMaterial){
 				this._conchMaterial.setShaderValue(shaderIndex,number,2);
 			}
-		}
+		};
 
 		/**
 		*获取浮点。
@@ -18290,7 +18290,7 @@
 		*/
 		__proto._getNumber=function(shaderIndex){
 			return this._values[shaderIndex];
-		}
+		};
 
 		/**
 		*设置布尔。
@@ -18304,7 +18304,7 @@
 			if (this._conchMaterial){
 				this._conchMaterial.setShaderValue(shaderIndex,b,1);
 			}
-		}
+		};
 
 		/**
 		*获取布尔。
@@ -18313,7 +18313,7 @@
 		*/
 		__proto._getBool=function(shaderIndex){
 			return this._values[shaderIndex];
-		}
+		};
 
 		/**
 		*设置二维向量。
@@ -18327,7 +18327,7 @@
 			if (this._conchMaterial){
 				this._conchMaterial.setShaderValue(shaderIndex,vector2.elements,0);
 			}
-		}
+		};
 
 		/**
 		*获取二维向量。
@@ -18336,7 +18336,7 @@
 		*/
 		__proto._getVector2=function(shaderIndex){
 			return this._values[shaderIndex];
-		}
+		};
 
 		/**
 		*设置颜色。
@@ -18350,7 +18350,7 @@
 			if (this._conchMaterial && color){
 				this._conchMaterial.setShaderValue(shaderIndex,color.elements,0);
 			}
-		}
+		};
 
 		/**
 		*获取颜色。
@@ -18359,7 +18359,7 @@
 		*/
 		__proto._getColor=function(shaderIndex){
 			return this._values[shaderIndex];
-		}
+		};
 
 		/**
 		*设置纹理。
@@ -18377,7 +18377,7 @@
 			if (this._conchMaterial){
 				this._conchMaterial.setTexture(texture._conchTexture,this._textureSharderIndices.indexOf(shaderIndex),shaderIndex);
 			}
-		}
+		};
 
 		/**
 		*获取纹理。
@@ -18386,7 +18386,7 @@
 		*/
 		__proto._getTexture=function(shaderIndex){
 			return this._values[shaderIndex];
-		}
+		};
 
 		/**
 		*上传材质。
@@ -18398,9 +18398,9 @@
 		__proto._upload=function(){
 			this._uploadTextures();
 			this._shader.uploadMaterialUniforms(this._shaderValues.data);
-		}
+		};
 
-		__proto._setMaterialShaderParams=function(state){}
+		__proto._setMaterialShaderParams=function(state){};
 		/**
 		*设置渲染相关状态。
 		*/
@@ -18421,7 +18421,7 @@
 					WebGLContext.setBlend(gl,true);
 					break ;
 				}
-		}
+		};
 
 		/**
 		*设置渲染相关状态。
@@ -18464,7 +18464,7 @@
 					WebGLContext.setFrontFace(gl,forntFace);
 					break ;
 				}
-		}
+		};
 
 		/**
 		*设置使用Shader名字。
@@ -18476,7 +18476,7 @@
 			if (this._conchMaterial){
 				this._conchMaterial.setShader(this._shaderCompile._conchShader);
 			}
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -18485,13 +18485,13 @@
 			var jsonData=data[0];
 			var textureMap=data[1];
 			switch (jsonData.version){
-				case "LAYAMATERIAL:01":;
-					var props=jsonData.props;
+                case "LAYAMATERIAL:01":
+                    var props=jsonData.props;
 					var i=0,n=0;
 					for (var prop in props){
 					switch (prop){
-						case "colors":;
-							var colors=props[prop];
+                        case "colors":
+                            var colors=props[prop];
 							for (i=0,n=colors.length;i < n;i++){
 								var color=colors[i];
 								var colorValue=color.value;
@@ -18510,8 +18510,8 @@
 								}
 						}
 						break ;
-						case "textures":;
-						var textures=props[prop];
+                        case "textures":
+                            var textures=props[prop];
 						for (i=0,n=textures.length;i < n;i++){
 							var texture=textures[i];
 							var path=texture.path;
@@ -18527,7 +18527,7 @@
 				throw new Error("BaseMaterial:unkonwn version.");
 			}
 			this.event(/*laya.events.Event.LOADED*/"loaded",this);
-		}
+		};
 
 		/**
 		*克隆。
@@ -18597,7 +18597,7 @@
 				}
 			}
 			destBaseMaterial._textureSharderIndices=this._textureSharderIndices.slice();
-		}
+		};
 
 		/**
 		*克隆。
@@ -18607,7 +18607,7 @@
 			var destBaseMaterial=/*__JS__ */new this.constructor();
 			this.cloneTo(destBaseMaterial);
 			return destBaseMaterial;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -18615,7 +18615,7 @@
 		__proto.dispose=function(){
 			this.resourceManager.removeResource(this);
 			_super.prototype.dispose.call(this);
-		}
+		};
 
 		/**
 		*获取所属渲染队列。
@@ -18692,7 +18692,7 @@
 		BaseMaterial.SHADERDEFINE_ALPHATEST=0x1;
 		BaseMaterial.ALPHATESTVALUE=0;
 		return BaseMaterial;
-	})(Resource)
+	})(Resource);
 
 
 	/**
@@ -18710,7 +18710,7 @@
 			this._magFifter=0;
 			this._source=null;
 			BaseTexture.__super.call(this);
-			this._conchTexture
+			this._conchTexture;
 			if (Render.isConchNode){
 				this._conchTexture=/*__JS__ */new ConchTexture();
 			}
@@ -18725,7 +18725,7 @@
 		__proto.dispose=function(){
 			this.resourceManager.removeResource(this);
 			_super.prototype.dispose.call(this);
-		}
+		};
 
 		/**
 		*获取宽度。
@@ -18824,7 +18824,7 @@
 		['grayTexture',function(){return this.grayTexture=new SolidColorTexture2D(new Vector4(0.5,0.5,0.5,1.0));}
 		]);
 		return BaseTexture;
-	})(Resource)
+	})(Resource);
 
 
 	/**
@@ -18854,7 +18854,7 @@
 			this._boundingBox=new BoundBox(new Vector3(),new Vector3());
 			BoundBox.createfromPoints(pos,this._boundingBox);
 			this._boundingBox.getCorners(this._boundingBoxCorners);
-		}
+		};
 
 		/**
 		*获取渲染单元数量,请重载此方法。
@@ -18862,7 +18862,7 @@
 		*/
 		__proto.getRenderElementsCount=function(){
 			throw new Error("未Override,请重载该属性！");
-		}
+		};
 
 		/**
 		*获取渲染单元,请重载此方法。
@@ -18871,7 +18871,7 @@
 		*/
 		__proto.getRenderElement=function(index){
 			throw new Error("未Override,请重载该属性！");
-		}
+		};
 
 		/**
 		*获取网格顶点,请重载此方法。
@@ -18914,7 +18914,7 @@
 		});
 
 		return BaseMesh;
-	})(Resource)
+	})(Resource);
 
 
 	/**
@@ -18953,7 +18953,7 @@
 				}else {
 				this._environmentDiffuse.on(/*laya.events.Event.LOADED*/"loaded",this,this._environmentDiffuseLoaded);
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -18967,14 +18967,14 @@
 				}else {
 				this._environmentSpecular.on(/*laya.events.Event.LOADED*/"loaded",this,this._environmentSpecularLoaded);
 			}
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._environmentDiffuseLoaded=function(){
 			this.__ownerCamera._shaderValues.setValue(/*laya.d3.core.BaseCamera.ENVIRONMENTDIFFUSE*/7,this._environmentDiffuse.source);
-		}
+		};
 
 		/**
 		*@private
@@ -18984,12 +18984,12 @@
 			if (si && (si instanceof Float32Array))
 				this.__ownerCamera._shaderValues.setValue(/*laya.d3.core.BaseCamera.SIMLODINFO*/9,si);
 			this.__ownerCamera._shaderValues.setValue(/*laya.d3.core.BaseCamera.ENVIRONMENTSPECULAR*/8,this._environmentSpecular.source);
-		}
+		};
 
 		/**
 		*@private
 		*/
-		__proto._render=function(state){}
+		__proto._render=function(state){};
 		/**
 		*@private
 		*/
@@ -19087,7 +19087,7 @@
 		Sky.ALPHABLENDING=2;
 		Sky.DIFFUSETEXTURE=3;
 		return Sky;
-	})(Resource)
+	})(Resource);
 
 
 	/**
@@ -19130,14 +19130,14 @@
 			}
 			this._loaded=true;
 			this.event(/*laya.events.Event.LOADED*/"loaded",this);
-		}
+		};
 
 		TerrainHeightData.load=function(url,widht,height,bitType,value){
 			return Laya.loader.create(url,null,null,TerrainHeightData,[widht,height,bitType,value],1,false);
-		}
+		};
 
 		return TerrainHeightData;
-	})(Resource)
+	})(Resource);
 
 
 	/**
@@ -19196,8 +19196,8 @@
 						info.offset=new Vector2(0,0);
 					}
 					this._detailTextureInfos[i]=info;
-				};
-				var jchunks=json.chunkInfo;
+                }
+                var jchunks=json.chunkInfo;
 				if (this._chunkNumX *this._chunkNumZ !=jchunks.length){
 					alert("terrain data error");
 					return false;
@@ -19233,12 +19233,12 @@
 				this._heightData.once(/*laya.events.Event.LOADED*/"loaded",this,this.onLoadTerrainComplete);
 			}
 			return true;
-		}
+		};
 
 		__proto.onLoadTerrainComplete=function(heightData){
 			this._loaded=true;
 			this.event(/*laya.events.Event.LOADED*/"loaded",this);
-		}
+		};
 
 		/**
 		*异步回调
@@ -19251,14 +19251,14 @@
 				sPath+="/";
 			}
 			this.parseData(data,sPath);
-		}
+		};
 
 		TerrainRes.load=function(url){
 			return Laya.loader.create(url,null,null,TerrainRes,null,1,false);
-		}
+		};
 
 		return TerrainRes;
-	})(Resource)
+	})(Resource);
 
 
 	/**
@@ -19280,21 +19280,21 @@
 		*/
 		__proto._updateAnimtionPlayer=function(){
 			this._player._update(Laya.timer.delta);
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._addUpdatePlayerToTimer=function(){
 			Laya.timer.frameLoop(1,this,this._updateAnimtionPlayer);
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._removeUpdatePlayerToTimer=function(){
 			Laya.timer.clear(this,this._updateAnimtionPlayer);
-		}
+		};
 
 		/**
 		*@private
@@ -19306,21 +19306,21 @@
 				else
 				this._removeUpdatePlayerToTimer();
 			}
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onDisplayInStage=function(){
 			(this._owner.activeInHierarchy)&& (this._addUpdatePlayerToTimer());
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onUnDisplayInStage=function(){
 			(this._owner.activeInHierarchy)&& (this._removeUpdatePlayerToTimer());
-		}
+		};
 
 		/**
 		*@private
@@ -19331,7 +19331,7 @@
 			this._owner.on(/*laya.events.Event.ACTIVE_IN_HIERARCHY_CHANGED*/"activeinhierarchychanged",this,this._onOwnerActiveHierarchyChanged);
 			this._owner.on(/*laya.events.Event.DISPLAY*/"display",this,this._onDisplayInStage);
 			this._owner.on(/*laya.events.Event.UNDISPLAY*/"undisplay",this,this._onUnDisplayInStage);
-		}
+		};
 
 		/**
 		*@private
@@ -19346,7 +19346,7 @@
 			this._player._destroy();
 			this._player=null;
 			this._templet=null;
-		}
+		};
 
 		/**
 		*设置url地址。
@@ -19417,7 +19417,7 @@
 		});
 
 		return KeyframeAnimations;
-	})(Component3D)
+	})(Component3D);
 
 
 	/**
@@ -19445,7 +19445,7 @@
 		__proto._load=function(owner){
 			_super.prototype._load.call(this,owner);
 			this._attachSkeleton=owner.getComponentByType(SkinAnimations);
-		}
+		};
 
 		/**
 		*@private
@@ -19470,10 +19470,10 @@
 				Matrix4x4.multiply(worldMatrix,matrix,matrix);
 			}
 			this.event(/*laya.events.Event.COMPLETE*/"complete");
-		}
+		};
 
 		return AttachPoint;
-	})(Component3D)
+	})(Component3D);
 
 
 	/**
@@ -19491,7 +19491,7 @@
 		__proto.raycast=function(ray,hitInfo,maxDistance){
 			(maxDistance===void 0)&& (maxDistance=Number.MAX_VALUE);
 			throw new Error("Must override it.");
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -19502,7 +19502,7 @@
 
 		Collider._isSingleton=false;
 		return Collider;
-	})(Component3D)
+	})(Component3D);
 
 
 	/**
@@ -19528,7 +19528,7 @@
 
 		Script._isSingleton=false;
 		return Script;
-	})(Component3D)
+	})(Component3D);
 
 
 	/**
@@ -19552,7 +19552,7 @@
 			maxE[0]=Number.MAX_VALUE;
 			maxE[1]=Number.MAX_VALUE;
 			maxE[2]=Number.MAX_VALUE;
-		}
+		};
 
 		__proto._calculateBoundingSphere=function(){
 			var centerE=this._boundingSphere.center.elements;
@@ -19560,10 +19560,10 @@
 			centerE[1]=0;
 			centerE[2]=0;
 			this._boundingSphere.radius=Number.MAX_VALUE;
-		}
+		};
 
 		return GlitterRender;
-	})(BaseRender)
+	})(BaseRender);
 
 
 	/**
@@ -19585,7 +19585,7 @@
 		*/
 		__proto._sharedMeshLoaded=function(){
 			this.event(/*laya.events.Event.LOADED*/"loaded");
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -19594,7 +19594,7 @@
 			_super.prototype._destroy.call(this);
 			this._owner=null;
 			this._sharedMesh=null;
-		}
+		};
 
 		/**
 		*设置共享网格。
@@ -19644,7 +19644,7 @@
 		});
 
 		return MeshFilter;
-	})(GeometryFilter)
+	})(GeometryFilter);
 
 
 	/**
@@ -19675,14 +19675,14 @@
 				}else {
 				mesh.once(/*laya.events.Event.LOADED*/"loaded",this,this._onMeshLoaed);
 			}
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onMeshLoaed=function(sender,enable){
 			this._boundingSphereNeedChange=this._boundingBoxNeedChange=this._boundingBoxCenterNeedChange=this._octreeNodeNeedChange=true;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -19703,7 +19703,7 @@
 				Vector3.transformCoordinate(meshBoundingSphere.center,transform.worldMatrix,this._boundingSphere.center);
 				this._boundingSphere.radius=meshBoundingSphere.radius *maxScale;
 			}
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -19719,7 +19719,7 @@
 				Vector3.transformCoordinate(corners[i],worldMat,BaseRender._tempBoudingBoxCorners[i]);
 				BoundBox.createfromPoints(BaseRender._tempBoudingBoxCorners,this._boundingBox);
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -19728,7 +19728,7 @@
 			_super.prototype._destroy.call(this);
 			this._lightmapScaleOffset=null;
 			this._meshSprite3DOwner=null;
-		}
+		};
 
 		/**
 		*设置光照贴图的缩放和偏移。
@@ -19747,7 +19747,7 @@
 		});
 
 		return MeshRender;
-	})(BaseRender)
+	})(BaseRender);
 
 
 	/**
@@ -19771,7 +19771,7 @@
 			maxE[0]=Number.MAX_VALUE;
 			maxE[1]=Number.MAX_VALUE;
 			maxE[2]=Number.MAX_VALUE;
-		}
+		};
 
 		__proto._calculateBoundingSphere=function(){
 			var centerE=this._boundingSphere.center.elements;
@@ -19779,10 +19779,10 @@
 			centerE[1]=0;
 			centerE[2]=0;
 			this._boundingSphere.radius=Number.MAX_VALUE;
-		}
+		};
 
 		return ParticleRender;
-	})(BaseRender)
+	})(BaseRender);
 
 
 	/**
@@ -19941,18 +19941,18 @@
 
 		__class(ShurikenParticleSystem,'laya.d3.core.particleShuriKen.ShurikenParticleSystem',_super);
 		var __proto=ShurikenParticleSystem.prototype;
-		Laya.imps(__proto,{"laya.d3.core.render.IRenderable":true,"laya.d3.core.IClone":true})
+		Laya.imps(__proto,{"laya.d3.core.render.IRenderable":true,"laya.d3.core.IClone":true});
 		__proto._getVertexBuffer=function(index){
 			(index===void 0)&& (index=0);
 			if (index===0)
 				return this._vertexBuffer;
 			else
 			return null;
-		}
+		};
 
 		__proto._getIndexBuffer=function(){
 			return this._indexBuffer;
-		}
+		};
 
 		/**
 		*@private
@@ -19963,7 +19963,7 @@
 			centerE[1]=0;
 			centerE[2]=0;
 			this._boundingSphere.radius=Number.MAX_VALUE;
-		}
+		};
 
 		/**
 		*@private
@@ -19997,8 +19997,8 @@
 					for (i=0,n=startLifeTimeGradientMax.gradientCount;i < n;i++)
 					maxStartLifeTime=Math.max(maxStartLifeTime,startLifeTimeGradientMax.getValueByIndex(i));
 					break ;
-				};
-			var minStartSpeed=NaN,maxStartSpeed=NaN;
+            }
+            var minStartSpeed=NaN,maxStartSpeed=NaN;
 			switch (this.startSpeedType){
 				case 0:
 					minStartSpeed=maxStartSpeed=this.startSpeedConstant;
@@ -20011,15 +20011,15 @@
 					break ;
 				case 3:
 					break ;
-				};
-			var minPosition,maxPosition,minDirection,maxDirection;
+            }
+            var minPosition,maxPosition,minDirection,maxDirection;
 			if (this._shape && this._shape.enable){
 				}else {
 				minPosition=maxPosition=Vector3.ZERO;
 				minDirection=Vector3.ZERO;
 				maxDirection=Vector3.UnitZ;
-			};
-			var startMinVelocity=new Vector3(minDirection.x *minStartSpeed,minDirection.y *minStartSpeed,minDirection.z *minStartSpeed);
+            }
+            var startMinVelocity=new Vector3(minDirection.x *minStartSpeed,minDirection.y *minStartSpeed,minDirection.z *minStartSpeed);
 			var startMaxVelocity=new Vector3(maxDirection.x *maxStartSpeed,maxDirection.y *maxStartSpeed,maxDirection.z *maxStartSpeed);
 			if (this._velocityOverLifetime && this._velocityOverLifetime.enbale){
 				var lifeMinVelocity;
@@ -20041,24 +20041,24 @@
 						lifeMaxVelocity=new Vector3(velocity.gradientXMax.getAverageValue(),velocity.gradientYMax.getAverageValue(),velocity.gradientZMax.getAverageValue());
 						break ;
 					}
-			};
-			var positionScale,velocityScale;
+            }
+            var positionScale,velocityScale;
 			var transform=this._owner.transform;
 			var worldPosition=transform.position;
 			var sizeScale=ShurikenParticleSystem._tempVector39;
 			var sizeScaleE=sizeScale.elements;
 			var renderMode=particleRender.renderMode;
 			switch (this.scaleMode){
-				case 0:;
-					var scale=transform.scale;
+                case 0:
+                    var scale=transform.scale;
 					positionScale=scale;
 					sizeScaleE[0]=scale.x;
 					sizeScaleE[1]=scale.z;
 					sizeScaleE[2]=scale.y;
 					(renderMode===1)&& (velocityScale=scale);
 					break ;
-				case 1:;
-					var localScale=transform.localScale;
+                case 1:
+                    var localScale=transform.localScale;
 					positionScale=localScale;
 					sizeScaleE[0]=localScale.x;
 					sizeScaleE[1]=localScale.z;
@@ -20070,8 +20070,8 @@
 					sizeScaleE[0]=sizeScaleE[1]=sizeScaleE[2]=1;
 					(renderMode===1)&& (velocityScale=Vector3.ONE);
 					break ;
-				};
-			var minStratPosition,maxStratPosition;
+            }
+            var minStratPosition,maxStratPosition;
 			if (this._velocityOverLifetime && this._velocityOverLifetime.enbale){
 				}else {
 				minStratPosition=new Vector3(startMinVelocity.x *maxStartLifeTime,startMinVelocity.y *maxStartLifeTime,startMinVelocity.z *maxStartLifeTime);
@@ -20095,8 +20095,8 @@
 					Vector3.add(boundMin,worldPosition,boundMin);
 					Vector3.add(boundMax,worldPosition,boundMax);
 					break ;
-				};
-			var maxSize=NaN,maxSizeY=NaN;
+            }
+            var maxSize=NaN,maxSizeY=NaN;
 			switch (this.startSizeType){
 				case 0:
 					if (this.threeDStartSize){
@@ -20130,8 +20130,8 @@
 			if (this._sizeOverLifetime && this._sizeOverLifetime.enbale){
 				var size=this._sizeOverLifetime.size;
 				maxSize *=this._sizeOverLifetime.size.getMaxSizeInGradient();
-			};
-			var threeDMaxSize=ShurikenParticleSystem._tempVector30;
+            }
+            var threeDMaxSize=ShurikenParticleSystem._tempVector30;
 			var threeDMaxSizeE=threeDMaxSize.elements;
 			var rotSize=NaN,nonRotSize=NaN;
 			switch (renderMode){
@@ -20141,8 +20141,8 @@
 					Vector3.subtract(boundMin,threeDMaxSize,boundMin);
 					Vector3.add(boundMax,threeDMaxSize,boundMax);
 					break ;
-				case 1:;
-					var maxStretchPosition=ShurikenParticleSystem._tempVector31;
+                case 1:
+                    var maxStretchPosition=ShurikenParticleSystem._tempVector31;
 					var maxStretchVelocity=ShurikenParticleSystem._tempVector32;
 					var minStretchVelocity=ShurikenParticleSystem._tempVector33;
 					var minStretchPosition=ShurikenParticleSystem._tempVector34;
@@ -20150,8 +20150,8 @@
 						}else {
 						Vector3.multiply(velocityScale,startMaxVelocity,maxStretchVelocity);
 						Vector3.multiply(velocityScale,startMinVelocity,minStretchVelocity);
-					};
-					var sizeStretch=maxSizeY *particleRender.stretchedBillboardLengthScale;
+                    }
+                    var sizeStretch=maxSizeY *particleRender.stretchedBillboardLengthScale;
 					var maxStretchLength=Vector3.scalarLength(maxStretchVelocity)*particleRender.stretchedBillboardSpeedScale+sizeStretch;
 					var minStretchLength=Vector3.scalarLength(minStretchVelocity)*particleRender.stretchedBillboardSpeedScale+sizeStretch;
 					var norMaxStretchVelocity=ShurikenParticleSystem._tempVector35;
@@ -20195,7 +20195,7 @@
 					break ;
 				}
 			this._boundingBox.getCorners(this._boundingBoxCorners);
-		}
+		};
 
 		/**
 		*@private
@@ -20212,21 +20212,21 @@
 				this._currentTime=0;
 			if (this._firstRetiredElement===this._firstActiveElement)
 				this._drawCounter=0;
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._addUpdateEmissionToTimer=function(){
 			Laya.timer.frameLoop(1,this,this._updateEmission);
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._removeUpdateEmissionToTimer=function(){
 			Laya.timer.clear(this,this._updateEmission);
-		}
+		};
 
 		/**
 		*@private
@@ -20238,21 +20238,21 @@
 				else
 				this._removeUpdateEmissionToTimer();
 			}
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onDisplayInStage=function(){
 			(this._owner.activeInHierarchy)&& (this._addUpdateEmissionToTimer());
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onUnDisplayInStage=function(){
 			(this._owner.activeInHierarchy)&& (this._removeUpdateEmissionToTimer());
-		}
+		};
 
 		/**
 		*@private
@@ -20270,7 +20270,7 @@
 				if (this._firstActiveElement >=this._bufferMaxParticles)
 					this._firstActiveElement=0;
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -20285,7 +20285,7 @@
 				if (this._firstRetiredElement >=this._bufferMaxParticles)
 					this._firstRetiredElement=0;
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -20302,7 +20302,7 @@
 				this._vertices[particleOffset+this._floatCountPerVertex *3+0]=-0.5;
 				this._vertices[particleOffset+this._floatCountPerVertex *3+1]=0.5;
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -20311,7 +20311,7 @@
 			this._vertexBuffer=VertexBuffer3D.create(VertexParticleShuriken.vertexDeclaration,this._bufferMaxParticles *4,/*laya.webgl.WebGLContext.DYNAMIC_DRAW*/0x88E8);
 			this._vertices=new Float32Array(this._bufferMaxParticles *this._floatCountPerVertex *4);
 			this._setPartVertexDatas();
-		}
+		};
 
 		/**
 		*@private
@@ -20330,7 +20330,7 @@
 				indexes[indexOffset+5]=(vertexOffset+2);
 			}
 			this._indexBuffer.setData(indexes);
-		}
+		};
 
 		/**
 		*@private
@@ -20356,7 +20356,7 @@
 				}
 			}
 			return totalEmitCount;
-		}
+		};
 
 		/**
 		*@private
@@ -20403,7 +20403,7 @@
 				else
 				break ;
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -20438,7 +20438,7 @@
 			this._sizeOverLifetime=null;
 			this._rotationOverLifetime=null;
 			this._textureSheetAnimation=null;
-		}
+		};
 
 		/**
 		*发射一个粒子。
@@ -20459,7 +20459,7 @@
 				directionE[2]=1;
 			}
 			return this.addParticle(position,direction);
-		}
+		};
 
 		//TODO:提前判断优化
 		__proto.addParticle=function(position,direction){
@@ -20506,8 +20506,8 @@
 				}
 				}else {
 				needRandomVelocity=false;
-			};
-			var needRandomColor=this._colorOverLifetime && this._colorOverLifetime.enbale;
+            }
+            var needRandomColor=this._colorOverLifetime && this._colorOverLifetime.enbale;
 			if (needRandomColor){
 				var colorType=this._colorOverLifetime.color.type;
 				if (colorType===3){
@@ -20523,8 +20523,8 @@
 				}
 				}else {
 				needRandomColor=false;
-			};
-			var needRandomSize=this._sizeOverLifetime && this._sizeOverLifetime.enbale;
+            }
+            var needRandomSize=this._sizeOverLifetime && this._sizeOverLifetime.enbale;
 			if (needRandomSize){
 				var sizeType=this._sizeOverLifetime.size.type;
 				if (sizeType===3){
@@ -20540,8 +20540,8 @@
 				}
 				}else {
 				needRandomSize=false;
-			};
-			var needRandomRotation=this._rotationOverLifetime && this._rotationOverLifetime.enbale;
+            }
+            var needRandomRotation=this._rotationOverLifetime && this._rotationOverLifetime.enbale;
 			if (needRandomRotation){
 				var rotationType=this._rotationOverLifetime.angularVelocity.type;
 				if (rotationType===2 || rotationType===3){
@@ -20557,8 +20557,8 @@
 				}
 				}else {
 				needRandomRotation=false;
-			};
-			var needRandomTextureAnimation=this._textureSheetAnimation && this._textureSheetAnimation.enbale;
+            }
+            var needRandomTextureAnimation=this._textureSheetAnimation && this._textureSheetAnimation.enbale;
 			if (needRandomTextureAnimation){
 				var textureAnimationType=this._textureSheetAnimation.frame.type;
 				if (textureAnimationType===3){
@@ -20609,7 +20609,7 @@
 			}
 			this._firstFreeElement=nextFreeParticle;
 			return true;
-		}
+		};
 
 		__proto.addNewParticlesToVertexBuffer=function(){
 			var start=0;
@@ -20624,7 +20624,7 @@
 				}
 			}
 			this._firstNewElement=this._firstFreeElement;
-		}
+		};
 
 		__proto._beforeRender=function(state){
 			if (this._firstNewElement !=this._firstFreeElement){
@@ -20637,7 +20637,7 @@
 				return true;
 			}
 			return false;
-		}
+		};
 
 		__proto._render=function(state){
 			var drawVertexCount=0;
@@ -20659,7 +20659,7 @@
 					Stat.drawCall++;
 				}
 			}
-		}
+		};
 
 		/**
 		*开始发射粒子。
@@ -20693,7 +20693,7 @@
 				}
 			this._startUpdateLoopCount=Stat.loopCount;
 			this.event(/*laya.events.Event.PLAYED*/"played");
-		}
+		};
 
 		/**
 		*暂停发射粒子。
@@ -20701,7 +20701,7 @@
 		__proto.pause=function(){
 			this._isPaused=true;
 			this.event(/*laya.events.Event.PAUSED*/"paused");
-		}
+		};
 
 		/**
 		*停止发射粒子。
@@ -20714,7 +20714,7 @@
 			this._emissionTime=0;
 			this._playbackTime=0;
 			this.event(/*laya.events.Event.STOPPED*/"stopped");
-		}
+		};
 
 		/**
 		*克隆。
@@ -20782,7 +20782,7 @@
 			dest._emissionTime=this._emissionTime;
 			dest._playbackTime=this._playbackTime;
 			dest._burstsIndex=this._burstsIndex;
-		}
+		};
 
 		/**
 		*克隆。
@@ -20792,9 +20792,9 @@
 			var dest=/*__JS__ */new this.constructor();
 			this.cloneTo(dest);
 			return dest;
-		}
+		};
 
-		__proto._renderRuntime=function(conchGraphics3D,renderElement,state){}
+		__proto._renderRuntime=function(conchGraphics3D,renderElement,state){};
 		/**是否已暂停。*/
 		__getset(0,__proto,'isPaused',function(){
 			return this._isPaused;
@@ -21101,13 +21101,13 @@
 					this._owner._removeShaderDefine(ShuriKenParticle3D.SHADERDEFINE_RANDOMCOLOROVERLIFETIME);
 				}
 				switch (color.type){
-					case 1:;
-						var gradientColor=color.gradient;
+                    case 1:
+                        var gradientColor=color.gradient;
 						this._owner._setShaderValueBuffer(/*laya.d3.core.particleShuriKen.ShuriKenParticle3D.COLOROVERLIFEGRADIENTALPHAS*/15,gradientColor._alphaElements);
 						this._owner._setShaderValueBuffer(/*laya.d3.core.particleShuriKen.ShuriKenParticle3D.COLOROVERLIFEGRADIENTCOLORS*/16,gradientColor._rgbElements);
 						break ;
-					case 3:;
-						var minGradientColor=color.gradientMin;
+                    case 3:
+                        var minGradientColor=color.gradientMin;
 						var maxGradientColor=color.gradientMax;
 						this._owner._setShaderValueBuffer(/*laya.d3.core.particleShuriKen.ShuriKenParticle3D.COLOROVERLIFEGRADIENTALPHAS*/15,minGradientColor._alphaElements);
 						this._owner._setShaderValueBuffer(/*laya.d3.core.particleShuriKen.ShuriKenParticle3D.COLOROVERLIFEGRADIENTCOLORS*/16,minGradientColor._rgbElements);
@@ -21297,7 +21297,7 @@
 		['_maxElapsedTime',function(){return this._maxElapsedTime=1.0 / 3.0;},'_RANDOMOFFSET',function(){return this._RANDOMOFFSET=new Uint32Array([0x23571a3e,0xc34f56fe,0x13371337,0x12460f3b,0x6aed452e,0xdec4aea1,0x96aa4de3,0x8d2c8431,0xf3857f6f,0xe0fbd834,0x13740583,0x591bc05c,0x40eb95e4,0xbc524e5f,0xaf502044,0xa614b381,0x1034e524,0xfc524e5f]);},'_tempVector30',function(){return this._tempVector30=new Vector3();},'_tempVector31',function(){return this._tempVector31=new Vector3();},'_tempVector32',function(){return this._tempVector32=new Vector3();},'_tempVector33',function(){return this._tempVector33=new Vector3();},'_tempVector34',function(){return this._tempVector34=new Vector3();},'_tempVector35',function(){return this._tempVector35=new Vector3();},'_tempVector36',function(){return this._tempVector36=new Vector3();},'_tempVector37',function(){return this._tempVector37=new Vector3();},'_tempVector38',function(){return this._tempVector38=new Vector3();},'_tempVector39',function(){return this._tempVector39=new Vector3();},'_tempPosition',function(){return this._tempPosition=new Vector3();},'_tempDirection',function(){return this._tempDirection=new Vector3();}
 		]);
 		return ShurikenParticleSystem;
-	})(GeometryFilter)
+	})(GeometryFilter);
 
 
 	/**
@@ -21334,7 +21334,7 @@
 			maxE[0]=Number.MAX_VALUE;
 			maxE[1]=Number.MAX_VALUE;
 			maxE[2]=Number.MAX_VALUE;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -21345,7 +21345,7 @@
 			centerE[1]=0;
 			centerE[2]=0;
 			this._boundingSphere.radius=Number.MAX_VALUE;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -21409,7 +21409,7 @@
 		});
 
 		return ShurikenParticleRender;
-	})(BaseRender)
+	})(BaseRender);
 
 
 	/**
@@ -21432,22 +21432,22 @@
 
 		__class(ParticleTemplet3D,'laya.d3.resource.tempelet.ParticleTemplet3D',_super);
 		var __proto=ParticleTemplet3D.prototype;
-		Laya.imps(__proto,{"laya.d3.core.render.IRenderable":true})
+		Laya.imps(__proto,{"laya.d3.core.render.IRenderable":true});
 		__proto._getVertexBuffer=function(index){
 			(index===void 0)&& (index=0);
 			if (index===0)
 				return this._vertexBuffer3D;
 			else
 			return null;
-		}
+		};
 
 		__proto._getIndexBuffer=function(){
 			return this._indexBuffer3D;
-		}
+		};
 
 		__proto.addParticle=function(position,velocity){
 			this.addParticleArray(position.elements,velocity.elements);
-		}
+		};
 
 		__proto.loadContent=function(){
 			var indexes=new Uint16Array(this.settings.maxPartices *6);
@@ -21460,7 +21460,7 @@
 				indexes[i *6+5]=(i *4+3);
 			}
 			this._indexBuffer3D.setData(indexes);
-		}
+		};
 
 		__proto.addNewParticlesToVertexBuffer=function(){
 			var start=0;
@@ -21475,7 +21475,7 @@
 				}
 			}
 			this._firstNewElement=this._firstFreeElement;
-		}
+		};
 
 		__proto._beforeRender=function(state){
 			if (this._firstNewElement !=this._firstFreeElement){
@@ -21488,7 +21488,7 @@
 				return true;
 			}
 			return false;
-		}
+		};
 
 		__proto._render=function(state){
 			var drawVertexCount=0;
@@ -21510,9 +21510,9 @@
 					Stat.drawCall++;
 				}
 			}
-		}
+		};
 
-		__proto._renderRuntime=function(conchGraphics3D,renderElement,state){}
+		__proto._renderRuntime=function(conchGraphics3D,renderElement,state){};
 		__getset(0,__proto,'indexOfHost',function(){
 			return 0;
 		});
@@ -21526,7 +21526,7 @@
 		});
 
 		return ParticleTemplet3D;
-	})(ParticleTemplateWebGL)
+	})(ParticleTemplateWebGL);
 
 
 	/**
@@ -21576,7 +21576,7 @@
 			this._posVelModePosition1=new Vector3();
 			this._posVelModeVelocity1=new Vector3();
 			this._owner=owner;
-			this._lastTime=0
+			this._lastTime=0;
 			this._firstActiveElement=0;
 			this._firstNewElement=0;
 			this._firstFreeElement=0;
@@ -21599,18 +21599,18 @@
 
 		__class(GlitterTemplet,'laya.d3.resource.tempelet.GlitterTemplet',_super);
 		var __proto=GlitterTemplet.prototype;
-		Laya.imps(__proto,{"laya.d3.core.render.IRenderable":true})
+		Laya.imps(__proto,{"laya.d3.core.render.IRenderable":true});
 		__proto._getVertexBuffer=function(index){
 			(index===void 0)&& (index=0);
 			if (index===0)
 				return this._vertexBuffer;
 			else
 			return null;
-		}
+		};
 
 		__proto._getIndexBuffer=function(){
 			return null;
-		}
+		};
 
 		/**
 		*@private
@@ -21618,7 +21618,7 @@
 		__proto._initialize=function(){
 			this._vertexBuffer=VertexBuffer3D.create(VertexGlitter.vertexDeclaration,this.maxSegments *2,/*laya.webgl.WebGLContext.DYNAMIC_DRAW*/0x88E8);
 			this._vertices=new Float32Array(this.maxSegments *this._floatCountPerVertex *2);
-		}
+		};
 
 		__proto._onActiveHierarchyChanged=function(active){
 			if (!active){
@@ -21631,7 +21631,7 @@
 				this._currentTime=0;
 				this._drawCounter=0;
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -21644,7 +21644,7 @@
 				if (this._firstFreeElement > 0)
 					this._updateSubTextureCoordinates(0,this._firstFreeElement *2);
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -21657,7 +21657,7 @@
 				var downVertexOffset=(vertexOffset+1)*this._floatCountPerVertex;
 				this._vertices[upVertexOffset+3]=this._vertices[downVertexOffset+3]=(this._vertices[upVertexOffset+5]-this._currentTime)/ this.lifeTime;
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -21675,7 +21675,7 @@
 				if (this._firstActiveElement >=this.maxSegments)
 					this._firstActiveElement=0;
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -21690,7 +21690,7 @@
 				if (this._firstRetiredElement >=this.maxSegments)
 					this._firstRetiredElement=0;
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -21698,7 +21698,7 @@
 		__proto._calcVelocity=function(left,right,out){
 			Vector3.subtract(left,right,out);
 			Vector3.scale(out,0.5,out);
-		}
+		};
 
 		/**
 		*@private
@@ -21716,7 +21716,7 @@
 				}
 			}
 			this._firstNewElement=this._firstFreeElement;
-		}
+		};
 
 		/**
 		*@private
@@ -21725,8 +21725,8 @@
 			if (this._needPatch){
 				this._needPatch=false;
 				this._addGlitter(this._lastPatchAddPos0,this._lastPatchAddPos1,this._lastPatchAddTime);
-			};
-			var nextFreeParticle=this._firstFreeElement+1;
+            }
+            var nextFreeParticle=this._firstFreeElement+1;
 			if (nextFreeParticle >=this.maxSegments){
 				nextFreeParticle=0;
 				position0.cloneTo(this._lastPatchAddPos0);
@@ -21752,7 +21752,7 @@
 			this._vertices[nextPositionIndex+4]=1.0;
 			this._vertices[nextPositionIndex+5]=time;
 			this._firstFreeElement=nextFreeParticle;
-		}
+		};
 
 		/**
 		*@private
@@ -21768,7 +21768,7 @@
 			if (this._firstRetiredElement==this._firstActiveElement)
 				this._drawCounter=0;
 			this._updateTextureCoordinates();
-		}
+		};
 
 		//实时更新纹理坐标
 		__proto._beforeRender=function(state){
@@ -21781,7 +21781,7 @@
 				return true;
 			}
 			return false;
-		}
+		};
 
 		/**
 		*@private
@@ -21808,7 +21808,7 @@
 					Stat.drawCall++;
 				}
 			}
-		}
+		};
 
 		/**
 		*通过位置添加刀光。
@@ -21838,7 +21838,7 @@
 					position1.cloneTo(this._posModePosition1);
 				}
 			}
-		}
+		};
 
 		/**
 		*通过位置和速度添加刀光。
@@ -21888,7 +21888,7 @@
 				position1.cloneTo(this._posVelModePosition1);
 				velocity1.cloneTo(this._posVelModeVelocity1);
 			}
-		}
+		};
 
 		__proto._destroy=function(){
 			_super.prototype._destroy.call(this);
@@ -21914,9 +21914,9 @@
 			this._lastPatchAddPos0=null;
 			this._lastPatchAddPos1=null;
 			this.color=null;
-		}
+		};
 
-		__proto._renderRuntime=function(conchGraphics3D,renderElement,state){}
+		__proto._renderRuntime=function(conchGraphics3D,renderElement,state){};
 		/**设置最大分段数,注意:谨慎修改此属性，有性能损耗。*/
 		/**获取最大分段数。*/
 		__getset(0,__proto,'maxSegments',function(){
@@ -21966,7 +21966,7 @@
 		});
 
 		return GlitterTemplet;
-	})(GeometryFilter)
+	})(GeometryFilter);
 
 
 	/**
@@ -22019,7 +22019,7 @@
 
 		__class(TerrainFilter,'laya.d3.terrain.TerrainFilter',_super);
 		var __proto=TerrainFilter.prototype;
-		Laya.imps(__proto,{"laya.d3.core.render.IRenderable":true})
+		Laya.imps(__proto,{"laya.d3.core.render.IRenderable":true});
 		/**
 		*@inheritDoc
 		*/
@@ -22028,7 +22028,7 @@
 			this._owner=null;
 			if(this._vertexBuffer)this._vertexBuffer.dispose();
 			if(this._indexBuffer)this._indexBuffer.dispose();
-		}
+		};
 
 		__proto.recreateResource=function(){
 			this._currentNumberIndices=0;
@@ -22062,7 +22062,7 @@
 			this._indexBuffer.setData(this._indexArrayBuffer);
 			this.memorySize=(this._vertexBuffer.byteLength+this._indexBuffer.byteLength)*2;
 			this.calcOriginalBoudingBoxAndSphere();
-		}
+		};
 
 		__proto.setLODLevel=function(leafsLODLevel){
 			if (leafsLODLevel.length !=4)return true;
@@ -22072,7 +22072,7 @@
 			}
 			this._currentLOD=nLOD;
 			return true;
-		}
+		};
 
 		__proto.assembleIndexInit=function(){
 			this._currentNumberIndices=0;
@@ -22088,7 +22088,7 @@
 				this._currentNumberIndices+=(planeLODIndex.length+skirtLODIndex.length);
 			}
 			this._numberTriangle=this._currentNumberIndices / 3;
-		}
+		};
 
 		__proto.isNeedAssemble=function(camera,cameraPostion){
 			var perspectiveFactor=Math.min(camera.viewport.width,camera.viewport.height)/ (2 *Math.tan(Math.PI *camera.fieldOfView / 180.0));
@@ -22105,7 +22105,7 @@
 				return 2;
 			}
 			return 0;
-		}
+		};
 
 		__proto.assembleIndex=function(camera,cameraPostion){
 			var nNeedType=this.isNeedAssemble(camera,cameraPostion);
@@ -22132,15 +22132,15 @@
 				}
 			}
 			return false;
-		}
+		};
 
 		__proto.calcOriginalBoudingBoxAndSphere=function(){
 			var sizeOfY=new Vector2(2147483647,-2147483647);
 			for (var i=0;i < this._leafNum;i++){
 				sizeOfY.x=this._leafs[i]._sizeOfY.x < sizeOfY.x ? this._leafs[i]._sizeOfY.x :sizeOfY.x;
 				sizeOfY.y=this._leafs[i]._sizeOfY.y > sizeOfY.y ? this._leafs[i]._sizeOfY.y :sizeOfY.y;
-			};
-			var min=new Vector3(this._chunkOffsetX *TerrainLeaf.CHUNK_GRID_NUM *this._gridSize,sizeOfY.x,this._chunkOffsetZ *TerrainLeaf.CHUNK_GRID_NUM *this._gridSize);
+            }
+            var min=new Vector3(this._chunkOffsetX *TerrainLeaf.CHUNK_GRID_NUM *this._gridSize,sizeOfY.x,this._chunkOffsetZ *TerrainLeaf.CHUNK_GRID_NUM *this._gridSize);
 			var max=new Vector3((this._chunkOffsetX+1)*TerrainLeaf.CHUNK_GRID_NUM *this._gridSize,sizeOfY.y,(this._chunkOffsetZ+1)*TerrainLeaf.CHUNK_GRID_NUM *this._gridSize);
 			this._boundingBox=new BoundBox(min,max);
 			var size=new Vector3();
@@ -22151,19 +22151,19 @@
 			this._boundingSphere=new BoundSphere(center,Vector3.scalarLength(size));
 			this._boundingBoxCorners=__newvec(8,null);
 			this._boundingBox.getCorners(this._boundingBoxCorners);
-		}
+		};
 
 		__proto.calcLeafBoudingBox=function(worldMatrix){
 			for (var i=0;i < this._leafNum;i++){
 				this._leafs[i].calcLeafBoudingBox(worldMatrix);
 			}
-		}
+		};
 
 		__proto.calcLeafBoudingSphere=function(worldMatrix,maxScale){
 			for (var i=0;i < this._leafNum;i++){
 				this._leafs[i].calcLeafBoudingSphere(worldMatrix,maxScale);
 			}
-		}
+		};
 
 		__proto._getVertexBuffer=function(index){
 			(index===void 0)&& (index=0);
@@ -22171,11 +22171,11 @@
 				return this._vertexBuffer;
 			}
 			return null;
-		}
+		};
 
 		__proto._getIndexBuffer=function(){
 			return this._indexBuffer;
-		}
+		};
 
 		__proto._beforeRender=function(state){
 			this._vertexBuffer._bind();
@@ -22188,15 +22188,15 @@
 				}
 			}
 			return true;
-		}
+		};
 
 		__proto._render=function(state){
 			WebGL.mainContext.drawElements(Terrain.RENDER_LINE_MODEL ? /*laya.webgl.WebGLContext.LINES*/0x0001 :/*laya.webgl.WebGLContext.TRIANGLES*/0x0004,this._currentNumberIndices,/*laya.webgl.WebGLContext.UNSIGNED_SHORT*/0x1403,0);
 			Stat.trianglesFaces+=this._numberTriangle;
 			Stat.drawCall++;
-		}
+		};
 
-		__proto._renderRuntime=function(conchGraphics3D,renderElement,state){}
+		__proto._renderRuntime=function(conchGraphics3D,renderElement,state){};
 		__getset(0,__proto,'indexOfHost',function(){
 			return this._indexOfHost;
 		});
@@ -22227,7 +22227,7 @@
 		['_TEMP_ARRAY_BUFFER',function(){return this._TEMP_ARRAY_BUFFER=new Uint32Array(TerrainLeaf.CHUNK_GRID_NUM / TerrainLeaf.LEAF_GRID_NUM *TerrainLeaf.CHUNK_GRID_NUM / TerrainLeaf.LEAF_GRID_NUM);}
 		]);
 		return TerrainFilter;
-	})(GeometryFilter)
+	})(GeometryFilter);
 
 
 	/**
@@ -22260,7 +22260,7 @@
 				this._boundingSphere.radius=meshBoundingSphere.radius *maxScale;
 				terrainFilter.calcLeafBoudingSphere(transform.worldMatrix,maxScale);
 			}
-		}
+		};
 
 		__proto._calculateBoundingBox=function(){
 			var terrainFilter=this._terrainSprite3DOwner.terrainFilter;
@@ -22274,7 +22274,7 @@
 				BoundBox.createfromPoints(BaseRender._tempBoudingBoxCorners,this._boundingBox);
 				terrainFilter.calcLeafBoudingBox(worldMat);
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -22282,10 +22282,10 @@
 		__proto._destroy=function(){
 			_super.prototype._destroy.call(this);
 			this._terrainSprite3DOwner=null;
-		}
+		};
 
 		return TerrainRender;
-	})(BaseRender)
+	})(BaseRender);
 
 
 	/**
@@ -22300,14 +22300,14 @@
 
 		__class(WaterRender,'laya.d3.water.WaterRender',_super);
 		var __proto=WaterRender.prototype;
-		__proto._calculateBoundingSphere=function(){}
-		__proto._calculateBoundingBox=function(){}
+		__proto._calculateBoundingSphere=function(){};
+		__proto._calculateBoundingBox=function(){};
 		__proto._destroy=function(){
 			_super.prototype._destroy.call(this);
-		}
+		};
 
 		return WaterRender;
-	})(BaseRender)
+	})(BaseRender);
 
 
 	/**
@@ -22344,7 +22344,7 @@
 			this.boxCorners1=null;
 			BaseScene.__super.call(this);
 			this._renderState=new RenderState();
-			this._lights=new Array;
+			this._lights=[];
 			this._frustumCullingObjects=[];
 			this._quenes=[];
 			this._cameraPool=[];
@@ -22367,7 +22367,7 @@
 
 		__class(BaseScene,'laya.d3.core.scene.BaseScene',_super);
 		var __proto=BaseScene.prototype;
-		Laya.imps(__proto,{"laya.webgl.submit.ISubmit":true})
+		Laya.imps(__proto,{"laya.webgl.submit.ISubmit":true});
 		/**
 		*初始化八叉树。
 		*@param width 八叉树宽度。
@@ -22382,7 +22382,7 @@
 			this.treeLevel=level;
 			this.treeRoot=new OctreeNode(this,0);
 			this.treeRoot.init(center,this.treeSize);
-		}
+		};
 
 		/**
 		*@private
@@ -22390,7 +22390,7 @@
 		__proto._$3__onDisplay=function(){
 			Laya.stage._scenes.push(this);
 			Laya.stage._scenes.sort(BaseScene._sortScenes);
-		}
+		};
 
 		/**
 		*@private
@@ -22398,7 +22398,7 @@
 		__proto._onUnDisplay=function(){
 			var scenes=Laya.stage._scenes;
 			scenes.splice(scenes.indexOf(this),1);
-		}
+		};
 
 		/**
 		*@private
@@ -22410,7 +22410,7 @@
 			state.elapsedTime=this._lastCurrentTime ? this.timer.currTimer-this._lastCurrentTime :0;
 			this._lastCurrentTime=this.timer.currTimer;
 			state.scene=this;
-		}
+		};
 
 		/**
 		*@private
@@ -22427,7 +22427,7 @@
 						break ;
 				}
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -22435,7 +22435,7 @@
 		__proto._updateChilds=function(state){
 			for (var i=0,n=this._childs.length;i < n;++i)
 			this._childs[i]._update(state);
-		}
+		};
 
 		/**
 		*@private
@@ -22443,7 +22443,7 @@
 		__proto._updateChildsConch=function(state){
 			for (var i=0,n=this._childs.length;i < n;++i)
 			this._childs[i]._updateConch(state);
-		}
+		};
 
 		/**
 		*@private
@@ -22464,7 +22464,7 @@
 			}
 			for (i=0,iNum=this._quenes.length;i < iNum;i++)
 			(this._quenes[i])&& (this._quenes[i]._preRender(state));
-		}
+		};
 
 		/**
 		*@private
@@ -22480,8 +22480,9 @@
 			var flag=/*laya.webgl.WebGLContext.DEPTH_BUFFER_BIT*/0x00000100;
 			var renderTarget=camera.renderTarget;
 			switch (camera.clearFlag){
-				case /*laya.d3.core.BaseCamera.CLEARFLAG_SOLIDCOLOR*/0:;
-					var clearColor=camera.clearColor;
+                case /*laya.d3.core.BaseCamera.CLEARFLAG_SOLIDCOLOR*/
+                0:
+                    var clearColor=camera.clearColor;
 					if (clearColor){
 						gl.enable(/*laya.webgl.WebGLContext.SCISSOR_TEST*/0x0C11);
 						gl.scissor(vpX,vpY,vpWidth,vpHeight);
@@ -22521,7 +22522,7 @@
 							break ;
 						case /*laya.webgl.WebGLContext.DEPTH_STENCIL*/0x84F9:
 							flag |=/*laya.webgl.WebGLContext.DEPTH_BUFFER_BIT*/0x00000100;
-							flag |=/*laya.webgl.WebGLContext.STENCIL_BUFFER_BIT*/0x00000400
+							flag |=/*laya.webgl.WebGLContext.STENCIL_BUFFER_BIT*/0x00000400;
 							break ;
 						}
 				}
@@ -22532,7 +22533,7 @@
 				default :
 				throw new Error("BaseScene:camera clearFlag invalid.");
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -22565,7 +22566,7 @@
 					camera.renderTarget ? queue._render(state,true):queue._render(state,false);
 				}
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -22584,7 +22585,7 @@
 			WebGLContext._depthMask=true;
 			gl.frontFace(/*laya.webgl.WebGLContext.CW*/0x0900);
 			WebGLContext._frontFace=/*laya.webgl.WebGLContext.CW*/0x0900;
-		}
+		};
 
 		/**
 		*@private
@@ -22597,14 +22598,14 @@
 			WebGLContext.setDepthMask(gl,true);
 			WebGLContext.setFrontFace(gl,/*laya.webgl.WebGLContext.CCW*/0x0901);
 			gl.viewport(0,0,RenderState2D.width,RenderState2D.height);
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._addLight=function(light){
 			if (this._lights.indexOf(light)< 0)this._lights.push(light);
-		}
+		};
 
 		/**
 		*@private
@@ -22612,7 +22613,7 @@
 		__proto._removeLight=function(light){
 			var index=this._lights.indexOf(light);
 			index >=0 && (this._lights.splice(index,1));
-		}
+		};
 
 		/**
 		*@private
@@ -22623,7 +22624,7 @@
 			this.beforeUpdate(renderState);
 			this._updateChilds(renderState);
 			this.lateUpdate(renderState);
-		}
+		};
 
 		/**
 		*@private
@@ -22640,7 +22641,7 @@
 				renderState.camera=camera;
 				camera._prepareCameraToRender();
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -22653,7 +22654,7 @@
 			}
 			for (var i=0,iNum=shdowQueues.length;i < iNum;i++)
 			(shdowQueues[i])&& (shdowQueues[i]._preRender(state));
-		}
+		};
 
 		/**
 		*@private
@@ -22697,14 +22698,14 @@
 				parallelSplitShadowMap.endRenderTarget(1);
 			}
 			this.removeShaderDefine(ParallelSplitShadowMap.SHADERDEFINE_CAST_SHADOW);
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto.addTreeNode=function(renderObj){
 			this.treeRoot.addTreeNode(renderObj);
-		}
+		};
 
 		/**
 		*@private
@@ -22714,7 +22715,7 @@
 			if (renderObj._treeNode){
 				renderObj._treeNode.removeObject(renderObj);
 			}
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -22728,7 +22729,7 @@
 			sprite3D._setBelongScene();
 			(sprite3D.active)&& (sprite3D._activeHierarchy());
 			return returnNode;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -22742,7 +22743,7 @@
 			sprite3D._setBelongScene();
 			(sprite3D.active)&& (sprite3D._activeHierarchy());
 			return returnNode;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -22759,7 +22760,7 @@
 				node.parent=null;
 			}
 			return node;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -22785,7 +22786,7 @@
 				}
 			}
 			return this;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -22795,7 +22796,7 @@
 				this.addTreeNode(renderObject);
 			else
 			this._frustumCullingObjects.push(renderObject);
-		}
+		};
 
 		/**
 		*@private
@@ -22807,7 +22808,7 @@
 				var index=this._frustumCullingObjects.indexOf(renderObject);
 				(index!==-1)&& (this._frustumCullingObjects.splice(index,1));
 			}
-		}
+		};
 
 		/**
 		*获得某个渲染队列。
@@ -22816,7 +22817,7 @@
 		*/
 		__proto.getRenderQueue=function(index){
 			return (this._quenes[index] || (this._quenes[index]=new RenderQueue(this)));
-		}
+		};
 
 		/**
 		*添加渲染队列。
@@ -22824,35 +22825,35 @@
 		*/
 		__proto.addRenderQuene=function(){
 			this._quenes[this._customRenderQueneIndex++]=new RenderQueue(this);
-		}
+		};
 
 		/**
 		*更新前处理,可重写此函数。
 		*@param state 渲染相关状态。
 		*/
-		__proto.beforeUpdate=function(state){}
+		__proto.beforeUpdate=function(state){};
 		/**
 		*更新后处理,可重写此函数。
 		*@param state 渲染相关状态。
 		*/
-		__proto.lateUpdate=function(state){}
+		__proto.lateUpdate=function(state){};
 		/**
 		*渲染前处理,可重写此函数。
 		*@param state 渲染相关状态。
 		*/
-		__proto.beforeRender=function(state){}
+		__proto.beforeRender=function(state){};
 		/**
 		*渲染后处理,可重写此函数。
 		*@param state 渲染相关状态。
 		*/
-		__proto.lateRender=function(state){}
+		__proto.lateRender=function(state){};
 		/**
 		*增加shader宏定义。
 		*@param define shader宏定义。
 		*/
 		__proto.addShaderDefine=function(define){
 			this._shaderDefineValue |=define;
-		}
+		};
 
 		/**
 		*移除shader宏定义。
@@ -22860,7 +22861,7 @@
 		*/
 		__proto.removeShaderDefine=function(define){
 			this._shaderDefineValue &=~define;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -22870,12 +22871,12 @@
 			this._childs.length > 0 && context.addRenderObject(this);
 			this._renderType &=~ /*laya.renders.RenderSprite.CHILDS*/0x800;
 			_super.prototype.render.call(this,context,x,y);
-		}
+		};
 
 		/**
 		*@private
 		*/
-		__proto._renderCamera=function(gl,state,baseCamera){}
+		__proto._renderCamera=function(gl,state,baseCamera){};
 		/**
 		*@private
 		*/
@@ -22900,7 +22901,7 @@
 			}
 			this._set2DRenderConfig(gl);
 			return 1;
-		}
+		};
 
 		__proto._renderDebug=function(gl,state){
 			var camera=state.camera;
@@ -22948,19 +22949,19 @@
 			this.debugSpriter1.line(this.boxCorners1[4].x,this.boxCorners1[4].y,this.boxCorners1[4].z,1.0,0.0,0.0,1.0,this.boxCorners1[7].x,this.boxCorners1[7].y,this.boxCorners1[7].z,1.0,0.0,0.0,1.0);
 			this.debugSpriter1.line(this.boxCorners1[5].x,this.boxCorners1[5].y,this.boxCorners1[5].z,1.0,0.0,0.0,1.0,this.boxCorners1[6].x,this.boxCorners1[6].y,this.boxCorners1[6].z,1.0,0.0,0.0,1.0);
 			this.debugSpriter1.end();
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto.getRenderType=function(){
 			return 0;
-		}
+		};
 
 		/**
 		*@private
 		*/
-		__proto.releaseRender=function(){}
+		__proto.releaseRender=function(){};
 		/**
 		*@private
 		*/
@@ -22968,7 +22969,7 @@
 			var pScene=/*__JS__ */new ConchScene();
 			pScene.init(512,512,512,4);
 			return pScene;
-		}
+		};
 
 		/**
 		*设置雾化颜色。
@@ -23068,7 +23069,7 @@
 				}else {
 				return (a.parent===Laya.stage)?-1 :1;
 			}
-		}
+		};
 
 		BaseScene.FOGCOLOR=0;
 		BaseScene.FOGSTART=1;
@@ -23098,7 +23099,7 @@
 		BaseScene.SHADOWMAPTEXTURE2=25;
 		BaseScene.SHADOWMAPTEXTURE3=26;
 		return BaseScene;
-	})(Sprite)
+	})(Sprite);
 
 
 	/**
@@ -23155,7 +23156,7 @@
 		var __proto=BaseCamera.prototype;
 		__proto.createConchModel=function(){
 			return /*__JS__ */new ConchCamera();
-		}
+		};
 
 		/**
 		*通过RenderingOrder属性对摄像机机型排序。
@@ -23172,18 +23173,18 @@
 					}
 				}
 			}
-		}
+		};
 
 		/**
 		*@private
 		*/
-		__proto._calculateProjectionMatrix=function(){}
+		__proto._calculateProjectionMatrix=function(){};
 		/**
 		*@private
 		*/
 		__proto._onScreenSizeChanged=function(){
 			this._calculateProjectionMatrix();
-		}
+		};
 
 		/**
 		*@private
@@ -23194,7 +23195,7 @@
 			cameraSV.setValue(/*CLASS CONST:laya.d3.core.BaseCamera.CAMERAPOS*/0,this.transform.position.elements);
 			cameraSV.setValue(/*CLASS CONST:laya.d3.core.BaseCamera.CAMERADIRECTION*/5,this.forward.elements);
 			cameraSV.setValue(/*CLASS CONST:laya.d3.core.BaseCamera.CAMERAUP*/6,this.up.elements);
-		}
+		};
 
 		/**
 		*@private
@@ -23203,7 +23204,7 @@
 			var cameraSV=this._shaderValues;
 			cameraSV.setValue(/*CLASS CONST:laya.d3.core.BaseCamera.VIEWMATRIX*/1,viewMatrix.elements);
 			cameraSV.setValue(/*CLASS CONST:laya.d3.core.BaseCamera.PROJECTMATRIX*/2,projectMatrix.elements);
-		}
+		};
 
 		/**
 		*增加可视图层。
@@ -23213,7 +23214,7 @@
 			if (layer.number===29 || layer.number==30)
 				return;
 			this.cullingMask=this.cullingMask | layer.mask;
-		}
+		};
 
 		/**
 		*移除可视图层。
@@ -23223,26 +23224,26 @@
 			if (layer.number===29 || layer.number==30)
 				return;
 			this.cullingMask=this.cullingMask & ~layer.mask;
-		}
+		};
 
 		/**
 		*增加所有图层。
 		*/
 		__proto.addAllLayers=function(){
 			this.cullingMask=2147483647;
-		}
+		};
 
 		/**
 		*移除所有图层。
 		*/
 		__proto.removeAllLayers=function(){
 			this.cullingMask=0 | Layer.getLayerByNumber(29).mask | Layer.getLayerByNumber(30).mask;
-		}
+		};
 
 		__proto.ResetProjectionMatrix=function(){
 			this._useUserProjectionMatrix=false;
 			this._calculateProjectionMatrix();
-		}
+		};
 
 		__proto.destroy=function(destroyChild){
 			(destroyChild===void 0)&& (destroyChild=true);
@@ -23253,7 +23254,7 @@
 			this.renderTarget=null;
 			Laya.stage.off(/*laya.events.Event.RESIZE*/"resize",this,this._onScreenSizeChanged);
 			_super.prototype.destroy.call(this,destroyChild);
-		}
+		};
 
 		/**
 		*向前移动。
@@ -23263,7 +23264,7 @@
 			this._tempVector3.elements[0]=this._tempVector3.elements[1]=0;
 			this._tempVector3.elements[2]=distance;
 			this.transform.translate(this._tempVector3);
-		}
+		};
 
 		/**
 		*向右移动。
@@ -23273,7 +23274,7 @@
 			this._tempVector3.elements[1]=this._tempVector3.elements[2]=0;
 			this._tempVector3.elements[0]=distance;
 			this.transform.translate(this._tempVector3);
-		}
+		};
 
 		/**
 		*向上移动。
@@ -23283,7 +23284,7 @@
 			this._tempVector3.elements[0]=this._tempVector3.elements[2]=0;
 			this._tempVector3.elements[1]=distance;
 			this.transform.translate(this._tempVector3,false);
-		}
+		};
 
 		//}// BoundingFrustumWorldSpace
 		__proto._addSelfRenderObjects=function(){
@@ -23302,12 +23303,12 @@
 					this.scene.conchModel.setCurrentCamera(this.conchModel);
 				}
 			}
-		}
+		};
 
 		__proto._clearSelfRenderObjects=function(){
 			var cameraPool=this.scene._cameraPool;
 			cameraPool.splice(cameraPool.indexOf(this),1);
-		}
+		};
 
 		/**设置天空。*/
 		/**获取天空。*/
@@ -23505,7 +23506,7 @@
 		BaseCamera.CLEARFLAG_DEPTHONLY=2;
 		BaseCamera.CLEARFLAG_NONE=3;
 		return BaseCamera;
-	})(Sprite3D)
+	})(Sprite3D);
 
 
 	/**
@@ -23541,7 +23542,7 @@
 			linePhasor.line(corners[1].x,corners[1].y,corners[1].z,0.0,1.0,0.0,1.0,corners[5].x,corners[5].y,corners[5].z,0.0,1.0,0.0,1.0);
 			linePhasor.line(corners[4].x,corners[4].y,corners[4].z,0.0,1.0,0.0,1.0,corners[7].x,corners[7].y,corners[7].z,0.0,1.0,0.0,1.0);
 			linePhasor.line(corners[5].x,corners[5].y,corners[5].z,0.0,1.0,0.0,1.0,corners[6].x,corners[6].y,corners[6].z,0.0,1.0,0.0,1.0);
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -23555,7 +23556,7 @@
 				Stat.spriteCount++;
 				this._childs.length && this._updateChilds(state);
 			}
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -23569,7 +23570,7 @@
 				Stat.spriteCount++;
 				this._childs.length && this._updateChildsConch(state);
 			}
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -23579,12 +23580,12 @@
 			_super.prototype.destroy.call(this,destroyChild);
 			this._render._destroy();
 			this._render=null;
-		}
+		};
 
 		RenderableSprite3D._tempBoundBoxCorners=[];
 		RenderableSprite3D.SHADERDEFINE_SCALEOFFSETLIGHTINGMAPUV=0x2;
 		return RenderableSprite3D;
-	})(Sprite3D)
+	})(Sprite3D);
 
 
 	/**
@@ -23622,14 +23623,14 @@
 		*/
 		__proto._addSelfRenderObjects=function(){
 			this.scene._addLight(this);
-		}
+		};
 
 		/**
 		*@inheritDoc
 		*/
 		__proto._clearSelfRenderObjects=function(){
 			this.scene._removeLight(this);
-		}
+		};
 
 		/**
 		*更新灯光相关渲染状态参数。
@@ -23637,7 +23638,7 @@
 		*/
 		__proto.updateToWorldState=function(state){
 			return false;
-		}
+		};
 
 		/**
 		*设置灯光的漫反射颜色。
@@ -23781,7 +23782,7 @@
 		LightSprite.TYPE_POINTLIGHT=2;
 		LightSprite.TYPE_SPOTLIGHT=3;
 		return LightSprite;
-	})(Sprite3D)
+	})(Sprite3D);
 
 
 	//class laya.d3.shader.Shader3D extends laya.webgl.shader.BaseShader
@@ -23841,7 +23842,7 @@
 			this._compile();
 			this.completeCreate();
 			this.memorySize=0;
-		}
+		};
 
 		//忽略尺寸尺寸
 		__proto.detoryResource=function(){
@@ -23853,7 +23854,7 @@
 			this._uniformParams=null;
 			this.memorySize=0;
 			this._curActTexIndex=0;
-		}
+		};
 
 		__proto._compile=function(){
 			if (!this._vs || !this._ps || this._attributeParams|| this._uniformParams)
@@ -23874,16 +23875,16 @@
 			gl.linkProgram(this._program);
 			if (!this.customCompile && !gl.getProgramParameter(this._program,/*laya.webgl.WebGLContext.LINK_STATUS*/0x8B82)){
 				throw gl.getProgramInfoLog(this._program);
-			};
-			var one,i=0,j=0,n=0,location;
+            }
+            var one,i=0,j=0,n=0,location;
 			var attribNum=this.customCompile ? result.attributes.length :gl.getProgramParameter(this._program,/*laya.webgl.WebGLContext.ACTIVE_ATTRIBUTES*/0x8B89);
 			for (i=0;i < attribNum;i++){
 				var attrib=this.customCompile ? result.attributes[i] :gl.getActiveAttrib(this._program,i);
 				location=gl.getAttribLocation(this._program,attrib.name);
 				one={vartype:"attribute",ivartype:0,attrib:attrib,location:location,name:attrib.name,type:attrib.type,isArray:false,isSame:false,preValue:null,indexOfParams:0};
 				this._attributeParams.push(one);
-			};
-			var nUniformNum=this.customCompile ? result.uniforms.length :gl.getProgramParameter(this._program,/*laya.webgl.WebGLContext.ACTIVE_UNIFORMS*/0x8B86);
+            }
+            var nUniformNum=this.customCompile ? result.uniforms.length :gl.getProgramParameter(this._program,/*laya.webgl.WebGLContext.ACTIVE_UNIFORMS*/0x8B86);
 			for (i=0;i < nUniformNum;i++){
 				var uniform=this.customCompile ? result.uniforms[i] :gl.getActiveUniform(this._program,i);
 				location=gl.getUniformLocation(this._program,uniform.name);
@@ -23983,14 +23984,14 @@
 						break ;
 					}
 			}
-		}
+		};
 
 		__proto._attribute=function(one,value){
 			var gl=WebGL.mainContext;
 			gl.enableVertexAttribArray(one.location);
 			gl.vertexAttribPointer(one.location,value[0],value[1],value[2],value[3],value[4]);
 			return 2;
-		}
+		};
 
 		__proto._uniform1f=function(one,value){
 			var uploadedValue=one.uploadedValue;
@@ -23999,7 +24000,7 @@
 				return 1;
 			}
 			return 0;
-		}
+		};
 
 		__proto._uniform1fv=function(one,value){
 			if (value.length < 4){
@@ -24017,7 +24018,7 @@
 				WebGL.mainContext.uniform1fv(one.location,value);
 				return 1;
 			}
-		}
+		};
 
 		__proto._uniform_vec2=function(one,value){
 			var uploadedValue=one.uploadedValue;
@@ -24026,7 +24027,7 @@
 				return 1;
 			}
 			return 0;
-		}
+		};
 
 		__proto._uniform_vec2v=function(one,value){
 			if (value.length < 2){
@@ -24044,7 +24045,7 @@
 				WebGL.mainContext.uniform2fv(one.location,value);
 				return 1;
 			}
-		}
+		};
 
 		__proto._uniform_vec3=function(one,value){
 			var uploadedValue=one.uploadedValue;
@@ -24053,12 +24054,12 @@
 				return 1;
 			}
 			return 0;
-		}
+		};
 
 		__proto._uniform_vec3v=function(one,value){
 			WebGL.mainContext.uniform3fv(one.location,value);
 			return 1;
-		}
+		};
 
 		__proto._uniform_vec4=function(one,value){
 			var uploadedValue=one.uploadedValue;
@@ -24067,37 +24068,37 @@
 				return 1;
 			}
 			return 0;
-		}
+		};
 
 		__proto._uniform_vec4v=function(one,value){
 			WebGL.mainContext.uniform4fv(one.location,value);
 			return 1;
-		}
+		};
 
 		__proto._uniformMatrix2fv=function(one,value){
 			WebGL.mainContext.uniformMatrix2fv(one.location,false,value);
 			return 1;
-		}
+		};
 
 		__proto._uniformMatrix3fv=function(one,value){
 			WebGL.mainContext.uniformMatrix3fv(one.location,false,value);
 			return 1;
-		}
+		};
 
 		__proto._uniformMatrix4fv=function(one,value){
 			WebGL.mainContext.uniformMatrix4fv(one.location,false,value);
 			return 1;
-		}
+		};
 
 		__proto._uinformMatrix2fv=function(one,value){
 			WebGL.mainContext.uniformMatrix2fv(one.location,false,value);
 			return 1;
-		}
+		};
 
 		__proto._uinformMatrix3fv=function(one,value){
 			WebGL.mainContext.uniformMatrix3fv(one.location,false,value);
 			return 1;
-		}
+		};
 
 		__proto._uniform1i=function(one,value){
 			var uploadedValue=one.uploadedValue;
@@ -24106,12 +24107,12 @@
 				return 1;
 			}
 			return 0;
-		}
+		};
 
 		__proto._uniform1iv=function(one,value){
 			WebGL.mainContext.uniform1iv(one.location,value);
 			return 1;
-		}
+		};
 
 		__proto._uniform_ivec2=function(one,value){
 			var uploadedValue=one.uploadedValue;
@@ -24120,12 +24121,12 @@
 				return 1;
 			}
 			return 0;
-		}
+		};
 
 		__proto._uniform_ivec2v=function(one,value){
 			WebGL.mainContext.uniform2iv(one.location,value);
 			return 1;
-		}
+		};
 
 		__proto._uniform_vec3i=function(one,value){
 			var uploadedValue=one.uploadedValue;
@@ -24134,12 +24135,12 @@
 				return 1;
 			}
 			return 0;
-		}
+		};
 
 		__proto._uniform_vec3vi=function(one,value){
 			WebGL.mainContext.uniform3iv(one.location,value);
 			return 1;
-		}
+		};
 
 		__proto._uniform_vec4i=function(one,value){
 			var uploadedValue=one.uploadedValue;
@@ -24148,12 +24149,12 @@
 				return 1;
 			}
 			return 0;
-		}
+		};
 
 		__proto._uniform_vec4vi=function(one,value){
 			WebGL.mainContext.uniform4iv(one.location,value);
 			return 1;
-		}
+		};
 
 		__proto._uniform_sampler2D=function(one,value){
 			var gl=WebGL.mainContext;
@@ -24172,7 +24173,7 @@
 					WebGLContext.bindTexture(gl,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,value);
 				return 0;
 			}
-		}
+		};
 
 		__proto._uniform_samplerCube=function(one,value){
 			var gl=WebGL.mainContext;
@@ -24195,11 +24196,11 @@
 				WebGLContext.bindTexture(gl,/*laya.webgl.WebGLContext.TEXTURE_CUBE_MAP*/0x8513,SolidColorTextureCube.grayTexture.source);
 				return 0;
 			}
-		}
+		};
 
 		__proto._noSetValue=function(one){
 			console.log("no....:"+one.name);
-		}
+		};
 
 		//throw new Error("upload shader err,must set value:"+one.name);
 		__proto.uploadTexture2D=function(value){
@@ -24207,14 +24208,14 @@
 			var gl=WebGL.mainContext;
 			gl.activeTexture(/*laya.webgl.WebGLContext.TEXTURE0*/0x84C0);
 			WebGLContext.bindTexture(gl,/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,value);
-		}
+		};
 
 		__proto.bind=function(){
 			BaseShader.activeShader=this;
 			BaseShader.bindShader=this;
 			this.activeResource();
 			return WebGLContext.UseProgram(this._program);
-		}
+		};
 
 		/**
 		*按数组的定义提交
@@ -24232,7 +24233,7 @@
 				}
 			}
 			Stat.shaderCall+=shaderCall;
-		}
+		};
 
 		/**
 		*按数组的定义提交
@@ -24248,7 +24249,7 @@
 					shaderCall+=one.fun.call(this,one,value);
 			}
 			Stat.shaderCall+=shaderCall;
-		}
+		};
 
 		/**
 		*按数组的定义提交
@@ -24264,7 +24265,7 @@
 					shaderCall+=one.fun.call(this,one,value);
 			}
 			Stat.shaderCall+=shaderCall;
-		}
+		};
 
 		/**
 		*按数组的定义提交
@@ -24280,7 +24281,7 @@
 					shaderCall+=one.fun.call(this,one,value);
 			}
 			Stat.shaderCall+=shaderCall;
-		}
+		};
 
 		/**
 		*按数组的定义提交
@@ -24296,7 +24297,7 @@
 					shaderCall+=one.fun.call(this,one,value);
 			}
 			Stat.shaderCall+=shaderCall;
-		}
+		};
 
 		/**
 		*按数组的定义提交
@@ -24312,7 +24313,7 @@
 					shaderCall+=one.fun.call(this,one,value);
 			}
 			Stat.shaderCall+=shaderCall;
-		}
+		};
 
 		__proto._preGetParams=function(vs,ps){
 			var text=[vs,ps];
@@ -24367,7 +24368,7 @@
 				}
 			}
 			return result;
-		}
+		};
 
 		__proto.parseOne=function(attributes,uniforms,words,i,word,b){
 			var one={type:Shader3D.shaderParamsMap[words[i+1]],name:words[i+2],size:isNaN(parseInt(words[i+3]))? 1 :parseInt(words[i+3])};
@@ -24384,16 +24385,16 @@
 			}
 			i+=2;
 			return i;
-		}
+		};
 
 		__proto.dispose=function(){
 			this.resourceManager.removeResource(this);
 			laya.resource.Resource.prototype.dispose.call(this);
-		}
+		};
 
 		Shader3D.create=function(vs,ps,attributeMap,sceneUniformMap,cameraUniformMap,spriteUniformMap,materialUniformMap,renderElementUniformMap){
 			return new Shader3D(vs,ps,attributeMap,sceneUniformMap,cameraUniformMap,spriteUniformMap,materialUniformMap,renderElementUniformMap);
-		}
+		};
 
 		Shader3D.addInclude=function(fileName,txt){
 			if (!txt || txt.length===0)
@@ -24401,7 +24402,7 @@
 			if (Shader3D._includeFiles[fileName])
 				throw new Error("add shader include file err, has add:"+fileName);
 			Shader3D._includeFiles[fileName]=txt;
-		}
+		};
 
 		Shader3D._createShader=function(gl,str,type){
 			var shader=gl.createShader(type);
@@ -24411,7 +24412,7 @@
 				throw gl.getShaderInfoLog(shader);
 			}
 			return shader;
-		}
+		};
 
 		Shader3D.PERIOD_RENDERELEMENT=0;
 		Shader3D.PERIOD_MATERIAL=1;
@@ -24425,7 +24426,7 @@
 		['shaderParamsMap',function(){return this.shaderParamsMap={"float":/*laya.webgl.WebGLContext.FLOAT*/0x1406,"int":/*laya.webgl.WebGLContext.INT*/0x1404,"bool":/*laya.webgl.WebGLContext.BOOL*/0x8B56,"vec2":/*laya.webgl.WebGLContext.FLOAT_VEC2*/0x8B50,"vec3":/*laya.webgl.WebGLContext.FLOAT_VEC3*/0x8B51,"vec4":/*laya.webgl.WebGLContext.FLOAT_VEC4*/0x8B52,"ivec2":/*laya.webgl.WebGLContext.INT_VEC2*/0x8B53,"ivec3":/*laya.webgl.WebGLContext.INT_VEC3*/0x8B54,"ivec4":/*laya.webgl.WebGLContext.INT_VEC4*/0x8B55,"bvec2":/*laya.webgl.WebGLContext.BOOL_VEC2*/0x8B57,"bvec3":/*laya.webgl.WebGLContext.BOOL_VEC3*/0x8B58,"bvec4":/*laya.webgl.WebGLContext.BOOL_VEC4*/0x8B59,"mat2":/*laya.webgl.WebGLContext.FLOAT_MAT2*/0x8B5A,"mat3":/*laya.webgl.WebGLContext.FLOAT_MAT3*/0x8B5B,"mat4":/*laya.webgl.WebGLContext.FLOAT_MAT4*/0x8B5C,"sampler2D":/*laya.webgl.WebGLContext.SAMPLER_2D*/0x8B5E,"samplerCube":/*laya.webgl.WebGLContext.SAMPLER_CUBE*/0x8B60};},'nameKey',function(){return this.nameKey=new StringKey();}
 		]);
 		return Shader3D;
-	})(BaseShader)
+	})(BaseShader);
 
 
 	/**
@@ -24448,7 +24449,7 @@
 		*/
 		__proto.setShaderName=function(name){
 			_super.prototype.setShaderName.call(this,name);
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -24460,7 +24461,7 @@
 			this._setNumber(5,templet.lifeTime);
 			this._setColor(2,templet._albedo);
 			this._setNumber(3,templet._currentTime);
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -24469,7 +24470,7 @@
 			_super.prototype.cloneTo.call(this,destObject);
 			var dest=destObject;
 			dest._renderMode=this._renderMode;
-		}
+		};
 
 		/**
 		*设置渲染模式。
@@ -24628,7 +24629,7 @@
 
 		GlitterMaterial.load=function(url){
 			return Laya.loader.create(url,null,null,GlitterMaterial);
-		}
+		};
 
 		GlitterMaterial.RENDERMODE_OPAQUE=1;
 		GlitterMaterial.RENDERMODE_OPAQUEDOUBLEFACE=2;
@@ -24653,7 +24654,7 @@
 		['defaultMaterial',function(){return this.defaultMaterial=new GlitterMaterial();}
 		]);
 		return GlitterMaterial;
-	})(BaseMaterial)
+	})(BaseMaterial);
 
 
 	/**
@@ -24683,13 +24684,13 @@
 			var viewportScale=new Vector2(0.5 / aspectRadio,-0.5);
 			this._setVector2(1,viewportScale);
 			this._setNumber(2,templet._currentTime);
-		}
+		};
 
 		__proto.cloneTo=function(destObject){
 			_super.prototype.cloneTo.call(this,destObject);
 			var dest=destObject;
 			dest._renderMode=this._renderMode;
-		}
+		};
 
 		/**
 		*设置渲染模式。
@@ -24848,7 +24849,7 @@
 
 		ParticleMaterial.load=function(url){
 			return Laya.loader.create(url,null,null,ParticleMaterial);
-		}
+		};
 
 		ParticleMaterial.RENDERMODE_OPAQUE=1;
 		ParticleMaterial.RENDERMODE_OPAQUEDOUBLEFACE=2;
@@ -24875,7 +24876,7 @@
 		['defaultMaterial',function(){return this.defaultMaterial=new ParticleMaterial();}
 		]);
 		return ParticleMaterial;
-	})(BaseMaterial)
+	})(BaseMaterial);
 
 
 	//class laya.d3.core.material.PBRMaterial extends laya.d3.core.material.BaseMaterial
@@ -24889,8 +24890,8 @@
 				if (!lutdt){
 					alert('no pbr lutdata, need pbrlut.js');
 					throw 'no pbr lutdata, need pbrlut.js';
-				};
-				var luttex=DataTexture2D.create((new Uint32Array(lutdt)).buffer,256,256,/*laya.webgl.WebGLContext.NEAREST*/0x2600,/*laya.webgl.WebGLContext.NEAREST*/0x2600,false);
+                }
+                var luttex=DataTexture2D.create((new Uint32Array(lutdt)).buffer,256,256,/*laya.webgl.WebGLContext.NEAREST*/0x2600,/*laya.webgl.WebGLContext.NEAREST*/0x2600,false);
 				laya.d3.core.material.PBRMaterial.pbrlutTex=luttex;
 			}
 			this._setTexture(4,laya.d3.core.material.PBRMaterial.pbrlutTex);
@@ -24905,26 +24906,26 @@
 		*/
 		__proto.disableLight=function(){
 			this._addDisablePublicShaderDefine(ShaderCompile3D.SHADERDEFINE_POINTLIGHT | ShaderCompile3D.SHADERDEFINE_SPOTLIGHT | ShaderCompile3D.SHADERDEFINE_DIRECTIONLIGHT);
-		}
+		};
 
 		/**
 		*禁用雾化。
 		*/
 		__proto.disableFog=function(){
 			this._addDisablePublicShaderDefine(ShaderCompile3D.SHADERDEFINE_FOG);
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._setMaterialShaderParams=function(state){
 			(this._transformUV)&& (this._transformUV.matrix);
-		}
+		};
 
 		//触发UV矩阵更新TODO:临时
 		__proto.onAsynLoaded=function(url,data,params){
 			_super.prototype.onAsynLoaded.call(this,url,data,params);
-		}
+		};
 
 		/**
 		*vdc算法产生的序列。这个比random要均匀一些。
@@ -24940,7 +24941,7 @@
 				tmpUint[0]=bits;
 				return tmpUint[0] *2.3283064365386963e-10;
 			})(bits);
-		}
+		};
 
 		/**
 		*
@@ -24957,7 +24958,7 @@
 				ret[ri++]=255;
 			}
 			return ret;
-		}
+		};
 
 		/**
 		*设置法线贴图。
@@ -25126,7 +25127,7 @@
 
 		PBRMaterial.load=function(url){
 			return Laya.loader.create(url,null,null,PBRMaterial);
-		}
+		};
 
 		PBRMaterial.DIFFUSETEXTURE=1;
 		PBRMaterial.NORMALTEXTURE=2;
@@ -25150,13 +25151,13 @@
 		PBRMaterial.RENDERMODE_CUTOUT=3;
 		PBRMaterial.RENDERMODE_CUTOUTDOUBLEFACE=4;
 		PBRMaterial.RENDERMODE_TRANSPARENT=13;
-		PBRMaterial.pbrlutTex=null
-		PBRMaterial.HammersleyNoiseTex=null
+		PBRMaterial.pbrlutTex=null;
+		PBRMaterial.HammersleyNoiseTex=null;
 		__static(PBRMaterial,
 		['defaultMaterial',function(){return this.defaultMaterial=new PBRMaterial();}
 		]);
 		return PBRMaterial;
-	})(BaseMaterial)
+	})(BaseMaterial);
 
 
 	/**
@@ -25186,14 +25187,14 @@
 		*/
 		__proto.disableLight=function(){
 			this._addDisablePublicShaderDefine(ShaderCompile3D.SHADERDEFINE_POINTLIGHT | ShaderCompile3D.SHADERDEFINE_SPOTLIGHT | ShaderCompile3D.SHADERDEFINE_DIRECTIONLIGHT);
-		}
+		};
 
 		/**
 		*禁用雾化。
 		*/
 		__proto.disableFog=function(){
 			this._addDisablePublicShaderDefine(ShaderCompile3D.SHADERDEFINE_FOG);
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -25210,14 +25211,14 @@
 				StandardMaterial._parseStandardMaterial(textureMap,this,jsonData);
 				this.event(/*laya.events.Event.LOADED*/"loaded",this);
 			}
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._setMaterialShaderParams=function(state){
 			(this._transformUV)&& (this._transformUV.matrix);
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -25227,7 +25228,7 @@
 			var dest=destObject;
 			dest._renderMode=this._renderMode;
 			(this._transformUV)&& (dest._transformUV=this._transformUV.clone());
-		}
+		};
 
 		/**
 		*设置环境光颜色。
@@ -25589,7 +25590,7 @@
 
 		StandardMaterial.load=function(url){
 			return Laya.loader.create(url,null,null,StandardMaterial);
-		}
+		};
 
 		StandardMaterial._parseStandardMaterial=function(textureMap,material,json){
 			var customProps=json.customProps;
@@ -25613,7 +25614,7 @@
 			(ambientTexture)&& (material.ambientTexture=Loader.getRes(textureMap[ambientTexture]));
 			var reflectTexture=customProps.reflectTexture.texture2D;
 			(reflectTexture)&& (material.reflectTexture=Loader.getRes(textureMap[reflectTexture]));
-		}
+		};
 
 		StandardMaterial.RENDERMODE_OPAQUE=1;
 		StandardMaterial.RENDERMODE_OPAQUEDOUBLEFACE=2;
@@ -25656,7 +25657,7 @@
 		['defaultMaterial',function(){return this.defaultMaterial=new StandardMaterial();}
 		]);
 		return StandardMaterial;
-	})(BaseMaterial)
+	})(BaseMaterial);
 
 
 	/**
@@ -25689,25 +25690,25 @@
 			this._diffuseScale1.x=x;
 			this._diffuseScale1.y=y;
 			this._setColor(6,this._diffuseScale1);
-		}
+		};
 
 		__proto.setDiffuseScale2=function(x,y){
 			this._diffuseScale2.x=x;
 			this._diffuseScale2.y=y;
 			this._setColor(7,this._diffuseScale2);
-		}
+		};
 
 		__proto.setDiffuseScale3=function(x,y){
 			this._diffuseScale3.x=x;
 			this._diffuseScale3.y=y;
 			this._setColor(8,this._diffuseScale3);
-		}
+		};
 
 		__proto.setDiffuseScale4=function(x,y){
 			this._diffuseScale4.x=x;
 			this._diffuseScale4.y=y;
 			this._setColor(9,this._diffuseScale4);
-		}
+		};
 
 		__proto.setDetailNum=function(value){
 			switch(value){
@@ -25736,19 +25737,19 @@
 					this._removeShaderDefine(laya.d3.core.material.TerrainMaterial.SHADERDEFINE_DETAIL_NUM3);
 					break ;
 				}
-		}
+		};
 
 		/**
 		*@inheritDoc
 		*/
 		__proto.setShaderName=function(name){
 			_super.prototype.setShaderName.call(this,name);
-		}
+		};
 
 		/**
 		*@inheritDoc
 		*/
-		__proto._setMaterialShaderParams=function(state){}
+		__proto._setMaterialShaderParams=function(state){};
 		/**
 		*@inheritDoc
 		*/
@@ -25756,7 +25757,7 @@
 			_super.prototype.cloneTo.call(this,destObject);
 			var dest=destObject;
 			dest._renderMode=this._renderMode;
-		}
+		};
 
 		/**
 		*设置渲染模式。
@@ -25893,7 +25894,7 @@
 
 		TerrainMaterial.load=function(url){
 			return Laya.loader.create(url,null,null,TerrainMaterial);
-		}
+		};
 
 		TerrainMaterial.RENDERMODE_OPAQUE=1;
 		TerrainMaterial.RENDERMODE_TRANSPARENT=2;
@@ -25918,7 +25919,7 @@
 		['defaultMaterial',function(){return this.defaultMaterial=new TerrainMaterial();}
 		]);
 		return TerrainMaterial;
-	})(BaseMaterial)
+	})(BaseMaterial);
 
 
 	//class laya.d3.core.material.WaterMaterial extends laya.d3.core.material.BaseMaterial
@@ -25938,15 +25939,15 @@
 		*/
 		__proto.disableFog=function(){
 			this._addDisablePublicShaderDefine(ShaderCompile3D.SHADERDEFINE_FOG);
-		}
+		};
 
 		/**
 		*@private
 		*/
-		__proto._setMaterialShaderParams=function(state){}
+		__proto._setMaterialShaderParams=function(state){};
 		__proto.onAsynLoaded=function(url,data,params){
 			_super.prototype.onAsynLoaded.call(this,url,data,params);
-		}
+		};
 
 		/**
 		*设置漫反射贴图。
@@ -26109,7 +26110,7 @@
 
 		WaterMaterial.load=function(url){
 			return Laya.loader.create(url,null,null,WaterMaterial);
-		}
+		};
 
 		WaterMaterial.DIFFUSETEXTURE=1;
 		WaterMaterial.NORMALTEXTURE=2;
@@ -26142,7 +26143,7 @@
 		['defaultMaterial',function(){return this.defaultMaterial=new WaterMaterial();}
 		]);
 		return WaterMaterial;
-	})(BaseMaterial)
+	})(BaseMaterial);
 
 
 	/**
@@ -26225,7 +26226,7 @@
 					this._buffer=data;
 				}
 			}
-		}
+		};
 
 		/**
 		*获取索引数据。
@@ -26236,14 +26237,14 @@
 				return this._buffer;
 			else
 			throw new Error("Can't read data from VertexBuffer with only write flag!");
-		}
+		};
 
 		/**彻底销毁索引缓冲。*/
 		__proto.dispose=function(){
 			this._buffer=null;
 			_super.prototype.dispose.call(this);
 			this.memorySize=0;
-		}
+		};
 
 		/**
 		*获取索引类型。
@@ -26283,10 +26284,10 @@
 			(bufferUsage===void 0)&& (bufferUsage=/*laya.webgl.WebGLContext.STATIC_DRAW*/0x88E4);
 			(canRead===void 0)&& (canRead=false);
 			return new IndexBuffer3D(indexType,indexCount,bufferUsage,canRead);
-		}
+		};
 
 		return IndexBuffer3D;
-	})(Buffer)
+	})(Buffer);
 
 
 	/**
@@ -26324,7 +26325,7 @@
 		__proto.bindWithIndexBuffer=function(ib){
 			(ib)&& (ib._bind());
 			this._bind();
-		}
+		};
 
 		/**
 		*设置数据。
@@ -26354,7 +26355,7 @@
 					this._buffer=data;
 				}
 			}
-		}
+		};
 
 		/**
 		*获取顶点数据。
@@ -26365,7 +26366,7 @@
 				return this._buffer;
 			else
 			throw new Error("Can't read data from VertexBuffer with only write flag!");
-		}
+		};
 
 		/**销毁顶点缓冲。*/
 		__proto.detoryResource=function(){
@@ -26373,7 +26374,7 @@
 			for (var i=0;i < elements.length;i++)
 			WebGL.mainContext.disableVertexAttribArray(i);
 			_super.prototype.detoryResource.call(this);
-		}
+		};
 
 		/**彻底销毁顶点缓冲。*/
 		__proto.dispose=function(){
@@ -26381,7 +26382,7 @@
 			this._buffer=null;
 			this._vertexDeclaration=null;
 			this.memorySize=0;
-		}
+		};
 
 		/**
 		*获取顶点结构声明。
@@ -26411,10 +26412,10 @@
 			(bufferUsage===void 0)&& (bufferUsage=/*laya.webgl.WebGLContext.STATIC_DRAW*/0x88E4);
 			(canRead===void 0)&& (canRead=false);
 			return new VertexBuffer3D(vertexDeclaration,vertexCount,bufferUsage,canRead);
-		}
+		};
 
 		return VertexBuffer3D;
-	})(Buffer)
+	})(Buffer);
 
 
 	/**
@@ -26454,7 +26455,7 @@
 			this._setInt(6,particleRender.stretchedBillboardLengthScale);
 			this._setInt(7,particleRender.stretchedBillboardSpeedScale);
 			this._setNumber(3,particleSystem.currentTime);
-		}
+		};
 
 		/**
 		*@private
@@ -26471,7 +26472,7 @@
 				ShurikenParticleMaterial._parseShurikenParticleMaterial(textureMap,this,jsonData);
 				this.event(/*laya.events.Event.LOADED*/"loaded",this);
 			}
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -26480,7 +26481,7 @@
 			_super.prototype.cloneTo.call(this,destObject);
 			var dest=destObject;
 			dest._renderMode=this._renderMode;
-		}
+		};
 
 		/**
 		*设置渲染模式。
@@ -26660,7 +26661,7 @@
 
 		ShurikenParticleMaterial.load=function(url){
 			return Laya.loader.create(url,null,null,ShurikenParticleMaterial);
-		}
+		};
 
 		ShurikenParticleMaterial._parseShurikenParticleMaterial=function(textureMap,material,json){
 			var customProps=json.customProps;
@@ -26668,7 +26669,7 @@
 			(diffuseTexture)&& (material.diffuseTexture=Loader.getRes(textureMap[diffuseTexture]));
 			var tintColorValue=customProps.tintColor;
 			(tintColorValue)&& (material.tintColor=new Vector4(tintColorValue[0],tintColorValue[1],tintColorValue[2],tintColorValue[3]));
-		}
+		};
 
 		ShurikenParticleMaterial.RENDERMODE_OPAQUE=1;
 		ShurikenParticleMaterial.RENDERMODE_OPAQUEDOUBLEFACE=2;
@@ -26699,7 +26700,7 @@
 		['_tempGravity',function(){return this._tempGravity=new Vector3();},'defaultMaterial',function(){return this.defaultMaterial=new ShurikenParticleMaterial();}
 		]);
 		return ShurikenParticleMaterial;
-	})(BaseMaterial)
+	})(BaseMaterial);
 
 
 	/**
@@ -26748,7 +26749,7 @@
 					this.addChild(terrainChunk);
 				}
 			}
-		}
+		};
 
 		/**
 		*获取地形X轴长度。
@@ -26756,7 +26757,7 @@
 		*/
 		__proto.width=function(){
 			return this._terrainRes._chunkNumX*TerrainLeaf.CHUNK_GRID_NUM *this._terrainRes._gridSize;
-		}
+		};
 
 		/**
 		*获取地形Z轴长度。
@@ -26764,7 +26765,7 @@
 		*/
 		__proto.depth=function(){
 			return this._terrainRes._chunkNumZ *TerrainLeaf.CHUNK_GRID_NUM *this._terrainRes._gridSize;
-		}
+		};
 
 		/**
 		*获取地形高度。
@@ -26805,17 +26806,17 @@
 				v=offsetZ / gridSize;
 				return h1+(h2-h1)*v+(h3-h1)*u;
 			}
-		}
+		};
 
 		Terrain.load=function(url){
 			return Laya.loader.create(url,null,null,Terrain,null,1,false);
-		}
+		};
 
 		Terrain.RENDER_LINE_MODEL=false;
 		Terrain.LOD_TOLERANCE_VALUE=4;
 		Terrain.LOD_DISTANCE_FACTOR=2.0;
 		return Terrain;
-	})(Sprite3D)
+	})(Sprite3D);
 
 
 	/**
@@ -26878,7 +26879,7 @@
 			var vs="\nattribute vec3 a_position;\nattribute vec3 a_normal;\nattribute vec2 uv;\n\nvarying vec2 vUv;\nvarying vec3 vWorldNorm;\nvarying vec3 vWorldTangent;\nvarying vec3 vWorldBinormal;\n\n\nvoid main() {\n	vec3 pos = a_position;\n	if(pos.z!=0.)pos.y=pos.z;\n	pos.z=0.5;\n	gl_Position = vec4(pos,1.);\n    vUv = uv;\n	//vWorldNorm = normalize((modelMat*vec4(a_normal,0.0)).xyz);\n	//vWorldTangent = normalize((modelMat*vec4(tangent,0.0)).xyz);\n	//vWorldBinormal = normalize((modelMat*vec4(binormal,0.0)).xyz);\n}\n"/*__INCLUDESTR__D:/LayaPublishWork/LayaWorkDir/LayaAir/publish/LayaAirPublish/src/d3/src/laya/d3/water/WaterDetailVS.glsl*/;
 			var ps="precision highp float;\nprecision lowp int;\n\nconst float PI = 3.14159265358979323846264;\nconst float _2PI = 6.2831853071796;\nvarying vec2 vUv;\nvarying vec3 vWorldNorm;\nvarying vec3 vWorldTangent;\nvarying vec3 vWorldBinormal;\n\nuniform float u_curTm;\n\n#include \"WaveFunction.glsl\"\n\nvoid main() {\n	vec3 wave_N,wave_B,wave_T;\n	calcWave(u_curTm, vUv,wave_B,wave_T,wave_N);\n	gl_FragColor.rgb = normalize(wave_N)*0.5+vec3(0.5);// vec3(0.1,.4,0.1);\n    gl_FragColor.a = 1.0;\n}\n"/*__INCLUDESTR__D:/LayaPublishWork/LayaWorkDir/LayaAir/publish/LayaAirPublish/src/d3/src/laya/d3/water/WaterDetailFS.glsl*/;
 			var shaderCompile=ShaderCompile3D.add(WaterDetail,vs,ps,attributeMap,uniformMap);
-		}
+		};
 
 		WaterDetailMaterial.CURTM=1;
 		WaterDetailMaterial.WAVEINFO=12;
@@ -26887,7 +26888,7 @@
 		WaterDetailMaterial.TEXWAVE_UV_SCALE=15;
 		WaterDetailMaterial._bInited=false;
 		return WaterDetailMaterial;
-	})(BaseMaterial)
+	})(BaseMaterial);
 
 
 	/**
@@ -26936,7 +26937,7 @@
 			else
 			this.owner.transform.worldMatrix=this._currentTransform;
 			this._camera.fieldOfView=this._currentAnimationData[9];
-		}
+		};
 
 		/**
 		*@private
@@ -26958,7 +26959,7 @@
 					_$this._camera.fieldOfView=_$this._originalFov;
 				}
 			});
-		}
+		};
 
 		/**
 		*@private
@@ -26984,8 +26985,8 @@
 					this._effect();
 					return;
 				}
-			};
-			var nodes=this._templet.getNodes(animationClipIndex);
+            }
+            var nodes=this._templet.getNodes(animationClipIndex);
 			var nodeCount=nodes.length;
 			if (this._player.isCache && rate >=1.0){
 				this._currentAnimationData=new Float32Array(nodeCount *10);
@@ -27003,10 +27004,10 @@
 			this._lastFrameIndex=frameIndex;
 			laya.d3.component.Component3D.prototype._update.call(this,state);
 			this._effect();
-		}
+		};
 
 		return CameraAnimations;
-	})(KeyframeAnimations)
+	})(KeyframeAnimations);
 
 
 	/**
@@ -27043,8 +27044,8 @@
 				for (var j=1;j < hierarchys.length;j++){
 					var childIndex=hierarchys[j];
 					curParentSprite=curParentSprite._childs[hierarchys[j]];
-				};
-				var curSprite=curParentSprite.getChildByName(nodes[i].name);
+                }
+                var curSprite=curParentSprite.getChildByName(nodes[i].name);
 				if (!curSprite)
 					break ;
 				this._animationSprites[i]=curSprite;
@@ -27053,7 +27054,7 @@
 				curSprite.transform.localMatrix.cloneTo(localMatrix);
 				curParentSprite=this._owner;
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -27063,7 +27064,7 @@
 				this._init();
 			else
 			this._templet.once(/*laya.events.Event.LOADED*/"loaded",this,this._init);
-		}
+		};
 
 		/**
 		*@private
@@ -27075,7 +27076,7 @@
 				for (var i=0;i < this._animationSprites.length;i++)
 				this._animationSprites[i].transform.localMatrix=this._animationSpritesInitLocalMatrix[i];
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -27090,7 +27091,7 @@
 				matrixE[i]=this._curAnimationDatas[nodeIndex *16+i];
 				sprite.transform.localMatrix=matrix;
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -27101,7 +27102,7 @@
 			_super.prototype._load.call(this,owner);
 			this._player.on(/*laya.events.Event.STOPPED*/"stopped",this,this._animtionStop);
 			this._player.on(/*laya.events.Event.PLAYED*/"played",this,this._animtionPlay);
-		}
+		};
 
 		/**
 		*@private
@@ -27128,8 +27129,8 @@
 					this._effectAnimation(nodes);
 					return;
 				}
-			};
-			var nodeFloatCount=nodes.length *16;
+            }
+            var nodeFloatCount=nodes.length *16;
 			if (isCache){
 				this._curAnimationDatas=new Float32Array(nodeFloatCount);
 				}else{
@@ -27147,7 +27148,7 @@
 			}
 			this._lastFrameIndex=frameIndex;
 			this._effectAnimation(nodes);
-		}
+		};
 
 		/**
 		*@private
@@ -27160,7 +27161,7 @@
 			this._tempCurAnimationData=null;
 			this._curOriginalData=null;
 			this._curAnimationDatas=null;
-		}
+		};
 
 		/**
 		*设置url地址。
@@ -27197,7 +27198,7 @@
 		});
 
 		return RigidAnimations;
-	})(KeyframeAnimations)
+	})(KeyframeAnimations);
 
 
 	/**
@@ -27231,7 +27232,7 @@
 				this._computeBoneIndeToMeshOnMesh();
 			else
 			this._templet.once(/*laya.events.Event.LOADED*/"loaded",this,this._computeBoneIndeToMeshOnMesh);
-		}
+		};
 
 		/**
 		*@private
@@ -27246,7 +27247,7 @@
 				this._computeBoneIndeToMesh(mesh);
 			else
 			mesh.on(/*laya.events.Event.LOADED*/"loaded",this,this._computeBoneIndeToMesh);
-		}
+		};
 
 		/**
 		*@private
@@ -27265,7 +27266,7 @@
 					boneIndexToMesh[j]=ani.bone3DMap[meshBoneNames[j]];
 				}
 			}
-		}
+		};
 
 		/**@private */
 		__proto._getAnimationDatasWithCache=function(rate,mesh,cacheDatas,aniIndex,frameIndex){
@@ -27284,7 +27285,7 @@
 					return meshDatas[frameIndex];
 				}
 			}
-		}
+		};
 
 		/**@private */
 		__proto._setAnimationDatasWithCache=function(rate,mesh,cacheDatas,aniIndex,frameIndex,animationDatas){
@@ -27292,19 +27293,19 @@
 			var rateDatas=(aniDatas[rate])|| (aniDatas[rate]={});
 			var meshDatas=(rateDatas[mesh.id])|| (rateDatas[mesh.id]=[]);
 			meshDatas[frameIndex]=animationDatas;
-		}
+		};
 
 		/**@private */
 		__proto._onMeshLoaded=function(){
 			(this.destroyed)|| (this._onAnimationPlayMeshLoaded);
-		}
+		};
 
 		/**@private */
 		__proto._onAnimationPlayMeshLoaded=function(){
 			var renderElements=this._ownerMesh.meshRender._renderElements;
 			for (var i=0,n=renderElements.length;i < n;i++)
 			renderElements[i]._canDynamicBatch=false;
-		}
+		};
 
 		/**@private */
 		__proto._onAnimationPlay=function(){
@@ -27314,7 +27315,7 @@
 				this._onAnimationPlayMeshLoaded();
 			else
 			mesh.on(/*laya.events.Event.LOADED*/"loaded",this,this._onMeshLoaded);
-		}
+		};
 
 		/**@private */
 		__proto._onAnimationStop=function(){
@@ -27323,11 +27324,11 @@
 				this._curBonesDatas=null;
 				this._curAnimationDatas=null;
 				this._ownerMesh._removeShaderDefine(laya.d3.component.animation.SkinAnimations.SHADERDEFINE_BONE);
-			};
-			var renderElements=this._ownerMesh.meshRender._renderElements;
+            }
+            var renderElements=this._ownerMesh.meshRender._renderElements;
 			for (var i=0,n=renderElements.length;i < n;i++)
 			renderElements[i]._canDynamicBatch=true;
-		}
+		};
 
 		/**
 		*@private
@@ -27340,7 +27341,7 @@
 			this._player.on(/*laya.events.Event.PLAYED*/"played",this,this._onAnimationPlay);
 			this._player.on(/*laya.events.Event.STOPPED*/"stopped",this,this._onAnimationStop);
 			(this._owner).meshFilter.on(/*laya.events.Event.MESH_CHANGED*/"meshchanged",this,this._computeBoneIndeToMeshOnTemplet);
-		}
+		};
 
 		/**
 		*@private
@@ -27368,13 +27369,13 @@
 					this._lastFrameIndex=frameIndex;
 					return;
 				}
-			};
-			var isCacheBonesDatas=false;
+            }
+            var isCacheBonesDatas=false;
 			if (isCache){
 				this._curBonesDatas=this._templet.getAnimationDataWithCache(cachePlayRate,boneDatasCache,animationClipIndex,frameIndex);
 				isCacheBonesDatas=this._curBonesDatas ? true :false;
-			};
-			var bones=this._templet.getNodes(animationClipIndex);
+            }
+            var bones=this._templet.getNodes(animationClipIndex);
 			var boneFloatCount=bones.length *16;
 			var inverseAbsoluteBindPoses=mesh.InverseAbsoluteBindPoses;
 			if (this._oldVersion)
@@ -27441,7 +27442,7 @@
 			for (i=0;i < subMeshCount;i++){
 				var boneIndicesList=mesh.getSubMesh(i)._boneIndicesList;
 				boneIndicesCount=boneIndicesList.length;
-				curSubAnimationDatas=this._curAnimationDatas[i]
+				curSubAnimationDatas=this._curAnimationDatas[i];
 				for (j=0;j < boneIndicesCount;j++)
 				SkinAnimations._splitAnimationDatas(boneIndicesList[j],this._curMeshAnimationData,curSubAnimationDatas[j]);
 			}
@@ -27456,7 +27457,7 @@
 					this._ownerMesh.meshRender._renderElements[i]._conchSubmesh.setShaderValue(/*CLASS CONST:laya.d3.component.animation.SkinAnimations.BONES*/0,this._curAnimationDatas[i],0);
 				}
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -27469,7 +27470,7 @@
 				subMesh._skinAnimationDatas=this._curAnimationDatas[subMesh.indexOfHost];
 			else
 			subMesh._skinAnimationDatas=null;
-		}
+		};
 
 		/**
 		*@private
@@ -27486,7 +27487,7 @@
 			this._curBonesDatas=null;
 			this._curAnimationDatas=null;
 			this._ownerMesh=null;
-		}
+		};
 
 		/**
 		*获取骨骼数据。
@@ -27518,12 +27519,12 @@
 					subAnimationDatas[ii]=bonesData[(indices[i] << 4)+j];
 				}
 			}
-		}
+		};
 
 		SkinAnimations.BONES=0;
 		SkinAnimations.SHADERDEFINE_BONE=0x4;
 		return SkinAnimations;
-	})(KeyframeAnimations)
+	})(KeyframeAnimations);
 
 
 	/**
@@ -27559,13 +27560,13 @@
 		__proto._initMeshData=function(){
 			this._materials=this._mesh.meshRender.sharedMaterials;
 			this._meshDataInited=true;
-		}
+		};
 
 		/**
 		*@private
 		*初始化UV动画相关数据函数。
 		*/
-		__proto._initAnimationData=function(animationIndex){}
+		__proto._initAnimationData=function(animationIndex){};
 		/**
 		*@private
 		*初始化载入UV动画组件。
@@ -27584,7 +27585,7 @@
 			});
 			this.player.on(/*laya.events.Event.STOPPED*/"stopped",this,function(){
 			});
-		}
+		};
 
 		/**
 		*@private
@@ -27612,16 +27613,16 @@
 				}
 			}
 			laya.d3.component.Component3D.prototype._update.call(this,state);
-		}
+		};
 
 		/**
 		*@private
 		*在渲染前更新UV动画组件渲染参数。
 		*@param state 渲染状态参数。
 		*/
-		__proto._preRenderUpdate=function(state){}
+		__proto._preRenderUpdate=function(state){};
 		return UVAnimations;
-	})(KeyframeAnimations)
+	})(KeyframeAnimations);
 
 
 	/**
@@ -27654,21 +27655,21 @@
 				this._transformOrientedBoundBox.transformation.setTranslationVector(BoxCollider._deviationV3);
 				this._needUpdate=false;
 			}
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onGeometryFilterLoaded=function(){
 			(this.destroyed)|| (this._initBoundBox());
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onWorldMatrixChanged=function(){
 			this._needUpdate=true;
-		}
+		};
 
 		/**
 		*@private
@@ -27683,7 +27684,7 @@
 			Vector3.scale(this.center,0.5,this.center);
 			this.owner.transform.on(/*laya.events.Event.WORLDMATRIX_NEEDCHANGE*/"worldmatrixneedchanged",this,this._onWorldMatrixChanged);
 			this._needUpdate=true;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -27705,7 +27706,7 @@
 				owner.transform.on(/*laya.events.Event.WORLDMATRIX_NEEDCHANGE*/"worldmatrixneedchanged",this,this._onWorldMatrixChanged);
 				this._needUpdate=true;
 			}
-		}
+		};
 
 		/**
 		*在场景中投下可与盒体碰撞器碰撞的一条光线,获取发生碰撞的盒体碰撞器信息。
@@ -27726,7 +27727,7 @@
 				hitInfo.sprite3D=null;
 				return false;
 			}
-		}
+		};
 
 		/**
 		*获取包围盒子。
@@ -27756,7 +27757,7 @@
 		['_deviationV3',function(){return this._deviationV3=new Vector3();},'_obbCenterV3',function(){return this._obbCenterV3=new Vector3();}
 		]);
 		return BoxCollider;
-	})(Collider)
+	})(Collider);
 
 
 	/**
@@ -27818,7 +27819,7 @@
 				}
 			}
 			return false;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -27829,7 +27830,7 @@
 				var meshSprite3D=owner;
 				this._mesh=meshSprite3D.meshFilter.sharedMesh;
 			}
-		}
+		};
 
 		/**
 		*在场景中投下可与网格碰撞器碰撞的一条光线,获取发生碰撞的网格碰撞器信息。
@@ -27859,7 +27860,7 @@
 				hitInfo.sprite3D=null;
 				return false;
 			}
-		}
+		};
 
 		/**
 		*设置碰撞器网格。
@@ -27879,7 +27880,7 @@
 		['_tempRay0',function(){return this._tempRay0=new Ray(new Vector3(),new Vector3());},'_tempVector30',function(){return this._tempVector30=new Vector3();},'_tempMatrix4x40',function(){return this._tempMatrix4x40=new Matrix4x4();},'_tempRaycastHit',function(){return this._tempRaycastHit=new RaycastHit();}
 		]);
 		return MeshCollider;
-	})(Collider)
+	})(Collider);
 
 
 	/**
@@ -27912,21 +27913,21 @@
 				this._transformBoundSphere.radius=this._originalBoundSphere.radius *maxScale;
 				this._needUpdate=false;
 			}
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onGeometryFilterLoaded=function(){
 			(this.destroyed)|| (this._initBoundSphere());
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onWorldMatrixChanged=function(){
 			this._needUpdate=true;
-		}
+		};
 
 		/**
 		*@private
@@ -27935,7 +27936,7 @@
 			(this.owner)._geometryFilter._originalBoundingSphere.cloneTo(this._originalBoundSphere);
 			this.owner.transform.on(/*laya.events.Event.WORLDMATRIX_NEEDCHANGE*/"worldmatrixneedchanged",this,this._onWorldMatrixChanged);
 			this._needUpdate=true;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -27957,7 +27958,7 @@
 				owner.transform.on(/*laya.events.Event.WORLDMATRIX_NEEDCHANGE*/"worldmatrixneedchanged",this,this._onWorldMatrixChanged);
 				this._needUpdate=true;
 			}
-		}
+		};
 
 		/**
 		*在场景中投下可与球体碰撞器碰撞的一条光线,获取发生碰撞的球体碰撞器信息。
@@ -27978,7 +27979,7 @@
 				hitInfo.sprite3D=null;
 				return false;
 			}
-		}
+		};
 
 		/**
 		*设置中心点。
@@ -28018,7 +28019,7 @@
 		});
 
 		return SphereCollider;
-	})(Collider)
+	})(Collider);
 
 
 	//class laya.d3.resource.DataTexture2D extends laya.d3.resource.BaseTexture
@@ -28048,12 +28049,12 @@
 			ret.push(new Uint8Array((new Uint32Array(2 *1)).fill(0xff808080).buffer));
 			ret.push(new Uint8Array((new Uint32Array(1 *1)).fill(0xffffffff).buffer));
 			return ret;
-		}
+		};
 
 		/**
 		*@private
 		*/
-		__proto._onTextureLoaded=function(buff){}
+		__proto._onTextureLoaded=function(buff){};
 		/**
 		*@private
 		*/
@@ -28107,8 +28108,8 @@
 				this.mipmap=false;
 				}else {
 				gl.texImage2D(/*laya.webgl.WebGLContext.TEXTURE_2D*/0x0DE1,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,w,h,0,/*laya.webgl.WebGLContext.RGBA*/0x1908,/*laya.webgl.WebGLContext.UNSIGNED_BYTE*/0x1401,new Uint8Array(this._buffer));
-			};
-			var minFifter=this._minFifter;
+            }
+            var minFifter=this._minFifter;
 			var magFifter=this._magFifter;
 			var repeat=this._repeat ? /*laya.webgl.WebGLContext.REPEAT*/0x2901 :/*laya.webgl.WebGLContext.CLAMP_TO_EDGE*/0x812F;
 			var isPot=Arith.isPOT(w,h);
@@ -28137,7 +28138,7 @@
 			else
 			this.memorySize=w *h *4;
 			this._recreateLock=false;
-		}
+		};
 
 		/**
 		*重新创建资源，如果异步创建中被强制释放再创建，则需等待释放完成后再重新加载创建。
@@ -28158,7 +28159,7 @@
 				this._createWebGlTexture();
 				this.completeCreate();
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -28181,7 +28182,7 @@
 			this.activeResource();
 			this._loaded=true;
 			this.event(/*laya.events.Event.LOADED*/"loaded",this);
-		}
+		};
 
 		/**
 		*返回图片像素。
@@ -28189,7 +28190,7 @@
 		*/
 		__proto.getPixels=function(){
 			return new Uint8Array(this._buffer);
-		}
+		};
 
 		/**
 		*销毁资源。
@@ -28204,7 +28205,7 @@
 				this._buffer=null;
 				this.memorySize=0;
 			}
-		}
+		};
 
 		/**
 		*获取文件路径全名。
@@ -28233,7 +28234,7 @@
 			ret.activeResource();
 			ret._loaded=true;
 			return ret;
-		}
+		};
 
 		DataTexture2D.load=function(url,w,h,magfilter,minfilter){
 			(w===void 0)&& (w=0);
@@ -28263,8 +28264,8 @@
 						var curbufsz=curw *curh *4;
 						if (cursz+curbufsz > data.byteLength){
 							throw "load mipmaps data size error ";
-						};
-						var tbuf=new Uint8Array(data,cursz,curbufsz);
+                        }
+                        var tbuf=new Uint8Array(data,cursz,curbufsz);
 						this._mipmaps.push(tbuf);
 						cursz+=curbufsz;
 						if (curw==1 && curh==1){
@@ -28303,7 +28304,7 @@
 				}else {
 				throw new Error("unknown params.");
 			}
-		}
+		};
 
 		DataTexture2D.lodasatlas=false;
 		__static(DataTexture2D,
@@ -28320,7 +28321,7 @@
 			512+256+128+64+32+16+8+4+2,0,1,1]);}
 		]);
 		return DataTexture2D;
-	})(BaseTexture)
+	})(BaseTexture);
 
 
 	/**
@@ -28341,49 +28342,49 @@
 
 		__class(PrimitiveMesh,'laya.d3.resource.models.PrimitiveMesh',_super);
 		var __proto=PrimitiveMesh.prototype;
-		Laya.imps(__proto,{"laya.d3.core.render.IRenderable":true})
+		Laya.imps(__proto,{"laya.d3.core.render.IRenderable":true});
 		__proto._getVertexBuffer=function(index){
 			(index===void 0)&& (index=0);
 			if (index===0)
 				return this._vertexBuffer;
 			else
 			return null;
-		}
+		};
 
 		__proto._getIndexBuffer=function(){
 			return this._indexBuffer;
-		}
+		};
 
 		__proto.getRenderElement=function(index){
 			return this;
-		}
+		};
 
 		__proto.getRenderElementsCount=function(){
 			return 1;
-		}
+		};
 
 		__proto.detoryResource=function(){
 			(this._vertexBuffer)&& (this._vertexBuffer.dispose(),this._vertexBuffer=null);
 			(this._indexBuffer)&& (this._indexBuffer.dispose(),this._indexBuffer=null);
 			this.memorySize=0;
-		}
+		};
 
 		__proto._beforeRender=function(state){
 			this._vertexBuffer._bind();
 			this._indexBuffer._bind();
 			return true;
-		}
+		};
 
 		__proto._render=function(state){
 			WebGL.mainContext.drawElements(/*laya.webgl.WebGLContext.TRIANGLES*/0x0004,this._numberIndices,/*laya.webgl.WebGLContext.UNSIGNED_SHORT*/0x1403,0);
 			Stat.drawCall++;
 			Stat.trianglesFaces+=this._numberIndices / 3;
-		}
+		};
 
 		/**NATIVE*/
 		__proto._renderRuntime=function(conchGraphics3D,renderElement,state){
 			conchGraphics3D.drawSubmesh(renderElement._conchSubmesh,0,/*laya.webgl.WebGLContext.TRIANGLES*/0x0004,0,this._numberIndices);
-		}
+		};
 
 		__getset(0,__proto,'indexOfHost',function(){
 			return this._indexOfHost;
@@ -28412,8 +28413,8 @@
 					positionElement=vertexElement;
 					break ;
 				}
-			};
-			var verticesData=this._vertexBuffer.getData();
+            }
+            var verticesData=this._vertexBuffer.getData();
 			for (j=0;j < verticesData.length;j+=this._vertexBuffer.vertexDeclaration.vertexStride / 4){
 				var ofset=j+positionElement.offset / 4;
 				var position=new Vector3(verticesData[ofset+0],verticesData[ofset+1],verticesData[ofset+2]);
@@ -28423,7 +28424,7 @@
 		});
 
 		return PrimitiveMesh;
-	})(BaseMesh)
+	})(BaseMesh);
 
 
 	/**
@@ -28459,7 +28460,7 @@
 			subMesh._indexInMesh=this._subMeshes.length;
 			this._subMeshes.push(subMesh);
 			this._subMeshCount++;
-		}
+		};
 
 		/**
 		*移除子网格（开发者禁止修改）。
@@ -28472,7 +28473,7 @@
 			this._subMeshes.splice(index,1);
 			this._subMeshCount--;
 			return true;
-		}
+		};
 
 		/**
 		*@private
@@ -28483,7 +28484,7 @@
 			MeshReader.read(bufferData,this,this._materials,textureMap);
 			this._loaded=true;
 			this.event(/*laya.events.Event.LOADED*/"loaded",this);
-		}
+		};
 
 		/**
 		*获得子网格。
@@ -28492,7 +28493,7 @@
 		*/
 		__proto.getSubMesh=function(index){
 			return this._subMeshes[index];
-		}
+		};
 
 		/**
 		*获得子网格数量。
@@ -28500,15 +28501,15 @@
 		*/
 		__proto.getSubMeshCount=function(){
 			return this._subMeshes.length;
-		}
+		};
 
 		__proto.getRenderElementsCount=function(){
 			return this._subMeshes.length;
-		}
+		};
 
 		__proto.getRenderElement=function(index){
 			return this._subMeshes[index];
-		}
+		};
 
 		/**
 		*<p>彻底清理资源。</p>
@@ -28521,7 +28522,7 @@
 			this._subMeshes[i].dispose();
 			this._subMeshes=null;
 			this._subMeshCount=0;
-		}
+		};
 
 		/**
 		*获取网格顶点
@@ -28597,10 +28598,10 @@
 
 		Mesh.load=function(url){
 			return Laya.loader.create(url,null,null,Mesh);
-		}
+		};
 
 		return Mesh;
-	})(BaseMesh)
+	})(BaseMesh);
 
 
 	/**
@@ -28695,7 +28696,7 @@
 			gl.bindRenderbuffer(/*laya.webgl.WebGLContext.RENDERBUFFER*/0x8D41,null);
 			this.memorySize=this._width *this._height *4;
 			this.completeCreate();
-		}
+		};
 
 		/**
 		*开始绑定。
@@ -28704,7 +28705,7 @@
 			WebGL.mainContext.bindFramebuffer(/*laya.webgl.WebGLContext.FRAMEBUFFER*/0x8D40,this.frameBuffer);
 			RenderTexture._currentRenderTarget=this;
 			this._alreadyResolved=false;
-		}
+		};
 
 		/**
 		*结束绑定。
@@ -28713,7 +28714,7 @@
 			WebGL.mainContext.bindFramebuffer(/*laya.webgl.WebGLContext.FRAMEBUFFER*/0x8D40,null);
 			RenderTexture._currentRenderTarget=null;
 			this._alreadyResolved=true;
-		}
+		};
 
 		/**
 		*获得像素数据。
@@ -28730,12 +28731,12 @@
 			if (!canRead){
 				gl.bindFramebuffer(/*laya.webgl.WebGLContext.FRAMEBUFFER*/0x8D40,null);
 				return null;
-			};
-			var pixels=new Uint8Array(this._width *this._height *4);
+            }
+            var pixels=new Uint8Array(this._width *this._height *4);
 			gl.readPixels(x,y,width,height,this._surfaceFormat,this._surfaceType,pixels);
 			gl.bindFramebuffer(/*laya.webgl.WebGLContext.FRAMEBUFFER*/0x8D40,null);
 			return pixels;
-		}
+		};
 
 		/**
 		*销毁资源。
@@ -28751,7 +28752,7 @@
 				this._depthStencilBuffer=null;
 				this.memorySize=0;
 			}
-		}
+		};
 
 		/**
 		*获取表面格式。
@@ -28796,9 +28797,9 @@
 			return this._frameBuffer;
 		});
 
-		RenderTexture._currentRenderTarget=null
+		RenderTexture._currentRenderTarget=null;
 		return RenderTexture;
-	})(BaseTexture)
+	})(BaseTexture);
 
 
 	/**
@@ -28859,7 +28860,7 @@
 				this.memorySize=w *h *4 *(1+1 / 3);
 			else
 			this.memorySize=w *h *4;
-		}
+		};
 
 		/**
 		*重新创建资源，如果异步创建中被强制释放再创建，则需等待释放完成后再重新加载创建。
@@ -28868,7 +28869,7 @@
 			this.startCreate();
 			this._createWebGlTexture();
 			this.completeCreate();
-		}
+		};
 
 		/**
 		*销毁资源。
@@ -28879,7 +28880,7 @@
 				this._source=null;
 				this.memorySize=0;
 			}
-		}
+		};
 
 		__getset(0,__proto,'source',function(){
 			return _super.prototype._$get_source.call(this);
@@ -28889,7 +28890,7 @@
 		['magentaTexture',function(){return this.magentaTexture=new SolidColorTexture2D(new Vector4(1.0,0.0,1.0,1.0));},'grayTexture',function(){return this.grayTexture=new SolidColorTexture2D(new Vector4(0.5,0.5,0.5,1.0));}
 		]);
 		return SolidColorTexture2D;
-	})(BaseTexture)
+	})(BaseTexture);
 
 
 	//class laya.d3.resource.SolidColorTextureCube extends laya.d3.resource.BaseTexture
@@ -28950,13 +28951,13 @@
 				this.memorySize=w *h *4 *(1+1 / 3)*this._texCount;
 			else
 			this.memorySize=w *h *4 *this._texCount;
-		}
+		};
 
 		__proto.recreateResource=function(){
 			this.startCreate();
 			this._createWebGlTexture();
 			this.completeCreate();
-		}
+		};
 
 		//处理创建完成后相关操作
 		__proto.detoryResource=function(){
@@ -28965,13 +28966,13 @@
 				this._source=null;
 				this.memorySize=0;
 			}
-		}
+		};
 
 		__static(SolidColorTextureCube,
 		['magentaTexture',function(){return this.magentaTexture=new SolidColorTextureCube(new Vector4(1.0,0.0,1.0,1.0));},'grayTexture',function(){return this.grayTexture=new SolidColorTextureCube(new Vector4(0.5,0.5,0.5,1.0));}
 		]);
 		return SolidColorTextureCube;
-	})(BaseTexture)
+	})(BaseTexture);
 
 
 	/**
@@ -29009,7 +29010,7 @@
 				Browser.context.drawImage(img,0,0,w,h);
 				this._pixels=new Uint8Array(Browser.context.getImageData(0,0,w,h).data.buffer);
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -29059,7 +29060,7 @@
 			else
 			this.memorySize=w *h *4;
 			this._recreateLock=false;
-		}
+		};
 
 		/**
 		*重新创建资源，如果异步创建中被强制释放再创建，则需等待释放完成后再重新加载创建。
@@ -29093,7 +29094,7 @@
 				this._createWebGlTexture();
 				this.completeCreate();
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -29110,7 +29111,7 @@
 			this.activeResource();
 			this._loaded=true;
 			this.event(/*laya.events.Event.LOADED*/"loaded",this);
-		}
+		};
 
 		/**
 		*返回图片像素。
@@ -29121,7 +29122,7 @@
 				return this._pixels;
 			else
 			throw new Error("Texture2D: must set texture canRead is true.");
-		}
+		};
 
 		/**
 		*销毁资源。
@@ -29136,7 +29137,7 @@
 				this._image=null;
 				this.memorySize=0;
 			}
-		}
+		};
 
 		/**
 		*获取文件路径全名。
@@ -29147,10 +29148,10 @@
 
 		Texture2D.load=function(url){
 			return Laya.loader.create(url,null,null,Texture2D);
-		}
+		};
 
 		return Texture2D;
-	})(BaseTexture)
+	})(BaseTexture);
 
 
 	//class laya.d3.resource.TextureCube extends laya.d3.resource.BaseTexture
@@ -29181,7 +29182,7 @@
 			this._width=minWidth;
 			this._height=minHeight;
 			this._size=new Size(minWidth,minHeight);
-		}
+		};
 
 		__proto._createWebGlTexture=function(){
 			var i=0;
@@ -29189,8 +29190,8 @@
 				if (!this._images[i]){
 					throw "create GLTextur err:no data:"+this._images[i];
 				}
-			};
-			var gl=WebGL.mainContext;
+            }
+            var gl=WebGL.mainContext;
 			var glTex=this._source=gl.createTexture();
 			var w=this._width;
 			var h=this._height;
@@ -29236,7 +29237,7 @@
 			else
 			this.memorySize=w *h *4 *this._texCount;
 			this._recreateLock=false;
-		}
+		};
 
 		__proto.recreateResource=function(){
 			var _$this=this;
@@ -29280,7 +29281,7 @@
 				this._createWebGlTexture();
 				this.completeCreate();
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -29294,7 +29295,7 @@
 			this.activeResource();
 			this._loaded=true;
 			this.event(/*laya.events.Event.LOADED*/"loaded",this);
-		}
+		};
 
 		__proto.detoryResource=function(){
 			if (this._recreateLock){
@@ -29305,7 +29306,7 @@
 				this._source=null;
 				this.memorySize=0;
 			}
-		}
+		};
 
 		/**
 		*文件路径全名。
@@ -29323,13 +29324,13 @@
 
 		TextureCube.load=function(url){
 			return Laya.loader.create(url,null,null,TextureCube);
-		}
+		};
 
 		__static(TextureCube,
 		['grayTexture',function(){return this.grayTexture=new SolidColorTextureCube(new Vector4(0.5,0.5,0.5,1.0));}
 		]);
 		return TextureCube;
-	})(BaseTexture)
+	})(BaseTexture);
 
 
 	/**
@@ -29359,7 +29360,7 @@
 			var shaderDefineValue=state.scene._shaderDefineValue;
 			this._shader=this._shaderCompile.withCompile(this._sharderNameID,shaderDefineValue,0,0);
 			return this._shader;
-		}
+		};
 
 		/**
 		*@private
@@ -29436,7 +29437,7 @@
 				var shaderCompile=ShaderCompile3D._preCompileShader[this._sharderNameID];
 				this._conchSky.setShader(shaderCompile._conchShader);
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -29447,7 +29448,7 @@
 			vertices[index+1]=posE[1];
 			vertices[index+2]=posE[2];
 			return index+3;
-		}
+		};
 
 		/**
 		*@private
@@ -29455,7 +29456,7 @@
 		__proto.loadShaderParams=function(){
 			this._sharderNameID=Shader3D.nameKey.getID("SkyBox");
 			this._shaderCompile=ShaderCompile3D._preCompileShader[this._sharderNameID];
-		}
+		};
 
 		__proto._render=function(state){
 			if (this._textureCube && this._textureCube.loaded){
@@ -29477,7 +29478,7 @@
 				Stat.trianglesFaces+=12;
 				Stat.drawCall++;
 			}
-		}
+		};
 
 		/**
 		*设置天空立方体纹理。
@@ -29501,7 +29502,7 @@
 		['_tempMatrix4x40',function(){return this._tempMatrix4x40=new Matrix4x4();},'_tempMatrix4x41',function(){return this._tempMatrix4x41=new Matrix4x4();},'_vertexDeclaration',function(){return this._vertexDeclaration=new VertexDeclaration(12,[new VertexElement(0,/*laya.d3.graphics.VertexElementFormat.Vector3*/"vector3",/*laya.d3.graphics.VertexElementUsage.POSITION0*/0)]);}
 		]);
 		return SkyBox;
-	})(Sky)
+	})(Sky);
 
 
 	/**
@@ -29534,7 +29535,7 @@
 			var shaderDefineValue=state.scene._shaderDefineValue;
 			this._shader=this._shaderCompile.withCompile(this._sharderNameID,shaderDefineValue,0,0);
 			return this._shader;
-		}
+		};
 
 		/**
 		*@private
@@ -29586,7 +29587,7 @@
 				var shaderCompile=ShaderCompile3D._preCompileShader[this._sharderNameID];
 				this._conchSky.setShader(shaderCompile._conchShader);
 			}
-		}
+		};
 
 		/**
 		*@private
@@ -29594,7 +29595,7 @@
 		__proto.loadShaderParams=function(){
 			this._sharderNameID=Shader3D.nameKey.getID("SkyDome");
 			this._shaderCompile=ShaderCompile3D._preCompileShader[this._sharderNameID];
-		}
+		};
 
 		__proto._render=function(state){
 			if (this._texture && this._texture.loaded){
@@ -29616,7 +29617,7 @@
 				Stat.trianglesFaces+=this._numberIndices / 3;
 				Stat.drawCall++;
 			}
-		}
+		};
 
 		/**
 		*设置天空立方体纹理。
@@ -29640,7 +29641,7 @@
 		['_tempMatrix4x40',function(){return this._tempMatrix4x40=new Matrix4x4();},'_tempMatrix4x41',function(){return this._tempMatrix4x41=new Matrix4x4();},'_vertexDeclaration',function(){return this._vertexDeclaration=new VertexDeclaration(20,[new VertexElement(0,/*laya.d3.graphics.VertexElementFormat.Vector3*/"vector3",/*laya.d3.graphics.VertexElementUsage.POSITION0*/0),new VertexElement(12,/*laya.d3.graphics.VertexElementFormat.Vector2*/"vector2",/*laya.d3.graphics.VertexElementUsage.TEXTURECOORDINATE0*/2)]);}
 		]);
 		return SkyDome;
-	})(Sky)
+	})(Sky);
 
 
 	/**
@@ -29684,10 +29685,10 @@
 			this._renderScene(gl,state);
 			this.lateRender(state);
 			(renderTarget)&& (renderTarget.end());
-		}
+		};
 
 		return Scene;
-	})(BaseScene)
+	})(BaseScene);
 
 
 	/**
@@ -29751,10 +29752,10 @@
 			this._renderScene(gl,state);
 			this.lateRender(state);
 			(renderTarget)&& (renderTarget.end());
-		}
+		};
 
 		return VRScene;
-	})(BaseScene)
+	})(BaseScene);
 
 
 	/**
@@ -29793,7 +29794,7 @@
 		*/
 		__proto._onWorldMatrixChanged=function(){
 			this._boundFrustumUpdate=true;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -29809,7 +29810,7 @@
 				}
 			}
 			this._boundFrustumUpdate=true;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -29820,7 +29821,7 @@
 				this.conchModel.setProjectMatrix(this.projectionMatrix.elements);
 			}
 			laya.d3.core.Sprite3D.prototype._update.call(this,state);
-		}
+		};
 
 		/**
 		*计算从屏幕空间生成的射线。
@@ -29829,7 +29830,7 @@
 		*/
 		__proto.viewportPointToRay=function(point,out){
 			Picker.calculateCursorRay(point,this.viewport,this._projectionMatrix,this.viewMatrix,null,out);
-		}
+		};
 
 		/**
 		*计算从裁切空间生成的射线。
@@ -29844,7 +29845,7 @@
 			vpPosE[0]=nVpPosE[0] *vp.width;
 			vpPosE[1]=nVpPosE[1] *vp.height;
 			Picker.calculateCursorRay(finalPoint,this.viewport,this._projectionMatrix,this.viewMatrix,null,out);
-		}
+		};
 
 		/**
 		*计算从世界空间准换三维坐标到屏幕空间。
@@ -29858,7 +29859,7 @@
 				var outE=out.elements;
 				outE[0]=outE[1]=outE[2]=NaN;
 			}
-		}
+		};
 
 		/**
 		*计算从世界空间准换三维坐标到裁切空间。
@@ -29872,7 +29873,7 @@
 				var outE=out.elements;
 				outE[0]=outE[1]=outE[2]=NaN;
 			}
-		}
+		};
 
 		/**
 		*获取视图投影矩阵。
@@ -29996,7 +29997,7 @@
 		['_tempVector20',function(){return this._tempVector20=new Vector2();}
 		]);
 		return Camera;
-	})(BaseCamera)
+	})(BaseCamera);
 
 
 	/**
@@ -30035,28 +30036,28 @@
 			renderElement.renderObj=element;
 			renderElement._material=material;
 			return renderElement;
-		}
+		};
 
 		/**@private */
 		__proto._onMaterialChanged=function(_glitterRender,index,material){
 			var renderElementCount=_glitterRender._renderElements.length;
 			(index < renderElementCount)&& this._changeRenderObject(index);
-		}
+		};
 
 		/**@private */
 		__proto._clearSelfRenderObjects=function(){
 			this.scene.removeFrustumCullingObject(this._render);
-		}
+		};
 
 		/**@private */
 		__proto._addSelfRenderObjects=function(){
 			this.scene.addFrustumCullingObject(this._render);
-		}
+		};
 
 		__proto._update=function(state){
 			(this._geometryFilter)._update(state.elapsedTime);
 			_super.prototype._update.call(this,state);
-		}
+		};
 
 		/**
 		*@private
@@ -30065,7 +30066,7 @@
 			this._setShaderValueMatrix4x4(/*laya.d3.core.Sprite3D.WORLDMATRIX*/0,this.transform.worldMatrix);
 			var projViewWorld=this.getProjectionViewWorldMatrix(projectionView);
 			this._setShaderValueMatrix4x4(/*laya.d3.core.Sprite3D.MVPMATRIX*/1,projViewWorld);
-		}
+		};
 
 		/**
 		*通过位置添加刀光。
@@ -30074,7 +30075,7 @@
 		*/
 		__proto.addGlitterByPositions=function(position0,position1){
 			(this._geometryFilter).addVertexPosition(position0,position1);
-		}
+		};
 
 		/**
 		*通过位置和速度添加刀光。
@@ -30085,7 +30086,7 @@
 		*/
 		__proto.addGlitterByPositionsVelocitys=function(position0,velocity0,position1,velocity1){
 			(this._geometryFilter).addVertexPositionVelocity(position0,velocity0,position1,velocity1);
-		}
+		};
 
 		__proto.cloneTo=function(destObject){
 			laya.d3.core.Sprite3D.prototype.cloneTo.call(this,destObject);
@@ -30102,7 +30103,7 @@
 			var glitterRender=this._render;
 			destGlitterRender.sharedMaterials=glitterRender.sharedMaterials;
 			destGlitterRender.enable=glitterRender.enable;
-		}
+		};
 
 		/**
 		*<p>销毁此对象。</p>
@@ -30113,7 +30114,7 @@
 			_super.prototype.destroy.call(this,destroyChild);
 			this._geometryFilter._destroy();
 			this._geometryFilter=null;
-		}
+		};
 
 		/**
 		*获取闪光模板。
@@ -30132,7 +30133,7 @@
 		});
 
 		return Glitter;
-	})(RenderableSprite3D)
+	})(RenderableSprite3D);
 
 
 	/**
@@ -30172,14 +30173,14 @@
 				this.scene.removeShaderDefine(ParallelSplitShadowMap.SHADERDEFINE_SHADOW_PSSM2);
 				this.scene.removeShaderDefine(ParallelSplitShadowMap.SHADERDEFINE_SHADOW_PSSM3);
 			}
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onWorldMatrixChange=function(){
 			this._updateDirection=true;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -30187,7 +30188,7 @@
 		__proto._addSelfRenderObjects=function(){
 			_super.prototype._addSelfRenderObjects.call(this);
 			this._shadow && (this._initShadow());
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -30200,7 +30201,7 @@
 			shaderValue.setValue(/*laya.d3.core.scene.BaseScene.LIGHTDIRSPECULAR*/6,null);
 			shaderValue.setValue(/*laya.d3.core.scene.BaseScene.LIGHTDIRECTION*/3,null);
 			(this._activeInHierarchy)&& (scene.removeShaderDefine(ShaderCompile3D.SHADERDEFINE_DIRECTIONLIGHT));
-		}
+		};
 
 		/**
 		*更新平行光相关渲染状态参数。
@@ -30220,7 +30221,7 @@
 				scene.removeShaderDefine(ShaderCompile3D.SHADERDEFINE_DIRECTIONLIGHT);
 				return false;
 			}
-		}
+		};
 
 		/**
 		*设置平行光的方向。
@@ -30264,7 +30265,7 @@
 		});
 
 		return DirectionLight;
-	})(LightSprite)
+	})(LightSprite);
 
 
 	/**
@@ -30300,7 +30301,7 @@
 			shaderValue.setValue(/*laya.d3.core.scene.BaseScene.POINTLIGHTRANGE*/8,null);
 			shaderValue.setValue(/*laya.d3.core.scene.BaseScene.POINTLIGHTATTENUATION*/9,null);
 			(this._activeInHierarchy)&& (scene.removeShaderDefine(ShaderCompile3D.SHADERDEFINE_POINTLIGHT));
-		}
+		};
 
 		/**
 		*更新点光相关渲染状态参数。
@@ -30322,7 +30323,7 @@
 				scene.removeShaderDefine(ShaderCompile3D.SHADERDEFINE_POINTLIGHT);
 				return false;
 			}
-		}
+		};
 
 		/**
 		*设置点光的范围。
@@ -30361,7 +30362,7 @@
 		});
 
 		return PointLight;
-	})(LightSprite)
+	})(LightSprite);
 
 
 	/**
@@ -30396,7 +30397,7 @@
 		*/
 		__proto._onWorldMatrixChange=function(){
 			this._updateDirection=true;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -30413,7 +30414,7 @@
 			shaderValue.setValue(/*laya.d3.core.scene.BaseScene.SPOTLIGHTSPOT*/15,null);
 			shaderValue.setValue(/*laya.d3.core.scene.BaseScene.SPOTLIGHTATTENUATION*/17,null);
 			(this._activeInHierarchy)&& (scene.removeShaderDefine(ShaderCompile3D.SHADERDEFINE_SPOTLIGHT));
-		}
+		};
 
 		/**
 		*更新聚光相关渲染状态参数。
@@ -30437,7 +30438,7 @@
 				scene.removeShaderDefine(ShaderCompile3D.SHADERDEFINE_SPOTLIGHT);
 				return false;
 			}
-		}
+		};
 
 		/**
 		*设置聚光的范围。
@@ -30511,7 +30512,7 @@
 		});
 
 		return SpotLight;
-	})(LightSprite)
+	})(LightSprite);
 
 
 	/**
@@ -30547,7 +30548,7 @@
 		*/
 		__proto.createConchModel=function(){
 			return null;
-		}
+		};
 
 		/**
 		*@private
@@ -30569,7 +30570,7 @@
 				renderElement._conchSubmesh.setVBIB(vertexBuffer.vertexDeclaration._conchVertexDeclaration,vertexBuffer.getData(),element._getIndexBuffer().getData());
 			}
 			return renderElement;
-		}
+		};
 
 		/**
 		*@private
@@ -30585,19 +30586,19 @@
 				renderElement._conchSubmesh.setMaterial(material._conchMaterial);
 			}
 			return renderElement;
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._changeRenderObjectsByMesh=function(){
 			if (Render.isConchNode){
-			};
-			var renderElementsCount=(this._geometryFilter).sharedMesh.getRenderElementsCount();
+            }
+            var renderElementsCount=(this._geometryFilter).sharedMesh.getRenderElementsCount();
 			this._render._renderElements.length=renderElementsCount;
 			for (var i=0;i < renderElementsCount;i++)
 			this._changeRenderObjectByMesh(i);
-		}
+		};
 
 		/**
 		*@private
@@ -30608,14 +30609,14 @@
 				this._changeRenderObjectsByMesh();
 			else
 			mesh.once(/*laya.events.Event.LOADED*/"loaded",this,this._onMeshLoaded);
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._onMeshLoaded=function(sender){
 			(sender===this.meshFilter.sharedMesh)&& (this._changeRenderObjectsByMesh());
-		}
+		};
 
 		/**
 		*@private
@@ -30623,7 +30624,7 @@
 		__proto._onMaterialChanged=function(meshRender,index,material){
 			var renderElementCount=this._render._renderElements.length;
 			(index < renderElementCount)&& this._changeRenderObjectByMaterial(index,material);
-		}
+		};
 
 		/**
 		*@private
@@ -30631,14 +30632,14 @@
 		__proto._clearSelfRenderObjects=function(){
 			this.scene.removeFrustumCullingObject(this._render);
 			if (this.scene.conchModel){}
-				}
+				};
 		/**
 		*@private
 		*/
 		__proto._addSelfRenderObjects=function(){
 			this.scene.addFrustumCullingObject(this._render);
 			if (this.scene.conchModel){}
-				}
+				};
 		/**
 		*@private
 		*/
@@ -30648,14 +30649,14 @@
 			for (var i=0,n=meshMaterials.length;i < n;i++)
 			(shaderMaterials[i])|| (shaderMaterials[i]=meshMaterials[i]);
 			this._render.sharedMaterials=shaderMaterials;
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._renderUpdate=function(projectionView){
 			laya.d3.core.Sprite3D.prototype._renderUpdate.call(this,projectionView);
-		}
+		};
 
 		__proto.cloneTo=function(destObject){
 			laya.d3.core.Sprite3D.prototype.cloneTo.call(this,destObject);
@@ -30670,13 +30671,13 @@
 			lightmapScaleOffset && (destMeshRender.lightmapScaleOffset=lightmapScaleOffset.clone());
 			destMeshRender.receiveShadow=meshRender.receiveShadow;
 			destMeshRender.sortingFudge=meshRender.sortingFudge;
-		}
+		};
 
 		__proto.destroy=function(destroyChild){
 			(destroyChild===void 0)&& (destroyChild=true);
 			_super.prototype.destroy.call(this,destroyChild);
 			(this._geometryFilter)._destroy();
-		}
+		};
 
 		/**
 		*获取网格过滤器。
@@ -30696,11 +30697,11 @@
 
 		MeshSprite3D.load=function(url){
 			return Laya.loader.create(url,null,null,MeshSprite3D,null,1,false);
-		}
+		};
 
 		MeshSprite3D.LIGHTMAPSCALEOFFSET=2;
 		return MeshSprite3D;
-	})(RenderableSprite3D)
+	})(RenderableSprite3D);
 
 
 	/**
@@ -30743,23 +30744,23 @@
 			renderElement.renderObj=element;
 			renderElement._material=material;
 			return renderElement;
-		}
+		};
 
 		/**@private */
 		__proto._onMaterialChanged=function(particleRender,index,material){
 			var renderElementCount=particleRender._renderElements.length;
 			(index < renderElementCount)&& this._changeRenderObject(index);
-		}
+		};
 
 		/**@private */
 		__proto._clearSelfRenderObjects=function(){
 			this.scene.removeFrustumCullingObject(this._render);
-		}
+		};
 
 		/**@private */
 		__proto._addSelfRenderObjects=function(){
 			this.scene.addFrustumCullingObject(this._render);
-		}
+		};
 
 		/**
 		*@private
@@ -30768,12 +30769,12 @@
 			this._setShaderValueMatrix4x4(/*laya.d3.core.Sprite3D.WORLDMATRIX*/0,this.transform.worldMatrix);
 			var projViewWorld=this.getProjectionViewWorldMatrix(projectionView);
 			this._setShaderValueMatrix4x4(/*laya.d3.core.Sprite3D.MVPMATRIX*/1,projViewWorld);
-		}
+		};
 
 		__proto._update=function(state){
 			this._templet.update(state.elapsedTime);
 			_super.prototype._update.call(this,state);
-		}
+		};
 
 		/**
 		*添加粒子。
@@ -30783,7 +30784,7 @@
 		__proto.addParticle=function(position,velocity){
 			Vector3.add(this.transform.localPosition,position,position);
 			this._templet.addParticle(position,velocity);
-		}
+		};
 
 		__proto.cloneTo=function(destObject){
 			laya.d3.core.Sprite3D.prototype.cloneTo.call(this,destObject);
@@ -30793,7 +30794,7 @@
 			var particleRender=this._render;
 			destParticleRender.sharedMaterials=particleRender.sharedMaterials;
 			destParticleRender.enable=particleRender.enable;
-		}
+		};
 
 		/**
 		*<p>销毁此对象。</p>
@@ -30803,7 +30804,7 @@
 			(destroyChild===void 0)&& (destroyChild=true);
 			_super.prototype.destroy.call(this,destroyChild);
 			this._templet=null;
-		}
+		};
 
 		/**
 		*获取粒子模板。
@@ -30822,7 +30823,7 @@
 		});
 
 		return Particle3D;
-	})(RenderableSprite3D)
+	})(RenderableSprite3D);
 
 
 	/**
@@ -30856,23 +30857,23 @@
 			renderElement.renderObj=element;
 			renderElement._material=material;
 			return renderElement;
-		}
+		};
 
 		/**@private */
 		__proto._onMaterialChanged=function(_particleRender,index,material){
 			var renderElementCount=_particleRender._renderElements.length;
 			(index < renderElementCount)&& this._changeRenderObject(index);
-		}
+		};
 
 		/**@private */
 		__proto._clearSelfRenderObjects=function(){
 			this.scene.removeFrustumCullingObject(this._render);
-		}
+		};
 
 		/**@private */
 		__proto._addSelfRenderObjects=function(){
 			this.scene.addFrustumCullingObject(this._render);
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -30891,13 +30892,13 @@
 			Matrix4x4.createFromQuaternion(this.transform.rotation,this._tempRotationMatrix);
 			this._setShaderValueMatrix4x4(1,this._tempRotationMatrix);
 			switch (this.particleSystem.scaleMode){
-				case 0:;
-					var scale=this.transform.scale;
+                case 0:
+                    var scale=this.transform.scale;
 					this._setShaderValueColor(4,scale);
 					this._setShaderValueColor(5,scale);
 					break ;
-				case 1:;
-					var localScale=this.transform.localScale;
+                case 1:
+                    var localScale=this.transform.localScale;
 					this._setShaderValueColor(4,localScale);
 					this._setShaderValueColor(5,localScale);
 					break ;
@@ -30908,7 +30909,7 @@
 				}
 			if (Laya3D.debugMode)
 				this._renderRenderableBoundBox();
-		}
+		};
 
 		/**
 		*@private
@@ -30927,7 +30928,7 @@
 			destParticleRender.stretchedBillboardSpeedScale=particleRender.stretchedBillboardSpeedScale;
 			destParticleRender.stretchedBillboardLengthScale=particleRender.stretchedBillboardLengthScale;
 			destParticleRender.sortingFudge=particleRender.sortingFudge;
-		}
+		};
 
 		/**
 		*<p>销毁此对象。</p>
@@ -30938,7 +30939,7 @@
 			_super.prototype.destroy.call(this,destroyChild);
 			(this._geometryFilter)._destroy();
 			this._geometryFilter=null;
-		}
+		};
 
 		/**
 		*获取粒子系统。
@@ -31020,7 +31021,7 @@
 		ShuriKenParticle3D.TEXTURESHEETANIMATIONGRADIENTUVS=41;
 		ShuriKenParticle3D.TEXTURESHEETANIMATIONGRADIENTMAXUVS=42;
 		return ShuriKenParticle3D;
-	})(RenderableSprite3D)
+	})(RenderableSprite3D);
 
 
 	/**
@@ -31081,7 +31082,7 @@
 		*/
 		__proto._onWorldMatrixChanged=function(){
 			this._leftBoundFrustumUpdate=this._rightBoundFrustumUpdate=true;
-		}
+		};
 
 		/**
 		*@private
@@ -31091,7 +31092,7 @@
 			var offset=this._tempVector3;
 			Vector3.scale(this.right,this._pupilDistande / 2,offset);
 			return offset.elements;
-		}
+		};
 
 		/**
 		*@private
@@ -31108,7 +31109,7 @@
 				}
 			}
 			this._leftBoundFrustumUpdate=true;
-		}
+		};
 
 		/**
 		*@private
@@ -31125,7 +31126,7 @@
 				}
 			}
 			this._rightBoundFrustumUpdate=true;
-		}
+		};
 
 		/**
 		*@inheritDoc
@@ -31145,7 +31146,7 @@
 				}
 			}
 			this._leftBoundFrustumUpdate=this._rightBoundFrustumUpdate=true;
-		}
+		};
 
 		/**
 		*获取摄像机右视锥。
@@ -31376,7 +31377,7 @@
 		});
 
 		return VRCamera;
-	})(BaseCamera)
+	})(BaseCamera);
 
 
 	/**
@@ -31421,36 +31422,36 @@
 			terrainMaterial.setDetailNum(detailNum);
 			if (this._render._renderElements.length !=0){
 				terrainMaterial.renderMode=/*laya.d3.core.material.TerrainMaterial.RENDERMODE_TRANSPARENT*/2;
-			};
-			var renderElement=new RenderElement();
+            }
+            var renderElement=new RenderElement();
 			renderElement._mainSortID=0;
 			renderElement._sprite3D=this;
 			renderElement.renderObj=this._geometryFilter;
 			renderElement._material=terrainMaterial;
 			this._render._materials.push(terrainMaterial);
 			this._render._renderElements.push(renderElement);
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto.createConchModel=function(){
 			return null;
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._clearSelfRenderObjects=function(){
 			this.scene.removeFrustumCullingObject(this._render);
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._addSelfRenderObjects=function(){
 			this.scene.addFrustumCullingObject(this._render);
-		}
+		};
 
 		/**
 		*@private
@@ -31461,24 +31462,24 @@
 			for (var i=0,n=meshMaterials.length;i < n;i++)
 			(shaderMaterials[i])|| (shaderMaterials[i]=meshMaterials[i]);
 			this._render.sharedMaterials=shaderMaterials;
-		}
+		};
 
 		/**
 		*@private
 		*/
 		__proto._renderUpdate=function(projectionView){
 			laya.d3.core.Sprite3D.prototype._renderUpdate.call(this,projectionView);
-		}
+		};
 
 		__proto.cloneTo=function(destObject){
 			console.log("Terrain Chunk can't clone");
-		}
+		};
 
 		__proto.destroy=function(destroyChild){
 			(destroyChild===void 0)&& (destroyChild=true);
 			_super.prototype.destroy.call(this,destroyChild);
 			(this._geometryFilter)._destroy();
-		}
+		};
 
 		/**
 		*获取地形过滤器。
@@ -31498,10 +31499,10 @@
 
 		TerrainChunk.load=function(url){
 			return Laya.loader.create(url,null,null,TerrainChunk,null,1,false);
-		}
+		};
 
 		return TerrainChunk;
-	})(RenderableSprite3D)
+	})(RenderableSprite3D);
 
 
 	/**
@@ -31580,7 +31581,7 @@
 			this._indexBuffer.setData(indices);
 			this.memorySize=(this._vertexBuffer.byteLength+this._indexBuffer.byteLength)*2;
 			this.completeCreate();
-		}
+		};
 
 		/**
 		*设置长度（改变此属性会重新生成顶点和索引）
@@ -31637,7 +31638,7 @@
 		});
 
 		return BoxMesh;
-	})(PrimitiveMesh)
+	})(PrimitiveMesh);
 
 
 	/**
@@ -31768,7 +31769,7 @@
 			this._indexBuffer.setData(indices);
 			this.memorySize=(this._vertexBuffer.byteLength+this._indexBuffer.byteLength)*2;
 			this.completeCreate();
-		}
+		};
 
 		/**
 		*设置半径（改变此属性会重新生成顶点和索引）
@@ -31843,7 +31844,7 @@
 		});
 
 		return CapsuleMesh;
-	})(PrimitiveMesh)
+	})(PrimitiveMesh);
 
 
 	/**
@@ -31985,7 +31986,7 @@
 			this._indexBuffer.setData(indices);
 			this.memorySize=(this._vertexBuffer.byteLength+this._indexBuffer.byteLength)*2;
 			this.completeCreate();
-		}
+		};
 
 		/**
 		*设置半径（改变此属性会重新生成顶点和索引）
@@ -32042,7 +32043,7 @@
 		});
 
 		return CylinderMesh;
-	})(PrimitiveMesh)
+	})(PrimitiveMesh);
 
 
 	/**
@@ -32095,8 +32096,8 @@
 					vertices[verticeCount++]=j *1 / this._stacks;
 					vertices[verticeCount++]=i *1 / this._slices;
 				}
-			};
-			var indiceIndex=0;
+            }
+            var indiceIndex=0;
 			for (i=0;i < this._slices;i++){
 				for (j=0;j < this._stacks;j++){
 					indices[indiceIndex++]=(i+1)*(this._stacks+1)+j;
@@ -32113,7 +32114,7 @@
 			this._indexBuffer.setData(indices);
 			this.memorySize=(this._vertexBuffer.byteLength+this._indexBuffer.byteLength)*2;
 			this.completeCreate();
-		}
+		};
 
 		/**
 		*设置长度（改变此属性会重新生成顶点和索引）
@@ -32188,7 +32189,7 @@
 		});
 
 		return PlaneMesh;
-	})(PrimitiveMesh)
+	})(PrimitiveMesh);
 
 
 	/**
@@ -32233,7 +32234,7 @@
 			this._indexBuffer.setData(indices);
 			this.memorySize=(this._vertexBuffer.byteLength+this._indexBuffer.byteLength)*2;
 			this.completeCreate();
-		}
+		};
 
 		/**
 		*设置长度（改变此属性会重新生成顶点和索引）
@@ -32272,7 +32273,7 @@
 		});
 
 		return QuadMesh;
-	})(PrimitiveMesh)
+	})(PrimitiveMesh);
 
 
 	/**
@@ -32343,7 +32344,7 @@
 			this._indexBuffer.setData(indices);
 			this.memorySize=(this._vertexBuffer.byteLength+this._indexBuffer.byteLength)*2;
 			this.completeCreate();
-		}
+		};
 
 		/**
 		*设置半径（改变此属性会重新生成顶点和索引）
@@ -32400,7 +32401,7 @@
 		});
 
 		return SphereMesh;
-	})(PrimitiveMesh)
+	})(PrimitiveMesh);
 
 
 	/**
@@ -32430,7 +32431,7 @@
 			rotation.elements[2]=0;
 			rotation.elements[3]=1;
 			this.transform.rotation=rotation;
-		}
+		};
 
 		/**
 		*@private
@@ -32442,7 +32443,7 @@
 			var m12=worldMatE[1];
 			var m13=worldMatE[2];
 			return Math.sqrt((m11 *m11)+(m12 *m12)+(m13 *m13));
-		}
+		};
 
 		/**
 		*@private
@@ -32454,7 +32455,7 @@
 			var m32=worldMatE[9];
 			var m33=worldMatE[10];
 			return Math.sqrt((m31 *m31)+(m32 *m32)+(m33 *m33));
-		}
+		};
 
 		/**
 		*@private
@@ -32466,7 +32467,7 @@
 			var max=boundingBox.max;
 			this._minX=min.x;
 			this._minZ=min.z;
-		}
+		};
 
 		/**
 		*@private
@@ -32482,12 +32483,12 @@
 					_$this._heightMap=HeightMap.createFromImage(texture,minHeight,maxHeight);
 					_$this._computeCellSize(boundingBox);
 				});
-			};
-			var min=boundingBox.min;
+            }
+            var min=boundingBox.min;
 			var max=boundingBox.max;
 			this._minX=min.x;
 			this._minZ=min.z;
-		}
+		};
 
 		/**
 		*@private
@@ -32503,7 +32504,7 @@
 			var heightSize=maxZ-minZ;
 			this._cellSize.elements[0]=widthSize / (this._heightMap.width-1);
 			this._cellSize.elements[1]=heightSize / (this._heightMap.height-1);
-		}
+		};
 
 		/**
 		*@private
@@ -32511,7 +32512,7 @@
 		__proto._update=function(state){
 			this._disableRotation();
 			laya.d3.core.RenderableSprite3D.prototype._update.call(this,state);
-		}
+		};
 
 		/**
 		*获取地形高度。
@@ -32561,7 +32562,7 @@
 				vy=h01-h11;
 				return (h11+(1.0-s)*uy+(1.0-t)*vy)*scaleY+translateY;
 			}
-		}
+		};
 
 		/**
 		*获取地形X轴最小位置。
@@ -32606,7 +32607,7 @@
 			else
 			mesh.once(/*laya.events.Event.LOADED*/"loaded",meshTerrainSprite3D,meshTerrainSprite3D._initCreateFromMesh,[heightMapWidth,heightMapHeight]);
 			return meshTerrainSprite3D;
-		}
+		};
 
 		MeshTerrainSprite3D.createFromMeshAndHeightMap=function(mesh,texture,minHeight,maxHeight,name){
 			var meshTerrainSprite3D=new MeshTerrainSprite3D(mesh,null,name);
@@ -32615,13 +32616,13 @@
 			else
 			mesh.once(/*laya.events.Event.LOADED*/"loaded",meshTerrainSprite3D,meshTerrainSprite3D._initCreateFromMeshHeightMap,[texture,minHeight,maxHeight]);
 			return meshTerrainSprite3D;
-		}
+		};
 
 		__static(MeshTerrainSprite3D,
 		['_tempVector3',function(){return this._tempVector3=new Vector3();},'_tempMatrix4x4',function(){return this._tempMatrix4x4=new Matrix4x4();}
 		]);
 		return MeshTerrainSprite3D;
-	})(MeshSprite3D)
+	})(MeshSprite3D);
 
 
 	/**
@@ -32670,7 +32671,7 @@
 			out[st++]=A;
 			out[st++]=WaterSprite._2pi / L;
 			out[st++]=7.846987702957 / Math.sqrt(L);
-		}
+		};
 
 		__proto.onDescLoaded=function(desc){
 			var _$this=this;
@@ -32718,7 +32719,7 @@
 			this.mtl.seaColor=new Float32Array(desc.color);
 			this._waterFogStart=desc.fogStart;
 			this._waterFogRange=desc.fogRange;
-		}
+		};
 
 		__proto.onMeshLoaded=function(){
 			this._refractQueue=new RenderQueue(this._scene);
@@ -32732,16 +32733,16 @@
 				throw "error2";
 			}
 			this._loaded=true;
-		}
+		};
 
 		__proto.stop=function(){
 			this._stop=!this._stop;
-		}
+		};
 
 		__proto.addRefractObj=function(obj){
 			this._refractObjStack.push(obj);
 			this._refractObjecs.push(obj);
-		}
+		};
 
 		/**
 		*渲染之前，生成必要的数据。
@@ -32760,8 +32761,8 @@
 						i--;
 					}
 				}
-			};
-			var gl=WebGL.mainContext;
+            }
+            var gl=WebGL.mainContext;
 			var olddf=gl.getParameter(/*laya.webgl.WebGLContext.DEPTH_TEST*/0x0B71);
 			var oldcf=gl.getParameter(/*laya.webgl.WebGLContext.CULL_FACE*/0x0B44);
 			var oldvp=gl.getParameter(/*laya.webgl.WebGLContext.VIEWPORT*/0x0BA2);
@@ -32825,11 +32826,11 @@
 				this._shownormal=false;
 				this.mtl._removeShaderDefine(WaterMaterial.SHADERDEFINE_SHOW_NORMAL);
 			}
-		}
+		};
 
 		__proto._update=function(state){
 			laya.d3.core.RenderableSprite3D.prototype._update.call(this,state);
-		}
+		};
 
 		__getset(0,__proto,'src',null,function(v){
 			var ld=new Loader();
@@ -32844,7 +32845,7 @@
 		['deg2rad',function(){return this.deg2rad=Math.PI / 180;},'_2pi',function(){return this._2pi=2 *Math.PI;}
 		]);
 		return WaterSprite;
-	})(MeshSprite3D)
+	})(MeshSprite3D);
 
 
 	Laya.__init([ShaderCompile3D]);
