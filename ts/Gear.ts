@@ -4,12 +4,14 @@
 
 class Gear {
     constructor() {
-        require(["../verdor/laya/laya.core"], this.engReady);
+        require(["verdor/laya/laya.core"], this.engReady);
     }
 
     engReady() {
         let canvas = Laya.init(800, 600);
         document.body.appendChild(canvas);
+
+        // Laya.stage.addChild(new view.ViewMgr());
     }
 }
 

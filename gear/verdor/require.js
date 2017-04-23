@@ -585,7 +585,7 @@ var requirejs, require, define;
                             // at the main module.
                             c = pkg ? getOwn(config.config, mod.map.id + '/' + pkg.main) :
                                 getOwn(config.config, mod.map.id);
-                            return c || {};
+                            return  c || {};
                         },
                         exports: defined[mod.map.id]
                     });
@@ -962,9 +962,7 @@ var requirejs, require, define;
                             this.map.parentMap);
                         on(normalizedMap,
                             'defined', bind(this, function (value) {
-                                this.init([], function () {
-                                    return value;
-                                }, null, {
+                                this.init([], function () { return value; }, null, {
                                     enabled: true,
                                     ignore: true
                                 });
@@ -988,9 +986,7 @@ var requirejs, require, define;
                     }
 
                     load = bind(this, function (value) {
-                        this.init([], function () {
-                            return value;
-                        }, null, {
+                        this.init([], function () { return value; }, null, {
                             enabled: true
                         });
                     });
@@ -1300,7 +1296,7 @@ var requirejs, require, define;
                     each(cfg.packages, function (pkgObj) {
                         var location;
 
-                        pkgObj = typeof pkgObj === 'string' ? {name: pkgObj} : pkgObj;
+                        pkgObj = typeof pkgObj === 'string' ? { name: pkgObj } : pkgObj;
                         location = pkgObj.location;
 
                         //Create a brand new object on pkgs, since currentPackages can
@@ -1351,7 +1347,6 @@ var requirejs, require, define;
                     }
                     return ret || (value.exports && getGlobal(value.exports));
                 }
-
                 return fn;
             },
 
@@ -1445,7 +1440,7 @@ var requirejs, require, define;
                         }
 
                         return context.nameToUrl(normalize(moduleNamePlusExt,
-                            relMap && relMap.id, true), ext, true);
+                            relMap && relMap.id, true), ext,  true);
                     },
 
                     defined: function (id) {
@@ -1744,9 +1739,7 @@ var requirejs, require, define;
      */
     req.nextTick = typeof setTimeout !== 'undefined' ? function (fn) {
         setTimeout(fn, 4);
-    } : function (fn) {
-        fn();
-    };
+    } : function (fn) { fn(); };
 
     /**
      * Export require as a global, but only if it does not already exist.
@@ -1949,7 +1942,7 @@ var requirejs, require, define;
                     //baseUrl.
                     src = mainScript.split('/');
                     mainScript = src.pop();
-                    subPath = src.length ? src.join('/') + '/' : './';
+                    subPath = src.length ? src.join('/')  + '/' : './';
 
                     cfg.baseUrl = subPath;
                 }
@@ -2059,3 +2052,4 @@ var requirejs, require, define;
     //Set up with config info.
     req(cfg);
 }(this));
+
