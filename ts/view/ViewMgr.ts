@@ -1,11 +1,12 @@
+import Sprite = laya.display.Sprite;
 /**
  * Created by Lonmee on 4/23/2017.
  */
 
-export class ViewMgr extends laya.display.Sprite {
+export class ViewMgr extends Sprite{
 
     constructor() {
         super();
-        this.graphics.drawCircle(200, 200, 150, 0xCCCCCC, 0xFFFF00, 5);
+        this.graphics.drawCircle(200, 200, 150, "#FFFFFF", "#FFFF00", 5);
     }
 }

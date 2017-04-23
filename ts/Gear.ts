@@ -1,23 +1,14 @@
 /**
  * Created by Lonmee on 4/19/2017.
  */
-import {ViewMgr} from "./view/ViewMgr"
+import {ViewMgr} from "./view/ViewMgr";
+
 class Gear {
-
     constructor() {
-
-    }
-
-    init() {
-
-    }
-
-    load() {
         let canvas = Laya.init(800, 600);
         document.body.appendChild(canvas);
-
         Laya.stage.addChild(new ViewMgr());
     }
 }
 
-new Gear().init();
+new Gear();
