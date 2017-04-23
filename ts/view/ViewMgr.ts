@@ -13,6 +13,7 @@ export class ViewMgr extends Sprite {
         if (fwSettings.bgColor) {
             Laya.stage.bgColor = fwSettings.bgColor;
         }
+
         if (fwSettings.showStatus) {
             Stat.show();
         }
