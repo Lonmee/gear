@@ -1,12 +1,20 @@
 import Sprite = laya.display.Sprite;
+import Settings from "../data/Settings";
+import Stat = laya.utils.Stat;
 /**
  * Created by Lonmee on 4/23/2017.
  */
 
-export class ViewMgr extends Sprite{
+export class ViewMgr extends Sprite {
 
     constructor() {
         super();
-        this.graphics.drawCircle(200, 200, 150, "#FFFFFF", "#FFFF00", 5);
+        let fwSettings = Settings.frameworks;
+        if (fwSettings.bgColor) {
+            Laya.stage.bgColor = fwSettings.bgColor;
+        }
+        if (fwSettings.showStatus) {
+            Stat.show();
+        }
     }
 }

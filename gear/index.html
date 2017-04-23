@@ -5,6 +5,11 @@
     <title>Gear</title>
 </head>
 <body>
-<script src="verdor/require.js" data-main="js/Gear"></script>
+<script src="verdor/require.js"></script>
+<script>
+    require(["verdor/laya/laya.core"], function () {
+        require(["js/Gear"]);
+    });
+</script>
 </body>
 </html>
