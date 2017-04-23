@@ -5,10 +5,8 @@
     "sourceMap": true,
     "rootDir": "ts",
     "outDir": "gear/js"
-    //    "outFile": ""
   },
   "exclude": [
-    "node_modules",
-    "verdor"
+    "node_modules"
   ]
 }
