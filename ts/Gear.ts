@@ -1,17 +1,10 @@
 /**
  * Created by Lonmee on 4/19/2017.
  */
-import {Story} from "./data/Data";
-
+import {ViewMgr} from "./view/ViewMgr"
 class Gear {
-    private story: Story;
 
     constructor() {
-        //require(["xx"], this.load);
-
-        this.story = new Story(0);
-        let c = this.story.chapters[0];
-        let p = this.story.person;
 
     }
 
@@ -20,7 +13,10 @@ class Gear {
     }
 
     load() {
+        let canvas = Laya.init(800, 600);
+        document.body.appendChild(canvas);
 
+        Laya.stage.addChild(new ViewMgr());
     }
 }
 

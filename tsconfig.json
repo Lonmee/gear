@@ -5,7 +5,7 @@
     "sourceMap": true,
     "rootDir": "ts",
     "outDir": "gear/js"
-//    "outFile": ""
+    //    "outFile": ""
   },
   "exclude": [
     "node_modules"
