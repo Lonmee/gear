@@ -8,7 +8,9 @@
 <script src="verdor/require.js"></script>
 <script>
     require(["verdor/laya/laya.core"], function () {
-        require(["js/Gear"]);
+        require(["verdor/laya/laya.webgl"], function () {
+            require(["js/Gear"]);
+        })
     });
 </script>
 </body>
